@@ -2,83 +2,68 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
-
-import java.util.*;
-import view.ViewRushHour;
+package Model;
 
 /**
  *
  * @author Phongphet
  */
-public class Voiture{
+public class Voiture {
     
-    private boolean voitureRouge;
+    private char num;
+    private int ligne;
+    private int col;
+    private int longeur;
     private char direction;
-    private int x;
-    private int y;
-    private int taille;
+    private boolean voitureR;
 
-    public Voiture(boolean voitureRouge, char direction, int x, int y, int taille) {
-        this.voitureRouge = voitureRouge;
+    public Voiture(char num, int ligne, int col, int longeur, char direction, boolean voitureR) {
+        this.num = num;
+        this.ligne = ligne;
+        this.col = col;
+        this.longeur = longeur;
         this.direction = direction;
-        this.x = x;
-        this.y = y;
-        this.taille = taille;
+        this.voitureR = voitureR;
     }
 
-    public boolean isVoitureRouge() {
-        return voitureRouge;
+    public char getNum() {
+        return num;
     }
 
-    public void setVoitureRouge(boolean voitureRouge) {
-        this.voitureRouge = voitureRouge;
+    public void setNum(char num) {
+        this.num = num;
+    }
+
+    public int getCol() {
+        return col;
+    }
+
+    public void setCol(int col) {
+        this.col = col;
+    }
+
+    public int getLigne() {
+        return ligne;
+    }
+
+    public void setLigne(int ligne) {
+        this.ligne = ligne;
+    }
+
+    public int getLongeur() {
+        return longeur;
     }
 
     public char getDirection() {
         return direction;
     }
 
-    public void setDirection(char direction) {
-        this.direction = direction;
+    public boolean isVoitureR() {
+        return voitureR;
     }
 
-    public int getX() {
-        return x;
-    }
-
-    public void setX(int x) {
-        this.x = x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
-    public int getTaille() {
-        return taille;
-    }
-
-    public void setTaille(int taille) {
-        this.taille = taille;
-    }
-    
-    public boolean estClique(int x, int y){
-        if(this.direction == 'h'){
-            if(x >= this.getX() && x <= this.getX() + ViewRushHour.length_case
-               && y >= this.getY() && y<= (this.getY() + ViewRushHour.length_case) * this.taille){
-                return true;
-            }
-        }else{
-            if(x >= this.getX() && x <= (this.getX() + ViewRushHour.length_case) * this.taille
-               && y >= this.getY() && y<= this.getY() + ViewRushHour.length_case){
-                return true;
-            }
-        }
-        return false;
+    @Override
+    public String toString() {
+        return "Voiture{" + "num=" + num + ", ligne=" + ligne + ", col=" + col + ", longeur=" + longeur + ", direction=" + direction + ", voitureR=" + voitureR + '}';
     }
 }
