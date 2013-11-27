@@ -17,7 +17,7 @@ public class ViewMorpionGraphique extends JPanel implements Observer {
 	public ViewMorpionGraphique(Morpion morpion) {
 		super();
 		this.morpion = morpion;
-		this.setSize(150, 150);
+		this.setSize(200, 200);
 	}
 
 	@Override

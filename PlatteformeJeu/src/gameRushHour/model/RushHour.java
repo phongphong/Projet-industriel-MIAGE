@@ -50,7 +50,7 @@ public class RushHour extends Observable implements Jeu{
      * @param c 
      */
     @Override
-    public void jouerUnCoup(Coup c) {
+    public Jeu jouerUnCoup(Coup c) {
         //on recupere la voiture en fonction du coup
         Voiture v = ((CoupRushHour) c).getV();
         //les anciens cases qui ont ete occupes par cette voitures sont devenus disponibles
@@ -64,6 +64,8 @@ public class RushHour extends Observable implements Jeu{
         this.setCaseOccupe(v, (char)v.getNum());
         setChanged();
         notifyObservers();
+        
+        return this;
     }
 
     /**

@@ -39,7 +39,7 @@ public class ViewGame extends JFrame {
         this.setPreferredSize(d);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        JPanel panel = new JPanel();
+        final JPanel panel = new JPanel();
         
         final JPanel panelJeu = new JPanel();
         panelJeu.setSize(d.width/2 , d.height);
@@ -72,6 +72,7 @@ public class ViewGame extends JFrame {
 				view.addMouseListener(control);
 				panelJeu.removeAll();
 				panelJeu.add(view);
+				panel.repaint();
 			}
 		});
         
@@ -87,6 +88,8 @@ public class ViewGame extends JFrame {
 				view.addMouseMotionListener(control);
 				panelJeu.removeAll();
 				panelJeu.add(view);
+
+				panel.repaint();
 			}
 		});
         

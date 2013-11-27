@@ -1,10 +1,11 @@
 package gameMorpion.model;
 
-import gameAbstract.Coup;
-import gameAbstract.Jeu;
+import gameAbstract.*;
 
 import java.util.ArrayList;
 import java.util.Observable;
+
+import javax.swing.JOptionPane;
 
 
 public class Morpion extends Observable implements Jeu{
@@ -15,6 +16,7 @@ public class Morpion extends Observable implements Jeu{
 	private Joueur j2;
 	
 	public Morpion(){
+		
 		t_case = new char[3][3];
 		
 		//creation des joueurs
@@ -31,11 +33,18 @@ public class Morpion extends Observable implements Jeu{
 	}
 
 	@Override
-	public void jouerUnCoup(Coup c) {
+	public Jeu jouerUnCoup(Coup c) {
 		char signe = ((CoupMorpion) c).getJ().getSigne();
 		t_case[((CoupMorpion) c).getX()][((CoupMorpion) c).getY()] = signe;
+		if(gagner(c)){
+			JOptionPane.showMessageDialog(null, tourJoueur.getNom() + " gagne ce tour !!");
+		}else{
+			this.changerJoueur();
+		}
 		setChanged();
-		notifyObservers();		
+		notifyObservers();	
+		
+		return this;
 	}
 
 	@Override
@@ -98,5 +107,11 @@ public class Morpion extends Observable implements Jeu{
 	
 	public Joueur getTourJoueur(){
 		return tourJoueur;
+	}
+	
+	public void effaceCoup(Coup c){
+		t_case[((CoupMorpion) c).getX()][((CoupMorpion) c).getY()] = '.';
+		setChanged();
+		notifyObservers();
 	}
 }

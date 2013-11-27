@@ -12,7 +12,7 @@ import java.util.ArrayList;
  */
 public interface Jeu {
     
-    public void jouerUnCoup(Coup c);
+    public Jeu jouerUnCoup(Coup c);
     
     public ArrayList<Coup> listerTousCoupPossible();
     
