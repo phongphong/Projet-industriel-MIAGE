@@ -40,7 +40,7 @@ public class ControlMorpionGraphique implements MouseListener {
 		int y = e.getY() / 50;
 		Joueur j = morpion.getTourJoueur();
 		Coup c = new CoupMorpion(j, x, y);
-		partie.jouerUnePartie(c);
+		partie.jouerUnCoup(c);
 	}
 
 	@Override

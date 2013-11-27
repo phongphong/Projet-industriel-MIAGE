@@ -5,18 +5,13 @@ import java.util.ArrayList;
 public class Arbre {
 	
 	private Jeu jeu;
-	private Coup coup;
 	private ArrayList<Arbre> listeNoeud;
+	private ArrayList<Coup> listeCoup;
 	
 	public Arbre(Jeu jeu){
 		this.jeu = jeu;
 		listeNoeud = new ArrayList<>();
-	}
-	
-	public Arbre(Jeu jeu, Coup coup){
-		this.jeu = jeu;
-		this.coup = coup;
-		listeNoeud = new ArrayList<>();
+		listeCoup = new ArrayList<>();
 	}
 	
 	public void afficheArbre(){
@@ -29,14 +24,15 @@ public class Arbre {
 	public void ajouterNoeud(Arbre a){
 		this.listeNoeud.add(a);
 	}
+	
+	public void ajouterCoup(Coup c){
+		this.listeCoup.add(c);
+	}
 
 	public Jeu getJeu(){
 		return jeu;
 	}
-	
-	public Coup getCoup(){
-		return coup;
-	}
+
 	
 	public ArrayList<Arbre> getListeNoeud() {
 		return listeNoeud;

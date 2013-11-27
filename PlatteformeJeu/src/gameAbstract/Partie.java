@@ -3,33 +3,25 @@ package gameAbstract;
 public class Partie {
 	
 	private Jeu jeu;
-	private Arbre arbre;
-	private Arbre arbreCourant;
+	private Arbre racine;
+	private Arbre noeudCourant;
 	
 	public Partie(Jeu jeu){
 		this.jeu = jeu;
-		arbre = new Arbre(jeu);
-		arbreCourant = arbre;
+		racine = new Arbre(jeu);
+		noeudCourant = racine;
 	}
 	
-	public void jouerUnePartie(Coup c){
+	public void jouerUnCoup(Coup c){
+		/*A verifier si le coup n'existe pas deja, dans le cas qu'il existe deja on a juste a pointer
+		 * dessus sans ajouter une nouvelle branche dans l'arbre*/
 		if (jeu.listerTousCoupPossible().contains(c)) {
 			Jeu jeuEnCours = jeu.jouerUnCoup(c);
+			Arbre a = new Arbre(jeuEnCours);
+			noeudCourant.ajouterNoeud(a);
+			noeudCourant.ajouterCoup(c);
 			jeu = jeuEnCours;
-			Arbre a = new Arbre(jeuEnCours, c);
-			arbreCourant.ajouterNoeud(a);
-			arbreCourant = a;
-			afficheArbre();
+			noeudCourant = a;
 		}
-	}
-	
-	public void afficheArbre(){
-		int indice = 0;
-		while(arbre.getListeNoeud().size() > 0 && indice < arbre.getListeNoeud().size()){
-			Arbre a = arbre.getListeNoeud().get(indice);
-			System.out.println("Jeu : " + a.getJeu().toString() + " | " + "Coup : " + a.getCoup().toString());
-			indice ++ ;
-		}
-	}
-	
+	}	
 }
