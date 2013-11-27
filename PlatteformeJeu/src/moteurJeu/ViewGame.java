@@ -3,6 +3,13 @@
  * and open the template in the editor.
  */
 package moteurJeu;
+import gameMorpion.controler.ControlMorpionGraphique;
+import gameMorpion.model.Morpion;
+import gameMorpion.view.ViewMorpionGraphique;
+import gameRushHour.controler.ControlRushHourGraphic;
+import gameRushHour.model.RushHour;
+import gameRushHour.view.ViewRushHourGraphic;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,10 +23,10 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class ViewGame extends JFrame {
     
-    private GameFactory control;
+    private GameFactory factory;
     
-    public ViewGame(GameFactory control){
-        this.control = control;
+    public ViewGame(GameFactory factory){
+        this.factory = factory;
     }
     
     /**
@@ -28,44 +35,69 @@ public class ViewGame extends JFrame {
     public void affiche(){
         
         this.setTitle("Platteforme Jeu");
-        this.setPreferredSize(new Dimension(300, 200));
+        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setPreferredSize(d);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         JPanel panel = new JPanel();
-        JPanel panel1 = new JPanel();
-        panel1.setSize(300, 100);
         
-        JLabel label1 = new JLabel("Choisissez un jeu");
+        final JPanel panelJeu = new JPanel();
+        panelJeu.setSize(d.width/2 , d.height);
+        panelJeu.setLayout(new BorderLayout());
         
-        JButton b1 = new JButton("Jeu Morpion");
-        JButton b2 = new JButton("Jeu RushHour");
+        JPanel panelArbre = new JPanel();
+        panelArbre.setSize(d.width/2 , d.height);
         
-        b1.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                control.lancerJeu("morpion");
-            }
-        });
+        JMenuBar menuBar = new JMenuBar();
         
-        b2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                control.lancerJeu("rushhour");
-            }
-        });
+        JMenu menu1 = new JMenu("Jeu");
+        JMenu menu2 = new JMenu("Aide");
         
-        panel1.add(b1);
-        panel1.add(b2);
+        JMenuItem menuItem1 = new JMenuItem("Morpion");
+        JMenuItem menuItem2 = new JMenuItem("RushHour");
         
-        panel.setLayout(new BorderLayout());
-        panel.add(label1, BorderLayout.NORTH);
-        panel.add(panel1, BorderLayout.SOUTH);
+        menu1.add(menuItem1);
+        menu1.add(menuItem2);
+        
+        menuBar.add(menu1);
+        menuBar.add(menu2);
+        
+        menuItem1.addActionListener(new ActionListener() {	
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Morpion morpion = (Morpion) factory.creerJeu("morpion");
+				ViewMorpionGraphique view = new ViewMorpionGraphique(morpion);
+				ControlMorpionGraphique control = new ControlMorpionGraphique( morpion);
+				morpion.addObserver(view);
+				view.addMouseListener(control);
+				panelJeu.removeAll();
+				panelJeu.add(view);
+			}
+		});
+        
+        menuItem2.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				RushHour rh = (RushHour) factory.creerJeu("rushhour");
+				ViewRushHourGraphic view = new ViewRushHourGraphic(rh);
+				ControlRushHourGraphic control = new ControlRushHourGraphic(rh);
+				rh.addObserver(view);
+				view.addMouseListener(control);
+				view.addMouseMotionListener(control);
+				panelJeu.removeAll();
+				panelJeu.add(view);
+			}
+		});
+        
+        panel.setLayout(new GridLayout(1,2));
+        panel.add(panelJeu);
+        panel.add(panelArbre);
+        
+        this.setJMenuBar(menuBar);
         
         this.setContentPane(panel);
         this.pack();
         this.setVisible(true);
-    }
-    
+    } 
 }
