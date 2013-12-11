@@ -38,9 +38,11 @@ import javax.swing.JPanel;
 public class ViewGame extends JFrame {
     
     private GameFactory factory;
+    private Dimension d;
     
     public ViewGame(GameFactory factory){
         this.factory = factory;
+        d = Toolkit.getDefaultToolkit().getScreenSize();
     }
     
     /**
@@ -49,7 +51,6 @@ public class ViewGame extends JFrame {
     public void affiche(){
         
         this.setTitle("Platteforme Jeu");
-        Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
         this.setPreferredSize(d);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         
@@ -97,6 +98,7 @@ public class ViewGame extends JFrame {
 		        NodeHypertree root = new NodeHypertree(a);
 		        HyperTree tree = new HyperTree(root);
 		        SwingHTView viewTree = tree.getView();
+		        viewTree.setSize(d.width/2 , d.height);
 	
 				
 				ViewMorpionGraphique view = new ViewMorpionGraphique(morpion);
