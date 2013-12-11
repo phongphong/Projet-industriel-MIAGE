@@ -3,9 +3,11 @@
  * and open the template in the editor.
  */
 package moteurJeu;
+
 import gameAbstract.Arbre;
 import gameAbstract.Coup;
 import gameAbstract.NodeHypertree;
+import gameAbstract.Partie;
 import gameMorpion.controler.ControlMorpionGraphique;
 import gameMorpion.model.Morpion;
 import gameMorpion.view.ViewMorpionGraphique;
@@ -29,94 +31,80 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 
-
 /**
- * Cette classe représente la vue de la platteforme de jeu, elle liste tous les jeux
+ * Cette classe représente la vue de la platteforme de jeu, elle liste tous les
+ * jeux
+ * 
  * @author Phongphet
  */
 @SuppressWarnings("serial")
 public class ViewGame extends JFrame {
-    
-    private GameFactory factory;
-    private Dimension d;
-    
-    public ViewGame(GameFactory factory){
-        this.factory = factory;
-        d = Toolkit.getDefaultToolkit().getScreenSize();
-    }
-    
-    /**
-     * Cette méthode affiche l'interface de la platteforme de jeu
-     */
-    public void affiche(){
-        
-        this.setTitle("Platteforme Jeu");
-        this.setPreferredSize(d);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        final JPanel panel = new JPanel();
-        
-        final JPanel panelJeu = new JPanel();
-        panelJeu.setSize(d.width/2 , d.height);
-        panelJeu.setLayout(new BorderLayout());
-        
-        final JPanel panelArbre = new JPanel();
-        panelArbre.setSize(d.width/2 , d.height);
-        
-        JMenuBar menuBar = new JMenuBar();
-        
-        JMenu menu1 = new JMenu("Jeu");
-        JMenu menu2 = new JMenu("Aide");
-        
-        JMenuItem menuItem1 = new JMenuItem("Morpion");
-        JMenuItem menuItem2 = new JMenuItem("RushHour");
-        
-        menu1.add(menuItem1);
-        menu1.add(menuItem2);
-        
-        menuBar.add(menu1);
-        menuBar.add(menu2);
-        
 
-        
-        menuItem1.addActionListener(new ActionListener() {	
+	private GameFactory factory;
+	private Dimension d;
+
+	public ViewGame(GameFactory factory) {
+		this.factory = factory;
+		d = Toolkit.getDefaultToolkit().getScreenSize();
+	}
+
+	/**
+	 * Cette méthode affiche l'interface de la platteforme de jeu
+	 */
+	public void affiche() {
+
+		this.setTitle("Platteforme Jeu");
+		this.setPreferredSize(d);
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+		final JPanel panel = new JPanel();
+
+		final JPanel panelJeu = new JPanel();
+		panelJeu.setSize(d.width / 2, d.height);
+		panelJeu.setLayout(new BorderLayout());
+
+		final JPanel panelArbre = new JPanel();
+		panelArbre.setSize(d.width / 2, d.height);
+
+		JMenuBar menuBar = new JMenuBar();
+
+		JMenu menu1 = new JMenu("Jeu");
+		JMenu menu2 = new JMenu("Aide");
+
+		JMenuItem menuItem1 = new JMenuItem("Morpion");
+		JMenuItem menuItem2 = new JMenuItem("RushHour");
+
+		menu1.add(menuItem1);
+		menu1.add(menuItem2);
+
+		menuBar.add(menu1);
+		menuBar.add(menu2);
+
+		menuItem1.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Morpion morpion = (Morpion) factory.creerJeu("morpion");
-				ArrayList<Arbre> listeNoeud = new ArrayList<>();
-				Arbre a = new Arbre(morpion);
-				ArrayList<Coup> listeCoup = morpion.listerTousCoupPossible();
-				
-				for(int i = 0 ; i< listeCoup.size() ; i++){
-		        	Arbre a1 = new Arbre(morpion);
-		        	a1.ajouterCoup(listeCoup.get(i));
-		        	listeNoeud.add(a1);
-		        }
-				a.ajouterListeCoup(listeCoup);
-				a.ajouterListeNoeud(listeNoeud);	
-				
-		        NodeHypertree root = new NodeHypertree(a);
-		        HyperTree tree = new HyperTree(root);
-		        SwingHTView viewTree = tree.getView();
-		        viewTree.setSize(d.width/2 , d.height);
-	
-				
+
 				ViewMorpionGraphique view = new ViewMorpionGraphique(morpion);
-				ControlMorpionGraphique control = new ControlMorpionGraphique( morpion);
+				ControlMorpionGraphique control = new ControlMorpionGraphique(morpion);
 				morpion.addObserver(view);
 				view.addMouseListener(control);
 				panelJeu.removeAll();
 				panelJeu.add(view);
 				
-		        panelArbre.setLayout(new BorderLayout());
-		        panelArbre.add(viewTree, BorderLayout.CENTER);
-		        
+				Partie partieMorpion = control.getPartie();
+				VueArbre vueArbre = new VueArbre(partieMorpion);
+				partieMorpion.addObserver(vueArbre);
+
+				panelArbre.setLayout(new BorderLayout());
+				panelArbre.add(vueArbre, BorderLayout.CENTER);
+
 				panel.repaint();
 			}
 		});
-        
-        menuItem2.addActionListener(new ActionListener() {
-			
+
+		menuItem2.addActionListener(new ActionListener() {
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				RushHour rh = (RushHour) factory.creerJeu("rushhour");
@@ -132,14 +120,14 @@ public class ViewGame extends JFrame {
 			}
 		});
 
-        panel.setLayout(new GridLayout(1,2));
-        panel.add(panelJeu);
-        panel.add(panelArbre);
-        
-        this.setJMenuBar(menuBar);
-        
-        this.setContentPane(panel);
-        this.pack();
-        this.setVisible(true);
-    } 
+		panel.setLayout(new GridLayout(1, 2));
+		panel.add(panelJeu);
+		panel.add(panelArbre);
+
+		this.setJMenuBar(menuBar);
+
+		this.setContentPane(panel);
+		this.pack();
+		this.setVisible(true);
+	}
 }

@@ -1,9 +1,8 @@
 package gameAbstract;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
-public class Arbre extends Observable {
+public class Arbre{
 	
 	private Jeu jeu;
 	private ArrayList<Arbre> listeNoeud;
@@ -29,26 +28,27 @@ public class Arbre extends Observable {
 	
 	public void ajouterNoeud(Arbre a){
 		this.listeNoeud.add(a);
-		setChanged();
-		notifyObservers();
+
 	}
 	
 	public void ajouterListeNoeud(ArrayList<Arbre> listeNoeud){
 		this.listeNoeud.addAll(listeNoeud);
-		setChanged();
-		notifyObservers();
+
 	}
 	
 	public void ajouterListeCoup(ArrayList<Coup> listeCoup){
 		this.listeCoup.addAll(listeCoup);
-		setChanged();
-		notifyObservers();
+	
 	}
 	
 	public void ajouterCoup(Coup c){
 		this.listeCoup.add(c);
-		setChanged();
-		notifyObservers();
+
+	}
+	
+	public void ajouterNoeudEtCoup(Arbre a, Coup c){
+		this.listeNoeud.add(a);
+		this.listeCoup.add(c);
 	}
 
 	public Jeu getJeu(){

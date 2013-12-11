@@ -1,6 +1,8 @@
 package gameAbstract;
 
-public class Partie {
+import java.util.Observable;
+
+public class Partie extends Observable  {
 	
 	private Jeu jeu;
 	private Arbre racine;
@@ -9,7 +11,7 @@ public class Partie {
 	public Partie(Jeu jeu){
 		this.jeu = jeu;
 		racine = new Arbre(jeu);
-		noeudCourant = racine;
+		noeudCourant = racine;  
 	}
 	
 	public void jouerUnCoup(Coup c){
@@ -18,10 +20,19 @@ public class Partie {
 		if (jeu.listerTousCoupPossible().contains(c)) {
 			Jeu jeuEnCours = jeu.jouerUnCoup(c);
 			Arbre a = new Arbre(jeuEnCours);
-			noeudCourant.ajouterNoeud(a);
-			noeudCourant.ajouterCoup(c);
+			racine.ajouterNoeudEtCoup(a, c);
 			jeu = jeuEnCours;
 			noeudCourant = a;
+			setChanged();
+			notifyObservers();
 		}
 	}	
+	
+	public Arbre getRacine(){
+		return racine;
+	}
+	
+	public Arbre getNoeudCourant(){
+		return noeudCourant;
+	}
 }
