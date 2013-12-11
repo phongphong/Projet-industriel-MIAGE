@@ -47,12 +47,4 @@ public class NodeHypertree extends AbstractHTNode {
 	public String getName() {
 		return a.toString();
 	}
-
-	@Override
-	public String getNameBranch() {
-		if(!a.getListeCoup().isEmpty()){
-			return a.getListeCoup().get(0).toString();
-		}
-		return "";
-	}
 }

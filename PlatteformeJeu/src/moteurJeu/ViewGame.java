@@ -13,6 +13,7 @@ import gameRushHour.controler.ControlRushHourGraphic;
 import gameRushHour.model.RushHour;
 import gameRushHour.view.ViewRushHourGraphic;
 import hypertree.HyperTree;
+import hypertree.SwingHTView;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -95,7 +96,7 @@ public class ViewGame extends JFrame {
 				
 		        NodeHypertree root = new NodeHypertree(a);
 		        HyperTree tree = new HyperTree(root);
-		        ViewTree viewTree = new ViewTree(tree.getModel());
+		        SwingHTView viewTree = tree.getView();
 	
 				
 				ViewMorpionGraphique view = new ViewMorpionGraphique(morpion);
