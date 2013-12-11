@@ -1,0 +1,83 @@
+Ce que je dois faire pour la prochaine fois :
+
+Definir la classe coup contient des attribut
+	RUSHHOUR : numVoiture, deplacement par exemple (1, -2)
+	MORPION : signe, x, y
+
+La classe JEU doit contenir des methdoes :
+	lister tous les coup possible 
+	gagner/perdu (a voir comment on va faire)
+	jouer un coup (coup c), modifie le jeu en fonction du coup
+	
+Au niveau de graphique :
+
+	Nous allons peut etre avoir 2 vue qui s'affiche l'une a cote de l'autre : 
+		- vue du jeu
+		- vue du controleur
+	
+	- a chaque fois qu'on deplace la souris, on cree un coup et on teste si le coup fait partie de tous les coups possible
+	si oui on modifie la vue du controleur
+	
+	- une fois qu'on relache la souris, on regenere la derniere coup et on l'applique sur le jeu
+	
+	
+	Reflechir pour IA, fonction largeur d'abord, le graphe ......
+	
+	- Definir l'interface pricipal du Jeu
+	- utiliser le factory (On selectionne un jeu et on va creer suelement les objets qui sont necessaires au jeux)
+	- Definir bien l'architecture abstract et jeu : abstract contient l'interface Jeu, l'interface coup, elle possede une vue qui a la vue generale et qui liste tous les jeu
+	et un controleur approprie a ce modele
+	
+	- Jeu morpion et rushhour heritent de Jeu et coupMorpion et coupRushHour herient de Coup
+	- il vont avoir les interface qui sont propre a eux aussi
+
+
+-------------------------------------------------------------------
+
+Ce que je vais faire aujourd'hui
+
+- Mettre a jour le diagramme de classe
+- Terminer une classe Partie et Jeu, distingue bien la differentes
+- La structure de l'arbre est devenu comme ci-dessous
+	private Jeu jeu;
+	private ArrayList<Arbre> listeNoeud;
+	private ArrayList<Coup> listeCoup;
+
+et a chaque coup qu'on joue, on doit stocker le jeu en cours et le coup qu'on vient juste de jouer
+
+- Effectue bien la methode qui permet d'afficher l'arbre
+- Commence a reflechir comment on pourra aller sur une branche et sous branche de l'arbre et regenere les nouveaux noeuds a partir de cet endroit.
+
+-------------------------------------
+
+- Generer le jar, integrer le hypertree dans notre projet
+- essayer de faire en sorte que quand on joue un coup dans le jeu, l'hypertree genere une nouvelle branche
+- lister tous les coup possible pour un jeu
+
+-----------------------------------------------
+11/12/2013
+
+
+Ce que j'ai fait :
+	- Generer un .jar, integerer dans le projet
+	- Creer la classe Arbre , NodeHyperTree et utilise SwingHTNode pour affiche l'hypertree
+	- Integree hypertree dans l'interface graphique
+	- Ajoute la classe qui est représente la vue et le controleur de l'arbre (VueArbre.java et ControleurArbre.java)
+	- Implementer le design pattern observable/observe
+	- Recherche sur l'algorithme minimax
+
+A verifier avec M. Thomas :
+	- si le fait que quand on clique sur le noeud dans l'arbre, le jeu reviens en arriere, le nouveau noeud (le nouveau coup qu'on joue) s'ajoute dans le noeud
+	qu'on a selectionne correspond bien a ce qu'il veut
+	- L'organisation des classes et des packages est correct
+	- Soucis avec l'attribut Listecoup est toujours utile dans la classe Arbre, est ce l'arbre n'est pas plutot <Jeu, Coup et Liste<Arbre> : listenoeud> car j'ai l'impression qu'on
+	ajoute seulement le coup dans la case 0 de la liste de coup.
+
+A travailler pour la prochaine fois :
+	- Implementer le minimax dans le jeu
+	- Recherche comment on peut faire des etiquettes de coup
+
+
+	
+	
+	
