@@ -3,17 +3,30 @@
  * and open the template in the editor.
  */
 package moteurJeu;
+import gameAbstract.Arbre;
+import gameAbstract.Coup;
+import gameAbstract.NodeHypertree;
 import gameMorpion.controler.ControlMorpionGraphique;
 import gameMorpion.model.Morpion;
 import gameMorpion.view.ViewMorpionGraphique;
 import gameRushHour.controler.ControlRushHourGraphic;
 import gameRushHour.model.RushHour;
 import gameRushHour.view.ViewRushHourGraphic;
+import hypertree.HyperTree;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import java.util.ArrayList;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 
 /**
@@ -45,7 +58,7 @@ public class ViewGame extends JFrame {
         panelJeu.setSize(d.width/2 , d.height);
         panelJeu.setLayout(new BorderLayout());
         
-        JPanel panelArbre = new JPanel();
+        final JPanel panelArbre = new JPanel();
         panelArbre.setSize(d.width/2 , d.height);
         
         JMenuBar menuBar = new JMenuBar();
@@ -62,16 +75,39 @@ public class ViewGame extends JFrame {
         menuBar.add(menu1);
         menuBar.add(menu2);
         
+
+        
         menuItem1.addActionListener(new ActionListener() {	
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Morpion morpion = (Morpion) factory.creerJeu("morpion");
+				ArrayList<Arbre> listeNoeud = new ArrayList<>();
+				Arbre a = new Arbre(morpion);
+				ArrayList<Coup> listeCoup = morpion.listerTousCoupPossible();
+				
+				for(int i = 0 ; i< listeCoup.size() ; i++){
+		        	Arbre a1 = new Arbre(morpion);
+		        	a1.ajouterCoup(listeCoup.get(i));
+		        	listeNoeud.add(a1);
+		        }
+				a.ajouterListeCoup(listeCoup);
+				a.ajouterListeNoeud(listeNoeud);	
+				
+		        NodeHypertree root = new NodeHypertree(a);
+		        HyperTree tree = new HyperTree(root);
+		        ViewTree viewTree = new ViewTree(tree.getModel());
+	
+				
 				ViewMorpionGraphique view = new ViewMorpionGraphique(morpion);
 				ControlMorpionGraphique control = new ControlMorpionGraphique( morpion);
 				morpion.addObserver(view);
 				view.addMouseListener(control);
 				panelJeu.removeAll();
 				panelJeu.add(view);
+				
+		        panelArbre.setLayout(new BorderLayout());
+		        panelArbre.add(viewTree, BorderLayout.CENTER);
+		        
 				panel.repaint();
 			}
 		});
@@ -92,7 +128,7 @@ public class ViewGame extends JFrame {
 				panel.repaint();
 			}
 		});
-        
+
         panel.setLayout(new GridLayout(1,2));
         panel.add(panelJeu);
         panel.add(panelArbre);

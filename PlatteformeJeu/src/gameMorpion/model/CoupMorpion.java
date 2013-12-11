@@ -77,4 +77,6 @@ public class CoupMorpion implements Coup {
 			return false;
 		return true;
 	}
+	
+	
 }

@@ -37,6 +37,11 @@ public class Joueur {
 	}
 
 	@Override
+	public String toString() {
+		return "Joueur []";
+	}
+	
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
