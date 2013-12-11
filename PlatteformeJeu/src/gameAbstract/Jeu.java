@@ -17,4 +17,6 @@ public interface Jeu {
     public ArrayList<Coup> listerTousCoupPossible();
     
     public boolean gagner(Coup c);
+    
+    public void effacerCoup(Coup c);
 }

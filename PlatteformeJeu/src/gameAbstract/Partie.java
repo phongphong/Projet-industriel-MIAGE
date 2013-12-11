@@ -20,7 +20,7 @@ public class Partie extends Observable  {
 		if (jeu.listerTousCoupPossible().contains(c)) {
 			Jeu jeuEnCours = jeu.jouerUnCoup(c);
 			Arbre a = new Arbre(jeuEnCours);
-			racine.ajouterNoeudEtCoup(a, c);
+			noeudCourant.ajouterNoeudEtCoup(a, c);
 			jeu = jeuEnCours;
 			noeudCourant = a;
 			setChanged();
@@ -34,5 +34,10 @@ public class Partie extends Observable  {
 	
 	public Arbre getNoeudCourant(){
 		return noeudCourant;
+	}
+	
+	public void setNoeudCourant(Arbre noeudCourant){
+		this.noeudCourant = noeudCourant;
+		
 	}
 }

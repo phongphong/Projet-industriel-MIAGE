@@ -4,9 +4,6 @@
  */
 package moteurJeu;
 
-import gameAbstract.Arbre;
-import gameAbstract.Coup;
-import gameAbstract.NodeHypertree;
 import gameAbstract.Partie;
 import gameMorpion.controler.ControlMorpionGraphique;
 import gameMorpion.model.Morpion;
@@ -14,8 +11,6 @@ import gameMorpion.view.ViewMorpionGraphique;
 import gameRushHour.controler.ControlRushHourGraphic;
 import gameRushHour.model.RushHour;
 import gameRushHour.view.ViewRushHourGraphic;
-import hypertree.HyperTree;
-import hypertree.SwingHTView;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -23,7 +18,6 @@ import java.awt.GridLayout;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -95,7 +89,6 @@ public class ViewGame extends JFrame {
 				Partie partieMorpion = control.getPartie();
 				VueArbre vueArbre = new VueArbre(partieMorpion);
 				partieMorpion.addObserver(vueArbre);
-
 				panelArbre.setLayout(new BorderLayout());
 				panelArbre.add(vueArbre, BorderLayout.CENTER);
 
@@ -119,7 +112,7 @@ public class ViewGame extends JFrame {
 				panel.repaint();
 			}
 		});
-
+		
 		panel.setLayout(new GridLayout(1, 2));
 		panel.add(panelJeu);
 		panel.add(panelArbre);

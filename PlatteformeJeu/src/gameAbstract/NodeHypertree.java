@@ -2,11 +2,12 @@ package gameAbstract;
 
 import hypertree.AbstractHTNode;
 
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.Iterator;
 
 public class NodeHypertree extends AbstractHTNode {
-	
+
 	private Arbre a;
 	private HashMap<Arbre, NodeHypertree> children = null;
 
@@ -46,5 +47,13 @@ public class NodeHypertree extends AbstractHTNode {
 	 */
 	public String getName() {
 		return a.toString();
+	}
+
+	public Arbre getArbre() {
+		return a;
+	}
+
+	public Color getColor() {
+		return new Color(a.hashCode());
 	}
 }

@@ -109,7 +109,8 @@ public class Morpion extends Observable implements Jeu{
 		return tourJoueur;
 	}
 	
-	public void effaceCoup(Coup c){
+	@Override
+	public void effacerCoup(Coup c){
 		t_case[((CoupMorpion) c).getX()][((CoupMorpion) c).getY()] = '.';
 		setChanged();
 		notifyObservers();

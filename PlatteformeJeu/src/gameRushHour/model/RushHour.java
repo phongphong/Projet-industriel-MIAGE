@@ -152,4 +152,10 @@ public class RushHour extends Observable implements Jeu{
     public ArrayList<Voiture> getlVoiture() {
         return lVoiture;
     }
+
+	@Override
+	public void effacerCoup(Coup c) {
+		// TODO Auto-generated method stub
+		
+	}
 }
