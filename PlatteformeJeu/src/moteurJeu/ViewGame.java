@@ -6,6 +6,7 @@ package moteurJeu;
 
 import gameAbstract.Partie;
 import gameMorpion.controler.ControlMorpionGraphique;
+import gameMorpion.model.MiniMaxMorpion;
 import gameMorpion.model.Morpion;
 import gameMorpion.view.ViewMorpionGraphique;
 import gameRushHour.controler.ControlRushHourGraphic;
@@ -78,7 +79,6 @@ public class ViewGame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Morpion morpion = (Morpion) factory.creerJeu("morpion");
-
 				ViewMorpionGraphique view = new ViewMorpionGraphique(morpion);
 				ControlMorpionGraphique control = new ControlMorpionGraphique(morpion);
 				morpion.addObserver(view);

@@ -40,4 +40,8 @@ public class Partie extends Observable  {
 		this.noeudCourant = noeudCourant;
 		
 	}
+	
+	public Jeu getJeu(){
+		return jeu;
+	}
 }

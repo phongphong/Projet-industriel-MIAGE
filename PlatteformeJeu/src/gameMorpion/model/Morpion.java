@@ -115,4 +115,12 @@ public class Morpion extends Observable implements Jeu{
 		setChanged();
 		notifyObservers();
 	}
+	
+	public Joueur getJ1(){
+		return j1;
+	}
+	
+	public Joueur getJ2(){
+		return j2;
+	}
 }
