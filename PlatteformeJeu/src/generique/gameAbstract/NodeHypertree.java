@@ -2,7 +2,6 @@ package generique.gameAbstract;
 
 import hypertree.AbstractHTNode;
 
-import java.awt.Color;
 import java.util.HashMap;
 import java.util.Iterator;
 

@@ -138,4 +138,9 @@ public class Morpion extends Jeu{
 		return j2;
 	}
 
+	@Override
+	public Jeu copyDeJeu() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -4,8 +4,6 @@
  */
 package generique.gameAbstract;
 
-import generique.moteurJeu.VueArbre;
-
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -26,4 +24,6 @@ public abstract class Jeu extends Observable {
     public abstract AbstractView getView();
     
     public abstract AbstractControler getControler();
+    
+    public abstract Jeu copyDeJeu();
 }
