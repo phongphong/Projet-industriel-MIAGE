@@ -26,11 +26,13 @@ public class ControlRushHourGraphic extends AbstractControler {
     private RushHour rh;
     private ArrayList<Voiture> lVoiture;
     private int indice;
+    private Partie partie;
     
     public ControlRushHourGraphic(RushHour rh){
         this.rh = rh;
         lVoiture = rh.getlVoiture();
         indice = -1;
+        partie = new Partie(rh);
     }
     
     @Override
@@ -80,10 +82,7 @@ public class ControlRushHourGraphic extends AbstractControler {
             }
             //On cree ce coup
             CoupRushHour c = new CoupRushHour(v, deplacement);
-            //si le coup cree est parmi le coup possible, on deplace a voiture
-            if(rh.listerTousCoupPossible().contains(c)){
-                rh.jouerUnCoup(c);
-            }
+            partie.jouerUnCoup(c);
         }
     }
 
@@ -92,30 +91,10 @@ public class ControlRushHourGraphic extends AbstractControler {
   
     }
     
-    /**
-     * Cette méthode lancer le Jeu RushHour, elle lie la vue au contrôleur et
-     * le listener de la souris à l'interface
-     */
-    public void lancer(){
-        ViewRushHourGraphic view = new ViewRushHourGraphic(rh);
-        ControlRushHourGraphic ctr = new ControlRushHourGraphic(rh);
-        
-        JFrame frame = new JFrame("Rush hour");
-        frame.setPreferredSize(new Dimension(500, 500));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setContentPane(view);
-        frame.pack();
-        frame.setVisible(true);
 
-        rh.addObserver(view);
-        
-        view.addMouseListener(ctr);
-        view.addMouseMotionListener(ctr);
-    }
 
 	@Override
 	public Partie getPartie() {
-		// TODO Auto-generated method stub
-		return null;
+		return partie;
 	}
 }

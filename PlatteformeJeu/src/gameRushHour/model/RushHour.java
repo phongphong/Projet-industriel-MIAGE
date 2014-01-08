@@ -158,7 +158,11 @@ public class RushHour extends Jeu{
 	@Override
 	public void effacerCoup(Coup c) {
 		// TODO Auto-generated method stub
-		
+		CoupRushHour c1 = (CoupRushHour)c;
+		int deplacement = c1.getDeplacement();
+		deplacement = -1 * deplacement;
+		CoupRushHour c2 = new CoupRushHour(c1.getV(), deplacement);
+		this.jouerUnCoup(c2);
 	}
 
 	@Override

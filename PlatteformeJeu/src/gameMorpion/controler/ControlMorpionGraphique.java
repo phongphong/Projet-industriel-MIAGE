@@ -46,7 +46,7 @@ public class ControlMorpionGraphique extends AbstractControler {
 		partie.jouerUnCoup(c);
 		if(j.equals(morpion.getJ1())){
 			int[] t_score = minimax.minimax(2, j);
-			System.out.println("score : " + t_score[0] + " ligne : " + t_score[1] + " col : " + t_score[2]);
+			//System.out.println("score : " + t_score[0] + " ligne : " + t_score[1] + " col : " + t_score[2]);
 		}
 		
 	}

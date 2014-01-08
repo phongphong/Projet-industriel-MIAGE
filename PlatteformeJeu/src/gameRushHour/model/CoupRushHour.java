@@ -46,7 +46,7 @@ public class CoupRushHour implements Coup {
 
     @Override
     public String toString() {
-        return "Coup{" + "v=" + v.getNum() + ", deplacement=" + deplacement + '}';
+        return "[" + v.getNum() + ", " + deplacement + ']';
     }
 
     @Override

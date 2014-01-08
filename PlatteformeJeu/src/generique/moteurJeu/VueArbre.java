@@ -15,16 +15,9 @@ public class VueArbre extends JPanel implements Observer {
 
 	private Arbre a;
 	
-	public VueArbre(Partie partie){
-		this.a = partie.getRacine();
-		NodeHypertree root = new NodeHypertree(a);
-        HyperTree tree = new HyperTree(root);
-        JPanel viewTree = tree.getView();
-        viewTree.setSize(600, 600);
-        this.setSize(600, 600);
-        ControleurVueArbre control = new ControleurVueArbre((SwingHTView)viewTree, partie);
-        viewTree.addMouseListener(control);
-        this.add(viewTree);
+	public VueArbre(Partie p){
+		this.a = p.getRacine();
+		creerArbre(p);
 	}
 	
 	@Override
@@ -32,6 +25,11 @@ public class VueArbre extends JPanel implements Observer {
 		// TODO Auto-generated method stub
 		Partie p = ((Partie) o);
 		this.removeAll();
+		creerArbre(p);
+        this.repaint();
+	}
+	
+	public void creerArbre(Partie p){
 		this.a = p.getRacine();
 		NodeHypertree root = new NodeHypertree(a);
         HyperTree tree = new HyperTree(root);
@@ -41,6 +39,5 @@ public class VueArbre extends JPanel implements Observer {
         ControleurVueArbre control = new ControleurVueArbre((SwingHTView)viewTree, p);
         viewTree.addMouseListener(control);
         this.add(viewTree);
-        this.repaint();
 	}
 }

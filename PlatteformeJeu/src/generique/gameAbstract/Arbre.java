@@ -16,39 +16,19 @@ public class Arbre{
 	
 	public void afficheArbre(Arbre a){
 		if(a != null){
-			System.out.println(a.getJeu().toString());
-			for(int i = 0 ; i < listeCoup.size() ; i++){
-				System.out.println(a.getListeCoup().get(i).toString());
-			}
-			for(int i=0 ; i< listeNoeud.size() ; i++){
-				afficheArbre(a.getListeNoeud().get(i));
+			if(!a.getListeCoup().isEmpty()){
+				for(int i = 0 ; i < a.getListeCoup().size() ; i++){
+					System.out.println(a.getListeCoup().get(i).toString());
+					System.out.println("------------------------");
+					afficheArbre(a.getListeNoeud().get(i));
+				}
 			}
 		}
 	}
 	
-	public void ajouterNoeud(Arbre a){
-		this.listeNoeud.add(a);
-
-	}
-	
-	public void ajouterListeNoeud(ArrayList<Arbre> listeNoeud){
-		this.listeNoeud.addAll(listeNoeud);
-
-	}
-	
-	public void ajouterListeCoup(ArrayList<Coup> listeCoup){
-		this.listeCoup.addAll(listeCoup);
-	
-	}
-	
-	public void ajouterCoup(Coup c){
-		this.listeCoup.add(c);
-
-	}
-	
 	public void ajouterNoeudEtCoup(Arbre a, Coup c){
 		this.listeNoeud.add(a);
-		this.listeCoup.add(c);
+		a.getListeCoup().add(c);
 	}
 
 	public Jeu getJeu(){
@@ -71,5 +51,13 @@ public class Arbre{
 			nomCoup += c.toString();
 		}
 		return nomCoup;
-	} 
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((jeu == null) ? 0 : jeu.hashCode());
+		return result;
+	}	
 }

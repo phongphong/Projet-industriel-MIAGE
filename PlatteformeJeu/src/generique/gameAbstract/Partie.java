@@ -7,11 +7,13 @@ public class Partie extends Observable  {
 	private Jeu jeu;
 	private Arbre racine;
 	private Arbre noeudCourant;
+	private int i;
 	
 	public Partie(Jeu jeu){
 		this.jeu = jeu;
 		racine = new Arbre(jeu);
 		noeudCourant = racine;  
+		i = 0;
 	}
 	
 	public void jouerUnCoup(Coup c){
