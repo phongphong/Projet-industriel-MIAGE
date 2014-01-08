@@ -1,6 +1,6 @@
 package gameMorpion.model;
 
-import gameAbstract.*;
+import generique.gameAbstract.*;
 
 import java.util.ArrayList;
 import java.util.Observable;

@@ -1,10 +1,10 @@
-package moteurJeu;
+package generique.moteurJeu;
 
-import gameAbstract.Arbre;
-import gameAbstract.Coup;
-import gameAbstract.Jeu;
-import gameAbstract.NodeHypertree;
-import gameAbstract.Partie;
+import generique.gameAbstract.Arbre;
+import generique.gameAbstract.Coup;
+import generique.gameAbstract.Jeu;
+import generique.gameAbstract.NodeHypertree;
+import generique.gameAbstract.Partie;
 import hypertree.SwingHTView;
 
 import java.awt.event.MouseEvent;

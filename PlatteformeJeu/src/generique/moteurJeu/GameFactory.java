@@ -2,11 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package moteurJeu;
+package generique.moteurJeu;
 
-import gameAbstract.Jeu;
 import gameMorpion.model.*;
 import gameRushHour.model.*;
+import generique.gameAbstract.Jeu;
 
 /**
  * Cette classe représente le contrôleur du plateforme de jeu qui gère tous les jeux
@@ -31,6 +31,9 @@ public class GameFactory {
                 
             case "rushhour":
                 jeu = new RushHour();
+                break;
+            case "sa;ega;e":
+                jeu = new samegame();
                 break;
         }
         return jeu;

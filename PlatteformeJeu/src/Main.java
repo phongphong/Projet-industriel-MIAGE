@@ -1,4 +1,4 @@
-import moteurJeu.*;
+import generique.moteurJeu.*;
 
 
 public class Main {

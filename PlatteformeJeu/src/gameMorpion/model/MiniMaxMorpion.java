@@ -1,8 +1,8 @@
 package gameMorpion.model;
 
-import gameAbstract.Coup;
-import gameAbstract.IA;
-import gameAbstract.Partie;
+import generique.gameAbstract.Coup;
+import generique.gameAbstract.IA;
+import generique.gameAbstract.Partie;
 
 import java.util.ArrayList;
 

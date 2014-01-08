@@ -4,7 +4,7 @@
  */
 package gameRushHour.model;
 
-import gameAbstract.*;
+import generique.gameAbstract.*;
 
 import java.util.*;
 

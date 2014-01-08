@@ -5,9 +5,9 @@
 package gameRushHour.controler;
 
 
-import gameAbstract.*;
 import gameRushHour.model.RushHour;
 import gameRushHour.view.ViewRushHourConsole;
+import generique.gameAbstract.*;
 
 import java.util.*;
 

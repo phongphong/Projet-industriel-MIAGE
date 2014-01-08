@@ -1,4 +1,4 @@
-package gameAbstract;
+package generique.gameAbstract;
 
 import java.util.ArrayList;
 

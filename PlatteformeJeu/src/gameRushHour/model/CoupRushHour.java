@@ -4,8 +4,8 @@
  */
 package gameRushHour.model;
 
-import gameAbstract.*;
 import gameMorpion.model.Joueur;
+import generique.gameAbstract.*;
 
 import java.util.Objects;
 

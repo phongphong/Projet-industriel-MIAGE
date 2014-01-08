@@ -1,11 +1,11 @@
 package gameMorpion.controler;
 
-import gameAbstract.*;
 
 import gameMorpion.model.CoupMorpion;
 import gameMorpion.model.Joueur;
 import gameMorpion.model.MiniMaxMorpion;
 import gameMorpion.model.Morpion;
+import generique.gameAbstract.*;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;

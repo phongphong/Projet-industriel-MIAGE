@@ -2,9 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package moteurJeu;
+package generique.moteurJeu;
 
-import gameAbstract.Partie;
 import gameMorpion.controler.ControlMorpionGraphique;
 import gameMorpion.model.MiniMaxMorpion;
 import gameMorpion.model.Morpion;
@@ -12,6 +11,7 @@ import gameMorpion.view.ViewMorpionGraphique;
 import gameRushHour.controler.ControlRushHourGraphic;
 import gameRushHour.model.RushHour;
 import gameRushHour.view.ViewRushHourGraphic;
+import generique.gameAbstract.Partie;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

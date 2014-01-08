@@ -1,9 +1,9 @@
 package gameMorpion.controler;
 
-import gameAbstract.Coup;
 import gameMorpion.model.CoupMorpion;
 import gameMorpion.model.Morpion;
 import gameMorpion.view.ViewMorpionConsole;
+import generique.gameAbstract.Coup;
 
 import java.util.*;
 
