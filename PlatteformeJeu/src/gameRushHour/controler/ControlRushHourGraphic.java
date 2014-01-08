@@ -8,6 +8,7 @@ import gameRushHour.model.CoupRushHour;
 import gameRushHour.model.RushHour;
 import gameRushHour.model.Voiture;
 import gameRushHour.view.ViewRushHourGraphic;
+import generique.gameAbstract.AbstractControler;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ import javax.swing.*;
  * Cette classe représente le contrôleur en mode GRAPHIQUE du jeu rushHour
  * @author Phongphet
  */
-public class ControlRushHourGraphic implements MouseListener, MouseMotionListener {
+public class ControlRushHourGraphic extends AbstractControler {
 
     private RushHour rh;
     private ArrayList<Voiture> lVoiture;

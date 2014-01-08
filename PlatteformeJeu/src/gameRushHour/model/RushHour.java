@@ -4,6 +4,8 @@
  */
 package gameRushHour.model;
 
+import gameRushHour.controler.ControlRushHourGraphic;
+import gameRushHour.view.ViewRushHourGraphic;
 import generique.gameAbstract.*;
 
 import java.util.*;
@@ -13,7 +15,7 @@ import java.util.*;
  * Cette classe représente le modèle du Jeu RushHour
  * @author Phongphet
  */
-public class RushHour extends Observable implements Jeu{
+public class RushHour extends Jeu{
 
     private static final int dimension = 6;
     char[][] t_case;
@@ -157,5 +159,15 @@ public class RushHour extends Observable implements Jeu{
 	public void effacerCoup(Coup c) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public AbstractView getView() {
+		return (AbstractView) new ViewRushHourGraphic(this);
+	}
+
+	@Override
+	public AbstractControler getControler() {
+		return new ControlRushHourGraphic(this);
 	}
 }

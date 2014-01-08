@@ -4,18 +4,24 @@
  */
 package generique.moteurJeu;
 
-import gameMorpion.model.*;
-import gameRushHour.model.*;
+import gameMorpion.model.Morpion;
+import gameRushHour.model.RushHour;
 import generique.gameAbstract.Jeu;
+
+import java.util.ArrayList;
 
 /**
  * Cette classe représente le contrôleur du plateforme de jeu qui gère tous les jeux
  * @author Phongphet
  */
 public class GameFactory {
+	
+	private ArrayList<String> listeJeu;
     
     public GameFactory(){
-    	
+    	listeJeu = new ArrayList<>();
+    	listeJeu.add("morpion");
+    	listeJeu.add("rushhour");
     }
     
     /**
@@ -32,10 +38,11 @@ public class GameFactory {
             case "rushhour":
                 jeu = new RushHour();
                 break;
-            case "sa;ega;e":
-                jeu = new samegame();
-                break;
         }
         return jeu;
+    }
+    
+    public ArrayList<String> getListeJeu(){
+    	return listeJeu;
     }
 }

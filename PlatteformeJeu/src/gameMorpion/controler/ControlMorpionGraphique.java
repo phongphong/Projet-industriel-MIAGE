@@ -10,7 +10,7 @@ import generique.gameAbstract.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class ControlMorpionGraphique implements MouseListener {
+public class ControlMorpionGraphique extends AbstractControler {
 
 	private Morpion morpion;
 	private Partie partie;
@@ -56,7 +56,21 @@ public class ControlMorpionGraphique implements MouseListener {
 
 	}
 	
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	public Partie getPartie(){
 		return this.partie;
 	}
+
+	
 }

@@ -5,6 +5,8 @@
 package gameRushHour.view;
 
 import gameRushHour.model.RushHour;
+import generique.gameAbstract.AbstractControler;
+import generique.gameAbstract.AbstractView;
 
 import java.awt.*;
 import java.util.*;
@@ -16,7 +18,7 @@ import javax.swing.*;
  * @author Phongphet
  */
 @SuppressWarnings("serial")
-public class ViewRushHourGraphic extends JPanel implements Observer {
+public class ViewRushHourGraphic extends AbstractView{
 
     private RushHour rh;
     

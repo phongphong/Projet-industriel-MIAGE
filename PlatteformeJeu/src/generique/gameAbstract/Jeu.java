@@ -4,19 +4,26 @@
  */
 package generique.gameAbstract;
 
+import generique.moteurJeu.VueArbre;
+
 import java.util.ArrayList;
+import java.util.Observable;
 
 /**
  *
  * @author Phongphet
  */
-public interface Jeu {
+public abstract class Jeu extends Observable {
     
-    public Jeu jouerUnCoup(Coup c);
+    public abstract Jeu jouerUnCoup(Coup c);
     
-    public ArrayList<Coup> listerTousCoupPossible();
+    public abstract ArrayList<Coup> listerTousCoupPossible();
     
-    public boolean gagner(Coup c);
+    public abstract boolean gagner(Coup c);
     
-    public void effacerCoup(Coup c);
+    public abstract void effacerCoup(Coup c);
+    
+    public abstract AbstractView getView();
+    
+    public abstract AbstractControler getControler();
 }

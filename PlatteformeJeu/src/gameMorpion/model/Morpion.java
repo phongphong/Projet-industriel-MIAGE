@@ -1,14 +1,18 @@
 package gameMorpion.model;
 
-import generique.gameAbstract.*;
+import gameMorpion.controler.ControlMorpionGraphique;
+import gameMorpion.view.ViewMorpionGraphique;
+import generique.gameAbstract.AbstractControler;
+import generique.gameAbstract.AbstractView;
+import generique.gameAbstract.Coup;
+import generique.gameAbstract.Jeu;
 
 import java.util.ArrayList;
-import java.util.Observable;
 
 import javax.swing.JOptionPane;
 
 
-public class Morpion extends Observable implements Jeu{
+public class Morpion extends Jeu{
 	
 	private char t_case[][];
 	private Joueur tourJoueur;
@@ -116,6 +120,16 @@ public class Morpion extends Observable implements Jeu{
 		notifyObservers();
 	}
 	
+	@Override
+	public AbstractView getView() {
+		return new ViewMorpionGraphique(this);
+	}
+
+	@Override
+	public AbstractControler getControler() {
+		return new ControlMorpionGraphique(this);
+	}
+	
 	public Joueur getJ1(){
 		return j1;
 	}
@@ -123,4 +137,5 @@ public class Morpion extends Observable implements Jeu{
 	public Joueur getJ2(){
 		return j2;
 	}
+
 }

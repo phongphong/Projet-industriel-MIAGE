@@ -1,6 +1,7 @@
 package gameMorpion.view;
 
 import gameMorpion.model.Morpion;
+import generique.gameAbstract.AbstractView;
 
 import java.awt.Graphics;
 import java.util.Observable;
@@ -10,7 +11,7 @@ import javax.swing.*;
 
 
 @SuppressWarnings("serial")
-public class ViewMorpionGraphique extends JPanel implements Observer {
+public class ViewMorpionGraphique extends AbstractView {
 
 	private Morpion morpion;
 
