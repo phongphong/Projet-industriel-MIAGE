@@ -66,6 +66,10 @@ public class Arbre{
 
 	@Override
 	public String toString() {
-		return jeu.toString();
+		String nomCoup = "";
+		for(Coup c : listeCoup){
+			nomCoup += c.toString();
+		}
+		return nomCoup;
 	} 
 }

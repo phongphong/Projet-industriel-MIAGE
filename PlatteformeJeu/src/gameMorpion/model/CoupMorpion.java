@@ -44,7 +44,7 @@ public class CoupMorpion implements Coup {
 
 	@Override
 	public String toString() {
-		return "coupMorpion [j=" + j + ", x=" + x + ", y=" + y + "]";
+		return "[" + j + "," + x + "," + y + "]";
 	}
 
 	@Override

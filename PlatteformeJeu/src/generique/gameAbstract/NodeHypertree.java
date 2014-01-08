@@ -52,8 +52,4 @@ public class NodeHypertree extends AbstractHTNode {
 	public Arbre getArbre() {
 		return a;
 	}
-
-	public Color getColor() {
-		return new Color(a.hashCode());
-	}
 }

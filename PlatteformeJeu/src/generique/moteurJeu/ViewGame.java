@@ -7,6 +7,7 @@ package generique.moteurJeu;
 import generique.gameAbstract.AbstractControler;
 import generique.gameAbstract.AbstractView;
 import generique.gameAbstract.Jeu;
+import generique.gameAbstract.Partie;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -63,7 +64,7 @@ public class ViewGame extends JFrame {
 		JMenu menu1 = new JMenu("Jeu");
 		JMenu menu2 = new JMenu("Aide");
 
-		/*Creation des menus generiquement*/
+		/*creer des menus generiquement et ajouter ses actions correspondantes*/
 		ArrayList<String> listeJeu = factory.getListeJeu();
 		for(final String nomJeu : listeJeu){
 			JMenuItem sousMenu = new JMenuItem(nomJeu);
@@ -80,6 +81,13 @@ public class ViewGame extends JFrame {
 					view.addMouseMotionListener(control);
 					panelJeu.removeAll();
 					panelJeu.add(view);
+					
+					Partie partie = control.getPartie();
+					VueArbre vueArbre = new VueArbre(partie);
+					partie.addObserver(vueArbre);
+					panelArbre.setLayout(new BorderLayout());
+					panelArbre.add(vueArbre, BorderLayout.CENTER);
+					
 					panel.repaint();	
 				}
 			});

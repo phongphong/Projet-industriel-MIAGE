@@ -9,6 +9,7 @@ import gameRushHour.model.RushHour;
 import gameRushHour.model.Voiture;
 import gameRushHour.view.ViewRushHourGraphic;
 import generique.gameAbstract.AbstractControler;
+import generique.gameAbstract.Partie;
 
 import java.awt.event.*;
 import java.awt.*;
@@ -111,4 +112,10 @@ public class ControlRushHourGraphic extends AbstractControler {
         view.addMouseListener(ctr);
         view.addMouseMotionListener(ctr);
     }
+
+	@Override
+	public Partie getPartie() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

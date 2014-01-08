@@ -38,7 +38,7 @@ public class Joueur {
 
 	@Override
 	public String toString() {
-		return "Joueur []";
+		return nom;
 	}
 	
 	@Override
