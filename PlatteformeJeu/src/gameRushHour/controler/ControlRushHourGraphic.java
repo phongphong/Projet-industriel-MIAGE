@@ -17,82 +17,85 @@ import java.util.*;
 
 import javax.swing.*;
 
-
 /**
  * Cette classe représente le contrôleur en mode GRAPHIQUE du jeu rushHour
+ * 
  * @author Phongphet
  */
 public class ControlRushHourGraphic extends AbstractControler {
 
-    private ArrayList<Voiture> lVoiture;
-    private int indice;
-    private Partie partie;
-    
-    public ControlRushHourGraphic(Partie partie) {
-    	this.partie = partie;
-        indice = -1;
-    }
-    
-    @Override
-    public void mouseClicked(MouseEvent me) {
-    
-    }
+	private ArrayList<Voiture> lVoiture;
+	private int indice;
+	private Partie partie;
 
-    @Override
-    public void mousePressed(MouseEvent me) {
-        int colonne = me.getX() / 50;
-        int ligne = me.getY() / 50;
-        char c = ((RushHour) partie.getJeu()).getT_case()[ligne][colonne];
-        //on récupère la voiture choisie
-        lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
-        indice = lVoiture.indexOf(new Voiture(c));
-    }
+	public ControlRushHourGraphic(Partie partie) {
+		this.partie = partie;
+		indice = -1;
+	}
 
-    @Override
-    public void mouseReleased(MouseEvent me) {
-         if(partie.getJeu().gagner(null)){
-            JOptionPane.showMessageDialog(null, "Gagner");
-        }
-    }
+	@Override
+	public void mouseClicked(MouseEvent me) {
 
-    @Override
-    public void mouseEntered(MouseEvent me) {
-    
-    }
+	}
 
-    @Override
-    public void mouseExited(MouseEvent me) {
-    
-    }
+	@Override
+	public void mousePressed(MouseEvent me) {
+		int colonne = me.getX() / 50;
+		int ligne = me.getY() / 50;
+		if (ligne < RushHour.getDimension() && colonne < RushHour.getDimension()) {
+			char c = ((RushHour) partie.getJeu()).getT_case()[ligne][colonne];
+			// on récupère la voiture choisie
+			lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
+			indice = lVoiture.indexOf(new Voiture(c));
+		}
+	}
 
-    @Override
-    public void mouseDragged(MouseEvent me) {
-        //si la voiture choisi n'est pas nulle
-        if(indice != -1){
-            //on regenere le nouveau coup(voiture, deplacement) en fonction du deplacement de la souris et la direction 
-            int colonne = me.getX() / 50;
-            int ligne = me.getY() / 50;
-            lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
-            Voiture v = lVoiture.get(indice);
-            int deplacement;
-            if(v.getDirection() == 'h'){
-                deplacement = colonne - v.getCol();
-            }else{
-                deplacement = ligne - v.getLigne();
-            }
-            //On cree ce coup
-            CoupRushHour c = new CoupRushHour(v, deplacement);
-            try {
+	@Override
+	public void mouseReleased(MouseEvent me) {
+		if (partie.getJeu().gagner(null)) {
+			JOptionPane.showMessageDialog(null, "Gagner");
+		}
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent me) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent me) {
+
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent me) {
+		// si la voiture choisi n'est pas nulle
+		if (indice != -1) {
+			// on regenere le nouveau coup(voiture, deplacement) en fonction du
+			// deplacement de la souris et la direction
+			int colonne = me.getX() / 50;
+			int ligne = me.getY() / 50;
+			lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
+			Voiture v = lVoiture.get(indice);
+			int deplacement;
+			if (v.getDirection() == 'h') {
+				deplacement = colonne - v.getCol();
+			} else {
+				deplacement = ligne - v.getLigne();
+			}
+			// On cree ce coup
+			CoupRushHour c = new CoupRushHour(v, deplacement);
+			try {
 				partie.jouerUnCoup(c);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        }
-    }
+		}
+	}
 
-    @Override
-    public void mouseMoved(MouseEvent me) {
-  
-    }
+	@Override
+	public void mouseMoved(MouseEvent me) {
+
+	}
 }
