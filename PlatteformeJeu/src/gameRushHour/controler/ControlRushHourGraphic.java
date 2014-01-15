@@ -42,7 +42,8 @@ public class ControlRushHourGraphic extends AbstractControler {
 	public void mousePressed(MouseEvent me) {
 		int colonne = me.getX() / 50;
 		int ligne = me.getY() / 50;
-		if (ligne < RushHour.getDimension() && colonne < RushHour.getDimension()) {
+		if (ligne < RushHour.getDimension()
+				&& colonne < RushHour.getDimension()) {
 			char c = ((RushHour) partie.getJeu()).getT_case()[ligne][colonne];
 			// on récupère la voiture choisie
 			lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
@@ -75,21 +76,19 @@ public class ControlRushHourGraphic extends AbstractControler {
 			// deplacement de la souris et la direction
 			int colonne = me.getX() / 50;
 			int ligne = me.getY() / 50;
-			lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
-			Voiture v = lVoiture.get(indice);
-			int deplacement;
-			if (v.getDirection() == 'h') {
-				deplacement = colonne - v.getCol();
-			} else {
-				deplacement = ligne - v.getLigne();
-			}
-			// On cree ce coup
-			CoupRushHour c = new CoupRushHour(v, deplacement);
-			try {
+			if (ligne < RushHour.getDimension()
+					&& colonne < RushHour.getDimension()) {
+				lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
+				Voiture v = lVoiture.get(indice);
+				int deplacement;
+				if (v.getDirection() == 'h') {
+					deplacement = colonne - v.getCol();
+				} else {
+					deplacement = ligne - v.getLigne();
+				}
+				// On cree ce coup
+				CoupRushHour c = new CoupRushHour(v, deplacement);
 				partie.jouerUnCoup(c);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 	}
