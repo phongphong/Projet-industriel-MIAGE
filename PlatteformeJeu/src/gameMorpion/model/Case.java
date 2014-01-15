@@ -46,4 +46,6 @@ public class Case extends Observable{
 	public void setSigne(String signe) {
 		this.signe = signe;
 	}
+	
+	
 }

@@ -27,8 +27,8 @@ public class Arbre{
 	}
 	
 	public void ajouterNoeudEtCoup(Arbre a, Coup c){
-		this.listeNoeud.add(a);
 		a.getListeCoup().add(c);
+		this.listeNoeud.add(a);
 	}
 
 	public Jeu getJeu(){

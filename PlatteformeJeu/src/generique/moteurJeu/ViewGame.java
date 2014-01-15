@@ -74,17 +74,25 @@ public class ViewGame extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
 					Jeu jeu = factory.creerJeu(nomJeu);
-					AbstractView view = jeu.getView();
-					AbstractControler control = jeu.getControler();
-					jeu.addObserver(view);
+					//je creer la partie du jeu
+					Partie partie = new Partie(jeu);
+					
+					//Je recupere les vues et les controleurs selon le jeu et je lie la partie aux vues et controleurs
+					AbstractView view = jeu.getView(partie);
+					AbstractControler control = jeu.getControler(partie);
+					
+					
+					partie.addObserver(view);
 					view.addMouseListener(control);
 					view.addMouseMotionListener(control);
 					panelJeu.removeAll();
 					panelJeu.add(view);
 					
-					Partie partie = control.getPartie();
+					
 					VueArbre vueArbre = new VueArbre(partie);
 					partie.addObserver(vueArbre);
+					//partie.addObserver(view);
+					
 					panelArbre.removeAll();
 					panelArbre.setLayout(new BorderLayout());
 					panelArbre.add(vueArbre, BorderLayout.CENTER);

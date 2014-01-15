@@ -4,6 +4,9 @@
  */
 package generique.gameAbstract;
 
+import gameMorpion.model.Joueur;
+import gameRushHour.model.Voiture;
+
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -13,7 +16,7 @@ import java.util.Observable;
  */
 public abstract class Jeu extends Observable {
     
-    public abstract Jeu jouerUnCoup(Coup c);
+    public abstract void jouerUnCoup(Coup c);
     
     public abstract ArrayList<Coup> listerTousCoupPossible();
     
@@ -21,9 +24,12 @@ public abstract class Jeu extends Observable {
     
     public abstract void effacerCoup(Coup c);
     
-    public abstract AbstractView getView();
+    public abstract AbstractView getView(Partie partie);
     
-    public abstract AbstractControler getControler();
+    public abstract AbstractControler getControler(Partie partie);
     
-    public abstract Jeu copyDeJeu();
+    public abstract Jeu getCopyDeJeu();
+    
+    public abstract void setJeu(Jeu jeu);
+    
 }

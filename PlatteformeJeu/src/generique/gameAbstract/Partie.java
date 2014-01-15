@@ -1,56 +1,61 @@
 package generique.gameAbstract;
 
 import java.util.Observable;
+public class Partie extends Observable {
 
-public class Partie extends Observable  {
-	
 	private Jeu jeu;
 	private Arbre racine;
 	private Arbre noeudCourant;
 	
-	public Partie(Jeu jeu){
+
+	public Partie(Jeu jeu) {
 		this.jeu = jeu;
-		racine = new Arbre(jeu);
-		noeudCourant = racine;  
+		racine = new Arbre(jeu.getCopyDeJeu());
+		noeudCourant = racine;
+		
 	}
-	
-	
-	public void revenirAncienJeu(Arbre a){
-		Jeu j = a.getJeu();
-		jeu.setJeu(j);
-		noeudCourant = a;
+
+	public void revenirAncienJeu(Arbre a) {
+		jeu = a.getJeu().getCopyDeJeu();
+		this.noeudCourant = a;
 		setChanged();
 		notifyObservers();
 	}
-	
-	public void jouerUnCoup(Coup c){
-		/*A verifier si le coup n'existe pas deja, dans le cas qu'il existe deja on a juste a pointer
-		 * dessus sans ajouter une nouvelle branche dans l'arbre*/
-		if (jeu.listerTousCoupPossible().contains(c)) {
-			Jeu jeuEnCours = jeu.jouerUnCoup(c);
-			Arbre a = new Arbre(jeuEnCours);
+
+	public void jouerUnCoup(Coup c) {
+		if(jeu.listerTousCoupPossible().contains(c)){
+			// je fais evoluer le jeu
+			jeu.jouerUnCoup(c);
+			
+			// je mets a jour l'arbre
+			
+			//TODO attention si le coup existe deja
+			Arbre a = new Arbre(jeu.getCopyDeJeu());
 			noeudCourant.ajouterNoeudEtCoup(a, c);
-			jeu = jeuEnCours;
-			noeudCourant = a;
+			
+			//on passe au coup suivant
+			this.noeudCourant = a;
+			
+			//on demande la mise a jour de dessin de jeu
 			setChanged();
 			notifyObservers();
 		}
-	}	
-	
-	public Arbre getRacine(){
+	}
+
+	public Arbre getRacine() {
 		return racine;
 	}
-	
-	public Arbre getNoeudCourant(){
+
+	public Arbre getNoeudCourant() {
 		return noeudCourant;
 	}
-	
-	public void setNoeudCourant(Arbre noeudCourant){
+
+	public void setNoeudCourant(Arbre noeudCourant) {
 		this.noeudCourant = noeudCourant;
-		
+
 	}
-	
-	public Jeu getJeu(){
+
+	public Jeu getJeu() {
 		return jeu;
 	}
 }

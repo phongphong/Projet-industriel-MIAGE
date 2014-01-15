@@ -2,6 +2,7 @@ package gameMorpion.view;
 
 import gameMorpion.model.Morpion;
 import generique.gameAbstract.AbstractView;
+import generique.gameAbstract.Partie;
 
 import java.awt.Graphics;
 import java.util.Observable;
@@ -15,9 +16,9 @@ public class ViewMorpionGraphique extends AbstractView {
 
 	private Morpion morpion;
 
-	public ViewMorpionGraphique(Morpion morpion) {
+	public ViewMorpionGraphique(Partie partie) {
 		super();
-		this.morpion = morpion;
+		this.morpion = (Morpion) partie.getJeu();
 		this.setSize(200, 200);
 	}
 
@@ -37,7 +38,7 @@ public class ViewMorpionGraphique extends AbstractView {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		this.morpion = (Morpion)arg0;
+		this.morpion = (Morpion)((Partie) arg0).getJeu();
 		repaint();
 	}
 }

@@ -14,6 +14,7 @@ import generique.gameAbstract.Partie;
 import java.awt.event.*;
 import java.awt.*;
 import java.util.*;
+
 import javax.swing.*;
 
 
@@ -28,8 +29,9 @@ public class ControlRushHourGraphic extends AbstractControler {
     private int indice;
     private Partie partie;
     
-    public ControlRushHourGraphic(RushHour rh){
-        this.rh = rh;
+    public ControlRushHourGraphic(Partie partie) {
+    	this.partie = partie;
+        this.rh = (RushHour) partie.getJeu();
         lVoiture = rh.getlVoiture();
         indice = -1;
         partie = new Partie(rh);
@@ -82,7 +84,12 @@ public class ControlRushHourGraphic extends AbstractControler {
             }
             //On cree ce coup
             CoupRushHour c = new CoupRushHour(v, deplacement);
-            partie.jouerUnCoup(c);
+            try {
+				partie.jouerUnCoup(c);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
         }
     }
 
@@ -90,11 +97,4 @@ public class ControlRushHourGraphic extends AbstractControler {
     public void mouseMoved(MouseEvent me) {
   
     }
-    
-
-
-	@Override
-	public Partie getPartie() {
-		return partie;
-	}
 }
