@@ -14,18 +14,18 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class ViewMorpionGraphique extends AbstractView {
 
-	private Morpion morpion;
+	private Partie partie;
 
 	public ViewMorpionGraphique(Partie partie) {
 		super();
-		this.morpion = (Morpion) partie.getJeu();
+		this.partie =  partie;
 		this.setSize(200, 200);
 	}
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		char[][] t_case = morpion.getT_case();
+		char[][] t_case = ((Morpion) partie.getJeu()).getT_case();
 		for (int i = 0; i < t_case.length; i++) {
 			for (int j = 0; j < t_case.length; j++) {
 				g.drawRect(i * 50, j * 50, 50, 50);
@@ -38,7 +38,7 @@ public class ViewMorpionGraphique extends AbstractView {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		this.morpion = (Morpion)((Partie) arg0).getJeu();
+		this.partie =((Partie) arg0);
 		repaint();
 	}
 }

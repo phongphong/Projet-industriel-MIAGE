@@ -30,12 +30,21 @@ public class Partie extends Observable {
 			// je mets a jour l'arbre
 			
 			//TODO attention si le coup existe deja
-			Arbre a = new Arbre(jeu.getCopyDeJeu());
-			noeudCourant.ajouterNoeudEtCoup(a, c);
-			
-			//on passe au coup suivant
-			this.noeudCourant = a;
-			
+			boolean existeDeja = false;
+			for(Arbre fils : noeudCourant.getListeNoeud()){
+				if(fils.getListeCoup().contains(c)){
+					existeDeja = true;
+					noeudCourant = fils;
+					break;
+				}
+			}
+			if(!existeDeja){
+				Arbre a = new Arbre(jeu.getCopyDeJeu());
+				noeudCourant.ajouterNoeudEtCoup(a, c);
+				//on passe au coup suivant
+				this.noeudCourant = a;
+			}
+
 			//on demande la mise a jour de dessin de jeu
 			setChanged();
 			notifyObservers();

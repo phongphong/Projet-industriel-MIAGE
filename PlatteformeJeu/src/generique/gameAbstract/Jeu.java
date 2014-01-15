@@ -4,9 +4,6 @@
  */
 package generique.gameAbstract;
 
-import gameMorpion.model.Joueur;
-import gameRushHour.model.Voiture;
-
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -29,7 +26,5 @@ public abstract class Jeu extends Observable {
     public abstract AbstractControler getControler(Partie partie);
     
     public abstract Jeu getCopyDeJeu();
-    
-    public abstract void setJeu(Jeu jeu);
     
 }

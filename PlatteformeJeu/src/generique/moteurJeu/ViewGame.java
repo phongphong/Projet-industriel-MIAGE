@@ -16,7 +16,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Observer;
 
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -116,6 +115,4 @@ public class ViewGame extends JFrame {
 		this.pack();
 		this.setVisible(true);
 	}
-	
-	 
 }

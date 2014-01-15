@@ -24,17 +24,13 @@ import javax.swing.*;
  */
 public class ControlRushHourGraphic extends AbstractControler {
 
-    private RushHour rh;
     private ArrayList<Voiture> lVoiture;
     private int indice;
     private Partie partie;
     
     public ControlRushHourGraphic(Partie partie) {
     	this.partie = partie;
-        this.rh = (RushHour) partie.getJeu();
-        lVoiture = rh.getlVoiture();
         indice = -1;
-        partie = new Partie(rh);
     }
     
     @Override
@@ -46,14 +42,15 @@ public class ControlRushHourGraphic extends AbstractControler {
     public void mousePressed(MouseEvent me) {
         int colonne = me.getX() / 50;
         int ligne = me.getY() / 50;
-        char c = rh.getT_case()[ligne][colonne];
+        char c = ((RushHour) partie.getJeu()).getT_case()[ligne][colonne];
         //on récupère la voiture choisie
+        lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
         indice = lVoiture.indexOf(new Voiture(c));
     }
 
     @Override
     public void mouseReleased(MouseEvent me) {
-         if(rh.gagner(null)){
+         if(partie.getJeu().gagner(null)){
             JOptionPane.showMessageDialog(null, "Gagner");
         }
     }
@@ -75,6 +72,7 @@ public class ControlRushHourGraphic extends AbstractControler {
             //on regenere le nouveau coup(voiture, deplacement) en fonction du deplacement de la souris et la direction 
             int colonne = me.getX() / 50;
             int ligne = me.getY() / 50;
+            lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
             Voiture v = lVoiture.get(indice);
             int deplacement;
             if(v.getDirection() == 'h'){

@@ -22,11 +22,11 @@ import javax.swing.*;
 @SuppressWarnings("serial")
 public class ViewRushHourGraphic extends AbstractView{
 
-    private RushHour rh;
+    private Partie partie;
     
     public ViewRushHourGraphic(Partie partie){
         super();
-        this.rh = (RushHour) partie.getJeu();
+        this.partie =  partie;
         this.setSize(600, 600);
     }
     
@@ -37,7 +37,7 @@ public class ViewRushHourGraphic extends AbstractView{
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        char[][] t_case = rh.getT_case();
+        char[][] t_case = ((RushHour) partie.getJeu()).getT_case();
         for(int i = 0 ; i < t_case.length ; i++){
             for(int j = 0 ; j < t_case.length ; j++){
                 if(t_case[j][i] == '.'){
@@ -62,7 +62,7 @@ public class ViewRushHourGraphic extends AbstractView{
     
     @Override
     public void update(Observable o, Object o1) {
-        rh = (RushHour) ((Partie) o).getJeu();
+        partie = ((Partie) o);
         repaint();
     }
 }

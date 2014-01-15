@@ -34,18 +34,25 @@ public class RushHour extends Jeu {
 		Voiture v1 = new Voiture('0', 0, 0, 3, 'v', false);
 		Voiture v2 = new Voiture('R', 3, 0, 2, 'h', true);
 		Voiture v3 = new Voiture('1', 1, 5, 3, 'v', false);
+		
+		Voiture v4 = new Voiture('2', 5, 0, 2, 'h', false);
+		Voiture v5 = new Voiture('3', 5, 4, 2, 'h', false);
 
 		// ajout de la voiture dans la liste des voitures
 		lVoiture = new ArrayList<>();
 		lVoiture.add(v1);
 		lVoiture.add(v2);
 		lVoiture.add(v3);
+		lVoiture.add(v4);
+		lVoiture.add(v5);
 
 		// les cases qui sont occupes sont devenus occupe et contient le numero
 		// du voiture
 		this.setCaseOccupe(v1, v1.getNum());
 		this.setCaseOccupe(v2, v2.getNum());
 		this.setCaseOccupe(v3, v3.getNum());
+		this.setCaseOccupe(v4, v4.getNum());
+		this.setCaseOccupe(v5, v5.getNum());
 	}
 
 	/**
@@ -90,10 +97,9 @@ public class RushHour extends Jeu {
 				// on recupere les cases qui sont devant la voiture (les cases
 				// qu'elle peut y aller)
 				for (int j = 0; j < v.getCol(); j++) {
-					if (t_case[v.getLigne()][j] == '.')
+					if (t_case[v.getLigne()][j] == '.'){
 						listeCoup.add(new CoupRushHour(v, j - v.getCol()));
-					else
-						break;
+					} 
 				}
 				// on recupere les cases qui sont derrieres la voiture (les
 				// cases qu'elle peut y aller)
@@ -194,34 +200,33 @@ public class RushHour extends Jeu {
 	@Override
 	public Jeu getCopyDeJeu() {
 		RushHour rh = new RushHour();
-		char[][] t_case_bis = new char[dimension][dimension];
-		for(int i = 0 ; i < t_case_bis.length ; i++){
-            for(int j = 0 ; j < t_case_bis.length ; j++){
-            	t_case_bis[i][j] = t_case[i][j];
+		for(int i = 0 ; i < t_case.length ; i++){
+            for(int j = 0 ; j < t_case.length ; j++){
+            	rh.getT_case()[i][j] = t_case[i][j];
             }
         }
+		
+		rh.getlVoiture().clear();
 		for(Voiture v : lVoiture){
-			rh.getlVoiture().add(v);
-			rh.setCaseOccupe(v, v.getNum());
+			Voiture v_temp = new Voiture(v.getNum(), v.getLigne(), v.getCol(), v.getLongeur(), v.getDirection(), v.isVoitureR());
+			rh.getlVoiture().add(v_temp);
+			rh.setCaseOccupe(v_temp, v_temp.getNum());
 		}
-		rh.setT_case(t_case_bis);
+		
+		
 		return rh;
-	}
-
-	@Override
-	public void setJeu(Jeu jeu) {
-		this.setT_case(((RushHour) jeu).getT_case());
-		this.setlVoiture(((RushHour) jeu).getlVoiture());
-		setChanged();
-		notifyObservers();
 	}
 
 	public void setT_case(char[][] t_case) {
 		this.t_case = t_case;
+		setChanged();
+		notifyObservers();
 	}
 
 	public void setlVoiture(ArrayList<Voiture> lVoiture) {
 		this.lVoiture = lVoiture;
+		setChanged();
+		notifyObservers();
 	}
 	
 	

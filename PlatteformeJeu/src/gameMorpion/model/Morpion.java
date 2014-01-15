@@ -185,12 +185,4 @@ public class Morpion extends Jeu {
 		morpion.setT_case(t_case_bis);
 		return morpion;
 	}
-
-	@Override
-	public void setJeu(Jeu jeu) {
-		// TODO Auto-generated method stub
-		this.setT_case(((Morpion) jeu).getT_case());
-		this.setTourJoueur(((Morpion) jeu).getTourJoueur());
-		
-	}
 }
