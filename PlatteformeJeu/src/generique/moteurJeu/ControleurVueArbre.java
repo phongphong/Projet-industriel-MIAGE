@@ -1,10 +1,10 @@
 package generique.moteurJeu;
 
-import generique.gameAbstract.Arbre;
 import generique.gameAbstract.NodeHypertree;
 import generique.gameAbstract.Partie;
 import hypertree.SwingHTView;
 
+import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -21,10 +21,13 @@ public class ControleurVueArbre implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
+		NodeHypertree previousNode = p.getNoeudPrecedent();
+		previousNode.setColor(Color.white);
 		NodeHypertree node = (NodeHypertree) view.getNodeUnderTheMouse(e);
 		if (node != null) {
-			Arbre noeudChoisi = node.getArbre();
-			p.revenirAncienJeu(noeudChoisi);
+			p.setNoeudPrecedent(node);
+			node.setColor(Color.green);
+			p.revenirAncienJeu(node);	
 		}
 	}
 

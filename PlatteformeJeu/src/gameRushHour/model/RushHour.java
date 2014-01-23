@@ -4,6 +4,7 @@
  */
 package gameRushHour.model;
 
+import gameMorpion.model.Joueur;
 import gameRushHour.controler.ControlRushHourGraphic;
 import gameRushHour.view.ViewRushHourGraphic;
 import generique.gameAbstract.*;
@@ -227,6 +228,12 @@ public class RushHour extends Jeu {
 		this.lVoiture = lVoiture;
 		setChanged();
 		notifyObservers();
+	}
+
+	@Override
+	public Joueur getTourJoueur() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

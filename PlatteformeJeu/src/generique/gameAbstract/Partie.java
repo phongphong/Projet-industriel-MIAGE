@@ -4,20 +4,20 @@ import java.util.Observable;
 public class Partie extends Observable {
 
 	private Jeu jeu;
-	private Arbre racine;
-	private Arbre noeudCourant;
-	
+	private NodeHypertree racineHypertree;
+	private NodeHypertree noeudCourant;
+	private NodeHypertree noeudPrecedent;
 
 	public Partie(Jeu jeu) {
 		this.jeu = jeu;
-		racine = new Arbre(jeu.getCopyDeJeu());
-		noeudCourant = racine;
-		
+		racineHypertree = new NodeHypertree(jeu.getCopyDeJeu());
+		noeudCourant = racineHypertree;
+		noeudPrecedent = racineHypertree;
 	}
 
-	public void revenirAncienJeu(Arbre a) {
-		jeu = a.getJeu().getCopyDeJeu();
-		this.noeudCourant = a;
+	public void revenirAncienJeu(NodeHypertree node) {
+		jeu = node.getJeu().getCopyDeJeu();
+		this.noeudCourant = node;
 		setChanged();
 		notifyObservers();
 	}
@@ -31,7 +31,7 @@ public class Partie extends Observable {
 			
 			//TODO attention si le coup existe deja
 			boolean existeDeja = false;
-			for(Arbre fils : noeudCourant.getListeNoeud()){
+			for(NodeHypertree fils : noeudCourant.getChildren()){
 				if(fils.getListeCoup().contains(c)){
 					existeDeja = true;
 					noeudCourant = fils;
@@ -39,10 +39,12 @@ public class Partie extends Observable {
 				}
 			}
 			if(!existeDeja){
-				Arbre a = new Arbre(jeu.getCopyDeJeu());
-				noeudCourant.ajouterNoeudEtCoup(a, c);
+				NodeHypertree n_fils = new NodeHypertree(jeu.getCopyDeJeu());
+				n_fils.getListeCoup().add(c);
+				noeudCourant.addChild(n_fils);
+				
 				//on passe au coup suivant
-				this.noeudCourant = a;
+				this.noeudCourant = n_fils;
 			}
 
 			//on demande la mise a jour de dessin de jeu
@@ -51,20 +53,23 @@ public class Partie extends Observable {
 		}
 	}
 
-	public Arbre getRacine() {
-		return racine;
+	public Jeu getJeu() {
+		return jeu;
 	}
 
-	public Arbre getNoeudCourant() {
+	public NodeHypertree getRacineHypertree() {
+		return racineHypertree;
+	}
+
+	public NodeHypertree getNoeudCourant() {
 		return noeudCourant;
 	}
 
-	public void setNoeudCourant(Arbre noeudCourant) {
-		this.noeudCourant = noeudCourant;
-
+	public NodeHypertree getNoeudPrecedent() {
+		return noeudPrecedent;
 	}
 
-	public Jeu getJeu() {
-		return jeu;
+	public void setNoeudPrecedent(NodeHypertree noeudPrecedent) {
+		this.noeudPrecedent = noeudPrecedent;
 	}
 }

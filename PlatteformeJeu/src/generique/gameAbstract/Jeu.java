@@ -1,8 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package generique.gameAbstract;
+
+import gameMorpion.model.Joueur;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -26,5 +24,7 @@ public abstract class Jeu extends Observable {
     public abstract AbstractControler getControler(Partie partie);
     
     public abstract Jeu getCopyDeJeu();
+    
+    public abstract Joueur getTourJoueur();
     
 }

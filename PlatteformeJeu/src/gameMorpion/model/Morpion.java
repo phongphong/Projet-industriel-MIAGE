@@ -109,6 +109,7 @@ public class Morpion extends Jeu {
 		}
 	}
 
+	@Override
 	public Joueur getTourJoueur() {
 		return tourJoueur;
 	}

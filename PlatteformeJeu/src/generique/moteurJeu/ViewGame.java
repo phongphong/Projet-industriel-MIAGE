@@ -87,10 +87,8 @@ public class ViewGame extends JFrame {
 					panelJeu.removeAll();
 					panelJeu.add(view);
 					
-					
 					VueArbre vueArbre = new VueArbre(partie);
 					partie.addObserver(vueArbre);
-					//partie.addObserver(view);
 					
 					panelArbre.removeAll();
 					panelArbre.setLayout(new BorderLayout());

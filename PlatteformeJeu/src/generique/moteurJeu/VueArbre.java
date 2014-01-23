@@ -16,7 +16,6 @@ public class VueArbre extends JPanel implements Observer {
 	private Arbre a;
 	
 	public VueArbre(Partie p){
-		this.a = p.getRacine();
 		creerArbre(p);
 	}
 	
@@ -30,9 +29,9 @@ public class VueArbre extends JPanel implements Observer {
 	}
 	
 	public void creerArbre(Partie p){
-		this.a = p.getRacine();
-		NodeHypertree root = new NodeHypertree(a);
+		NodeHypertree root = p.getRacineHypertree();
         HyperTree tree = new HyperTree(root);
+        
         JPanel viewTree = tree.getView();
         viewTree.setSize(600, 600);
         this.setSize(600, 600);

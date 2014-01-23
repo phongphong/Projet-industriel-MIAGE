@@ -5,16 +5,11 @@
 package gameRushHour.view;
 
 import gameRushHour.model.RushHour;
-import generique.gameAbstract.AbstractControler;
 import generique.gameAbstract.AbstractView;
 import generique.gameAbstract.Partie;
 
 import java.awt.*;
 import java.util.*;
-
-import javax.swing.*;
-
-
 /**
  * Cette méthode représente la vue Graphique du jeu RushHour
  * @author Phongphet

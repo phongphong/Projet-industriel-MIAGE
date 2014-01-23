@@ -2,31 +2,33 @@ package generique.gameAbstract;
 
 import hypertree.AbstractHTNode;
 
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map.Entry;
 
 public class NodeHypertree extends AbstractHTNode {
 
-	private Arbre a;
-	private HashMap<Arbre, NodeHypertree> children = null;
+	private Jeu jeu;
+	private ArrayList<Coup> listeCoup;
+	private ArrayList<NodeHypertree> children;
+	private Color c;
 
-	public NodeHypertree(Arbre a) {
+	public NodeHypertree(Jeu jeu) {
 		super();
-		this.a = a;
-		children = new HashMap<>();
-		NodeHypertree fils;
-		for (int i = 0; i < a.getListeNoeud().size(); i++) {
-			fils = new NodeHypertree(a.getListeNoeud().get(i));
-			addChild(fils);
-		}
+		this.jeu = jeu;
+		c = new Color(255,255,255);
+		listeCoup = new ArrayList<>();
+		children = new ArrayList<>();
 	}
 
 	protected void addChild(NodeHypertree child) {
-		children.put(child.a, child);
+		children.add(child);
 	}
 
 	public Iterator<?> children() {
-		return this.children.values().iterator();
+		return this.children.iterator();
 	}
 
 	/**
@@ -36,7 +38,7 @@ public class NodeHypertree extends AbstractHTNode {
 	 *         otherwise
 	 */
 	public boolean isLeaf() {
-		return (a.getListeNoeud().isEmpty());
+		return (children.isEmpty());
 	}
 
 	/**
@@ -45,10 +47,34 @@ public class NodeHypertree extends AbstractHTNode {
 	 * @return the name of the file
 	 */
 	public String getName() {
-		return a.toString();
+		String nomCoup = "";
+		for(Coup c : listeCoup){
+			nomCoup += c.toString();
+		}
+		return nomCoup;
 	}
 
-	public Arbre getArbre() {
-		return a;
+	public Color getColor() {
+		return c;
+	}
+	
+	public void setColor(Color nc) {
+		c=nc;
+	}
+
+	public Jeu getJeu() {
+		return jeu;
+	}
+
+	public void setJeu(Jeu jeu) {
+		this.jeu = jeu;
+	}
+
+	public ArrayList<Coup> getListeCoup() {
+		return listeCoup;
+	}
+
+	public ArrayList<NodeHypertree> getChildren() {
+		return children;
 	}
 }
