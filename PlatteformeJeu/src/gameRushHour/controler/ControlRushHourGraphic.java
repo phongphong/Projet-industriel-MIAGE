@@ -7,12 +7,10 @@ package gameRushHour.controler;
 import gameRushHour.model.CoupRushHour;
 import gameRushHour.model.RushHour;
 import gameRushHour.model.Voiture;
-import gameRushHour.view.ViewRushHourGraphic;
 import generique.gameAbstract.AbstractControler;
 import generique.gameAbstract.Partie;
 
 import java.awt.event.*;
-import java.awt.*;
 import java.util.*;
 
 import javax.swing.*;

@@ -7,7 +7,9 @@ package generique.moteurJeu;
 import generique.gameAbstract.AbstractControler;
 import generique.gameAbstract.AbstractView;
 import generique.gameAbstract.Jeu;
+import generique.gameAbstract.NodeHypertree;
 import generique.gameAbstract.Partie;
+import hypertree.HTModel;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -87,7 +89,11 @@ public class ViewGame extends JFrame {
 					panelJeu.removeAll();
 					panelJeu.add(view);
 					
-					VueArbre vueArbre = new VueArbre(partie);
+					NodeHypertree root = partie.getRacineHypertree();
+					HTModel model = new HTModel(root);
+					VueArbre vueArbre = new VueArbre(model);
+					ControleurVueArbre controlArbre = new ControleurVueArbre(vueArbre, partie);
+					vueArbre.addMouseListener(controlArbre);
 					partie.addObserver(vueArbre);
 					
 					panelArbre.removeAll();

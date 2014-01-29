@@ -1,42 +1,28 @@
 package generique.moteurJeu;
 
-import generique.gameAbstract.Arbre;
 import generique.gameAbstract.NodeHypertree;
 import generique.gameAbstract.Partie;
-import hypertree.HyperTree;
+import hypertree.HTModel;
 import hypertree.SwingHTView;
 
+import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
-import javax.swing.JPanel;
-
-public class VueArbre extends JPanel implements Observer {
-
-	private Arbre a;
+public class VueArbre extends SwingHTView implements Observer {
 	
-	public VueArbre(Partie p){
-		creerArbre(p);
+	public VueArbre(HTModel model){
+		super(model);
+		this.setSize(new Dimension(600, 600));
 	}
 	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		Partie p = ((Partie) o);
-		this.removeAll();
-		creerArbre(p);
-        this.repaint();
-	}
-	
-	public void creerArbre(Partie p){
+		Partie p = (Partie) o;
 		NodeHypertree root = p.getRacineHypertree();
-        HyperTree tree = new HyperTree(root);
-        
-        JPanel viewTree = tree.getView();
-        viewTree.setSize(600, 600);
-        this.setSize(600, 600);
-        ControleurVueArbre control = new ControleurVueArbre((SwingHTView)viewTree, p);
-        viewTree.addMouseListener(control);
-        this.add(viewTree);
+		HTModel model = new HTModel(root);
+		this.refesh(model);
+		this.repaint();
 	}
 }

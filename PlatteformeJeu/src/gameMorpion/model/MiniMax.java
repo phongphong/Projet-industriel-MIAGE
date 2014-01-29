@@ -23,106 +23,119 @@ public class MiniMax implements IA {
 		for(Coup c : listeCoupPossible){
 			CoupMorpion cm = (CoupMorpion) c; 
 			mp.getT_case()[cm.getX()][cm.getY()] = cm.getJ().getSigne();
-			mp.changerJoueur();
-			int score = calculMin(mp, c, profondeur - 1);
-			if(score > max){
-				max = score ;
-				meilleurCoup = c;
+			CoupScore cs = calculMin(mp, c, profondeur - 1);
+			if(cs.getScore() * -1 > max){
+				max = -1 * cs.getScore() ;
+				meilleurCoup = cs.getCoup();
 			}
-			
 			mp.getT_case()[cm.getX()][cm.getY()] = '.';
-			mp.changerJoueur();
 		}
 		System.out.println(max);
 		return meilleurCoup;
 	}
 	
-	public int calculMin(Morpion mp, Coup coup, int profondeur){
+	public CoupScore calculMin(Morpion mp, Coup coup, int profondeur){
+		
 		int min = MAX_VAL;
+		CoupScore cs = new CoupScore(coup, 0);
+		mp.changerJoueur();
 		if(mp.listerTousCoupPossible().isEmpty() || profondeur == 0){
-			return calculScore(mp, coup);
+			
+			int score = calculScore(mp, coup);
+			cs.setScore(score);
 		}else{
 			ArrayList<Coup> listeCoupPossible = mp.listerTousCoupPossible();
 			for(Coup c : listeCoupPossible){
 				CoupMorpion cm = (CoupMorpion) c; 
 				mp.getT_case()[cm.getX()][cm.getY()] = cm.getJ().getSigne();
-				mp.changerJoueur();
-				int score = calculMax(mp, c, profondeur - 1);
-				if(score < min){
-					min = score;
+				CoupScore cs_temp = calculMax(mp, c, profondeur - 1);
+				if(cs_temp.getScore() < min){
+					min = cs_temp.getScore();
+					cs.setCoup(c);
+					cs.setScore(min);
 				}
 				
 				mp.getT_case()[cm.getX()][cm.getY()] = '.';
-				mp.changerJoueur();
+				
 			}
 		}
-		return min;
+		mp.changerJoueur();
+		return cs;
 	}
 	
-	public int calculMax(Morpion mp, Coup coup, int profondeur){
+	public CoupScore calculMax(Morpion mp, Coup coup, int profondeur){
+		
+		mp.changerJoueur();
 		int max = MIN_VAL;
+		CoupScore cs = new CoupScore(coup, 0);
+		
 		if(mp.listerTousCoupPossible().isEmpty() || profondeur == 0){
-			return calculScore(mp, coup);
+			int score = calculScore(mp, coup);
+			cs.setScore(score);
 		}else{
 			ArrayList<Coup> listeCoupPossible = mp.listerTousCoupPossible();
 			for(Coup c : listeCoupPossible){
 				CoupMorpion cm = (CoupMorpion) c; 
 				mp.getT_case()[cm.getX()][cm.getY()] = cm.getJ().getSigne();
-				mp.changerJoueur();
-				int score = calculMax(mp, c, profondeur - 1);
-				if(score > max){
-					max = score;
+				CoupScore cs_temp = calculMin(mp, c, profondeur - 1);
+				if(cs_temp.getScore() > max){
+					max = cs.getScore();
+					cs.setCoup(c);
+					cs.setScore(max);
 				}
 				
 				mp.getT_case()[cm.getX()][cm.getY()] = '.';
-				mp.changerJoueur();
+				
 			}
 		}
-		return max;
-	}
-	
-	public int compteSigne(Morpion mp, Joueur joueur){
-		int compteur = 0;
-		char[][] t_case = mp.getT_case();
-		for(int i=0 ; i < t_case.length ; i++){
-			for(int j=0 ; j < t_case.length ; j++){
-				if(t_case[i][j] == joueur.getSigne()){
-					compteur ++;
-				}
-			}
-		}
-		return compteur;
-	}
-	
-	public int nombreSerieDe2(Morpion mp, Joueur joueur){
-		int compteur = 0;
-		char[][] t_case = mp.getT_case();
-		for(int i=0 ; i < t_case.length - 1 ; i++){
-			for(int j=0 ; j < t_case.length - 1 ; j++){
-				if(t_case[i][j] == joueur.getSigne()){
-					if(t_case[i][j+1] == joueur.getSigne() || t_case[i+1][j] == joueur.getSigne()
-							||t_case[i][i] == joueur.getSigne() || t_case[i][2 - i] == joueur.getSigne())
-					compteur ++;
-				}
-			}
-		}
-		return compteur;
+		mp.changerJoueur();
+		return cs;
 	}
 	
 	public int calculScore(Morpion mp, Coup coup){
 		int score = 0;
 		if(mp.gagner(coup)){
-			if(mp.getTourJoueur().equals(mp.getJ2())){
-				score = 1000 - compteSigne(mp, mp.getJ2()) ;
-			}else if(mp.getTourJoueur().equals(mp.getJ1())){
-				score = -1000 + compteSigne(mp, mp.getJ1());
-			}else{
-				return 0;
+			if(((CoupMorpion) coup).getJ().equals(mp.getJ2())){
+				score = 1;
+			}else if(((CoupMorpion) coup).getJ().equals(mp.getJ1())){
+				score = -1;
 			}
-		}else{
-			score = nombreSerieDe2(mp, mp.getJ2()) - nombreSerieDe2(mp, mp.getJ1()); 
 		}
+		
 		return score;
+	
 	}
+	
+	class CoupScore {
+		
+		private Coup coup;
+		private int score;
+		
+		public CoupScore(Coup coup, int score) {
+			super();
+			this.coup = coup;
+			this.score = score;
+		}
 
+		public Coup getCoup() {
+			return coup;
+		}
+
+		public void setCoup(Coup coup) {
+			this.coup = coup;
+		}
+
+		public int getScore() {
+			return score;
+		}
+
+		public void setScore(int score) {
+			this.score = score;
+		}
+
+		@Override
+		public String toString() {
+			return "CoupScore [coup=" + coup + ", score=" + score + "]";
+		}
+	}
 }
