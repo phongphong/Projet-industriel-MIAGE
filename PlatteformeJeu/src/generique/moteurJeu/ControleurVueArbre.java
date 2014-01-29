@@ -21,11 +21,9 @@ public class ControleurVueArbre implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		NodeHypertree previousNode = p.getNoeudPrecedent();
-		previousNode.setColor(Color.white);
 		NodeHypertree node = (NodeHypertree) view.getNodeUnderTheMouse(e);
 		if (node != null) {
-			p.setNoeudPrecedent(node);
+			p.getNoeudCourant().setColor(Color.white);
 			node.setColor(Color.green);
 			p.revenirAncienJeu(node);	
 		}

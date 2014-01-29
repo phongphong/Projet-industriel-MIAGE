@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
 public class Morpion extends Jeu {
 
 	private char t_case[][];
-	private Joueur tourJoueur;
+	private Joueur joueurEnCours;
 	private Joueur j1;
 	private Joueur j2;
 
@@ -27,7 +27,7 @@ public class Morpion extends Jeu {
 		j1 = new Joueur("J1", 'O');
 		j2 = new Joueur("J2", 'X');
 
-		tourJoueur = j1;
+		joueurEnCours = j1;
 
 		for (int i = 0; i < t_case.length; i++) {
 			for (int j = 0; j < t_case.length; j++) {
@@ -40,14 +40,16 @@ public class Morpion extends Jeu {
 	public void jouerUnCoup(Coup c) {
 		char signe = ((CoupMorpion) c).getJ().getSigne();
 		t_case[((CoupMorpion) c).getX()][((CoupMorpion) c).getY()] = signe;
-		if (gagner(c)) {
-			JOptionPane.showMessageDialog(null, tourJoueur.getNom()
-					+ " gagne ce tour !!");
-		} else {
-			this.changerJoueur();
-		}
-		setChanged();
-		notifyObservers();
+		
+		/*if (gagner(c)) {
+			JOptionPane.showMessageDialog(null, joueurEnCours.getNom()
+					+ " gagne ce tour !!"); 
+		}*/
+	}
+	
+	@Override
+	public void enleverCoup(Coup c) {
+		t_case[((CoupMorpion) c).getX()][((CoupMorpion) c).getY()] = '.';
 	}
 
 	@Override
@@ -56,7 +58,7 @@ public class Morpion extends Jeu {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
 				if (t_case[j][i] == '.') {
-					listeCoupPossible.add(new CoupMorpion(tourJoueur, j, i));
+					listeCoupPossible.add(new CoupMorpion(joueurEnCours, j, i));
 				}
 			}
 		}
@@ -101,24 +103,18 @@ public class Morpion extends Jeu {
 		return t_case;
 	}
 
+	@Override
 	public void changerJoueur() {
-		if (tourJoueur.equals(j1)) {
-			tourJoueur = j2;
+		if (joueurEnCours.equals(j1)) {
+			joueurEnCours = j2;
 		} else {
-			tourJoueur = j1;
+			joueurEnCours = j1;
 		}
 	}
 
 	@Override
-	public Joueur getTourJoueur() {
-		return tourJoueur;
-	}
-
-	@Override
-	public void effacerCoup(Coup c) {
-		t_case[((CoupMorpion) c).getX()][((CoupMorpion) c).getY()] = '.';
-		setChanged();
-		notifyObservers();
+	public Joueur getJoueurEnCours() {
+		return joueurEnCours;
 	}
 
 	@Override
@@ -146,7 +142,7 @@ public class Morpion extends Jeu {
 	}
 
 	public void setTourJoueur(Joueur tourJoueur) {
-		this.tourJoueur = tourJoueur;
+		this.joueurEnCours = tourJoueur;
 	}
 
 	public void setJ1(Joueur j1) {
@@ -175,7 +171,7 @@ public class Morpion extends Jeu {
 		Morpion morpion = new Morpion();
 		morpion.setJ1(j1);
 		morpion.setJ2(j2);
-		morpion.setTourJoueur(tourJoueur);
+		morpion.setTourJoueur(joueurEnCours);
 		
 		char[][] t_case_bis = new char[3][3];
 		for(int i=0 ; i<t_case_bis.length ; i++){

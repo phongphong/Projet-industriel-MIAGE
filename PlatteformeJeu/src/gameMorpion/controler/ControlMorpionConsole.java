@@ -20,7 +20,7 @@ public class ControlMorpionConsole {
 		Scanner sc = new Scanner(System.in);
 		int choix;
 		while(!fini){
-			System.out.println("Ce tour est � " + morpion.getTourJoueur().getNom());
+			System.out.println("Ce tour est � " + morpion.getJoueurEnCours().getNom());
 			ArrayList<Coup> listeCoup = morpion.listerTousCoupPossible();
 			System.out.println("Veuillez choisir le coup : ");
 			for(int i=0 ; i<listeCoup.size() ; i++){

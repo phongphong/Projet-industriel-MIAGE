@@ -18,7 +18,7 @@ public class ControlMorpionGraphique extends AbstractControler {
 	
 	public ControlMorpionGraphique(Partie partie) {
 		this.partie = partie;
-		minimax = new MiniMax(partie);
+		minimax = new MiniMax();
 	}
 
 	@Override
@@ -40,11 +40,17 @@ public class ControlMorpionGraphique extends AbstractControler {
 	public void mousePressed(MouseEvent e) {
 		int x = e.getX() / 50;
 		int y = e.getY() / 50;
-		Joueur j = ((Morpion) partie.getJeu()).getTourJoueur();
-		Coup c = new CoupMorpion(j, x, y);
+		
+		Morpion morpion = (Morpion) partie.getJeu(); 
+		Joueur joueurEnCours = morpion.getJoueurEnCours();
+		Coup c = new CoupMorpion(joueurEnCours, x, y);
 		partie.jouerUnCoup(c);
-		Coup meilleurCoup = minimax.minimax(2);
-		System.out.println(meilleurCoup);
+		morpion.changerJoueur();
+		if(morpion.getJoueurEnCours().equals(morpion.getJ2())){
+			Coup meilleurCoup = minimax.getMeilleurCoup(partie, 3);
+			System.out.println("Meilleur coup : "+meilleurCoup);
+		}
+		
 	}
 
 	@Override

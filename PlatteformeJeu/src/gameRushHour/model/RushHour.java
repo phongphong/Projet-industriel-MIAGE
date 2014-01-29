@@ -76,10 +76,9 @@ public class RushHour extends Jeu {
 			v.setLigne(v.getLigne() + ((CoupRushHour) c).getDeplacement());
 		}
 		this.setCaseOccupe(v, (char) v.getNum());
-		setChanged();
-		notifyObservers();
-
 	}
+	
+	
 
 	/**
 	 * Cette méthode analyse une situation actuelle du jeu et liste tous les
@@ -179,16 +178,6 @@ public class RushHour extends Jeu {
 	}
 
 	@Override
-	public void effacerCoup(Coup c) {
-		// TODO Auto-generated method stub
-		CoupRushHour c1 = (CoupRushHour) c;
-
-		CoupRushHour c2 = new CoupRushHour(c1.getV(),
-				(-1 * c1.getDeplacement()));
-		this.jouerUnCoup(c2);
-	}
-
-	@Override
 	public AbstractView getView(Partie partie) {
 		return (AbstractView) new ViewRushHourGraphic(partie);
 	}
@@ -230,11 +219,23 @@ public class RushHour extends Jeu {
 		notifyObservers();
 	}
 
+	/*Il y a qu'un seul joueur dans ce jeu*/
 	@Override
-	public Joueur getTourJoueur() {
+	public Joueur getJoueurEnCours() {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public void changerJoueur() {
+		// TODO Auto-generated method stub
+		
+	}	
 	
-	
+
+	@Override
+	public void enleverCoup(Coup c) {
+		// TODO Auto-generated method stub
+		
+	}
 }

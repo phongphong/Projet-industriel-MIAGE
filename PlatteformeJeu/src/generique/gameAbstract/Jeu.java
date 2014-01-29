@@ -17,14 +17,16 @@ public abstract class Jeu extends Observable {
     
     public abstract boolean gagner(Coup c);
     
-    public abstract void effacerCoup(Coup c);
-    
     public abstract AbstractView getView(Partie partie);
     
     public abstract AbstractControler getControler(Partie partie);
     
     public abstract Jeu getCopyDeJeu();
     
-    public abstract Joueur getTourJoueur();
+    public abstract Joueur getJoueurEnCours();
+    
+    public abstract void changerJoueur();
+    
+    public abstract void enleverCoup(Coup c);
     
 }

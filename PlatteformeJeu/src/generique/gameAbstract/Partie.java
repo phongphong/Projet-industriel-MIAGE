@@ -1,18 +1,17 @@
 package generique.gameAbstract;
 
+import java.awt.Color;
 import java.util.Observable;
 public class Partie extends Observable {
 
 	private Jeu jeu;
 	private NodeHypertree racineHypertree;
 	private NodeHypertree noeudCourant;
-	private NodeHypertree noeudPrecedent;
 
 	public Partie(Jeu jeu) {
 		this.jeu = jeu;
 		racineHypertree = new NodeHypertree(jeu.getCopyDeJeu());
 		noeudCourant = racineHypertree;
-		noeudPrecedent = racineHypertree;
 	}
 
 	public void revenirAncienJeu(NodeHypertree node) {
@@ -24,6 +23,7 @@ public class Partie extends Observable {
 
 	public void jouerUnCoup(Coup c) {
 		if(jeu.listerTousCoupPossible().contains(c)){
+			noeudCourant.setColor(Color.white);
 			// je fais evoluer le jeu
 			jeu.jouerUnCoup(c);
 			
@@ -46,7 +46,7 @@ public class Partie extends Observable {
 				//on passe au coup suivant
 				this.noeudCourant = n_fils;
 			}
-
+			noeudCourant.setColor(Color.green);
 			//on demande la mise a jour de dessin de jeu
 			setChanged();
 			notifyObservers();
@@ -63,13 +63,5 @@ public class Partie extends Observable {
 
 	public NodeHypertree getNoeudCourant() {
 		return noeudCourant;
-	}
-
-	public NodeHypertree getNoeudPrecedent() {
-		return noeudPrecedent;
-	}
-
-	public void setNoeudPrecedent(NodeHypertree noeudPrecedent) {
-		this.noeudPrecedent = noeudPrecedent;
 	}
 }
