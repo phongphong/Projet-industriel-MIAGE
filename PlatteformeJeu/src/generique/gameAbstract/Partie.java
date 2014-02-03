@@ -15,6 +15,7 @@ public class Partie extends Observable {
 	}
 
 	public void revenirAncienJeu(NodeHypertree node) {
+		
 		jeu = node.getJeu().getCopyDeJeu();
 		this.noeudCourant = node;
 		setChanged();
@@ -26,7 +27,7 @@ public class Partie extends Observable {
 			noeudCourant.setColor(Color.white);
 			// je fais evoluer le jeu
 			jeu.jouerUnCoup(c);
-			
+			jeu.changerJoueur();
 			// je mets a jour l'arbre
 			
 			//TODO attention si le coup existe deja
