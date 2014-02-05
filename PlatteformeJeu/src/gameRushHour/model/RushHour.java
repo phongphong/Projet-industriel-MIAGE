@@ -238,4 +238,10 @@ public class RushHour extends Jeu {
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public int calculScoreMinMax(Jeu jeu, Coup coup) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

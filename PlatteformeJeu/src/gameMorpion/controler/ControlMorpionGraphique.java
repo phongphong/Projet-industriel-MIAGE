@@ -3,7 +3,6 @@ package gameMorpion.controler;
 
 import gameMorpion.model.CoupMorpion;
 import gameMorpion.model.Joueur;
-import gameMorpion.model.MiniMax;
 import gameMorpion.model.Morpion;
 import generique.gameAbstract.AbstractControler;
 import generique.gameAbstract.Coup;
@@ -11,14 +10,16 @@ import generique.gameAbstract.Partie;
 
 import java.awt.event.MouseEvent;
 
+import IA.MinMax;
+
 public class ControlMorpionGraphique extends AbstractControler {
 
 	private Partie partie;
-	private MiniMax minimax;
+	private MinMax minimax;
 	
 	public ControlMorpionGraphique(Partie partie) {
 		this.partie = partie;
-		minimax = new MiniMax();
+		minimax = new MinMax();
 	}
 
 	@Override
@@ -46,7 +47,7 @@ public class ControlMorpionGraphique extends AbstractControler {
 		Coup c = new CoupMorpion(joueurEnCours, x, y);
 		partie.jouerUnCoup(c);
 		if(morpion.getJoueurEnCours().equals(morpion.getJ2())){
-			Coup meilleurCoup = minimax.getMeilleurCoup(partie, 7);
+			Coup meilleurCoup = minimax.minmax(partie.getJeu().getCopyDeJeu(), c).getCoup();
 			System.out.println("Meilleur coup : "+meilleurCoup);
 		}
 		

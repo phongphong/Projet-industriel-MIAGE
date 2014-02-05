@@ -40,13 +40,15 @@ public class Morpion extends Jeu {
 	public void jouerUnCoup(Coup c) {
 		char signe = ((CoupMorpion) c).getJ().getSigne();
 		t_case[((CoupMorpion) c).getX()][((CoupMorpion) c).getY()] = signe;
-		
-		/*if (gagner(c)) {
-			JOptionPane.showMessageDialog(null, joueurEnCours.getNom()
-					+ " gagne ce tour !!"); 
-		}*/
+		if(!gagner(c)){
+			this.changerJoueur();
+		}
+		/*
+		 * if (gagner(c)) { JOptionPane.showMessageDialog(null,
+		 * joueurEnCours.getNom() + " gagne ce tour !!"); }
+		 */
 	}
-	
+
 	@Override
 	public void enleverCoup(Coup c) {
 		t_case[((CoupMorpion) c).getX()][((CoupMorpion) c).getY()] = '.';
@@ -172,14 +174,22 @@ public class Morpion extends Jeu {
 		morpion.setJ1(j1);
 		morpion.setJ2(j2);
 		morpion.setTourJoueur(joueurEnCours);
-		
+
 		char[][] t_case_bis = new char[3][3];
-		for(int i=0 ; i<t_case_bis.length ; i++){
-			for(int j=0 ; j<t_case_bis.length ; j++){
+		for (int i = 0; i < t_case_bis.length; i++) {
+			for (int j = 0; j < t_case_bis.length; j++) {
 				t_case_bis[i][j] = t_case[i][j];
 			}
 		}
 		morpion.setT_case(t_case_bis);
 		return morpion;
 	}
+
+	@Override
+	public double calculScore(Joueur joueur) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	
+	
 }

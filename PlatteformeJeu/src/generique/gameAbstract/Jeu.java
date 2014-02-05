@@ -29,4 +29,6 @@ public abstract class Jeu extends Observable {
     
     public abstract void enleverCoup(Coup c);
     
+    public abstract double calculScore(Joueur joueur);
+    
 }
