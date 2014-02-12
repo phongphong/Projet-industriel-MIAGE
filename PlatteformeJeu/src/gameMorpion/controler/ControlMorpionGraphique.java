@@ -2,15 +2,16 @@ package gameMorpion.controler;
 
 
 import gameMorpion.model.CoupMorpion;
-import gameMorpion.model.Joueur;
 import gameMorpion.model.Morpion;
 import generique.gameAbstract.AbstractControler;
 import generique.gameAbstract.Coup;
+import generique.gameAbstract.Joueur;
 import generique.gameAbstract.Partie;
 
 import java.awt.event.MouseEvent;
 
 import IA.MinMax;
+import IA.NoeudMinMax;
 
 public class ControlMorpionGraphique extends AbstractControler {
 
@@ -37,17 +38,17 @@ public class ControlMorpionGraphique extends AbstractControler {
 
 	}
 
-	@Override
 	public void mousePressed(MouseEvent e) {
 		int x = e.getX() / 50;
 		int y = e.getY() / 50;
 		
 		Morpion morpion = (Morpion) partie.getJeu(); 
 		Joueur joueurEnCours = morpion.getJoueurEnCours();
-		Coup c = new CoupMorpion(joueurEnCours, x, y);
-		partie.jouerUnCoup(c);
+		Coup coupJoueur = new CoupMorpion(joueurEnCours, x, y);
+		partie.jouerUnCoup(coupJoueur);
 		if(morpion.getJoueurEnCours().equals(morpion.getJ2())){
-			Coup meilleurCoup = minimax.minmax(partie.getJeu().getCopyDeJeu()).getCoup();
+			NoeudMinMax noeudMinMax = minimax.lancerMinMax(partie.getJeu().getCopyDeJeu());
+			Coup meilleurCoup = noeudMinMax.getCoup();
 			System.out.println("Meilleur coup : "+meilleurCoup);
 		}
 		

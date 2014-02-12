@@ -4,7 +4,6 @@
  */
 package gameRushHour.model;
 
-import gameMorpion.model.Joueur;
 import gameRushHour.controler.ControlRushHourGraphic;
 import gameRushHour.view.ViewRushHourGraphic;
 import generique.gameAbstract.*;
@@ -132,21 +131,6 @@ public class RushHour extends Jeu {
 	}
 
 	/**
-	 * Cette méthode permet de savoir l'utilisateur gagne ou pas
-	 * 
-	 * @return
-	 */
-	@Override
-	public boolean gagner(Coup c) {
-		// si la voiture est bien positionne dans la position qu'il peut sortir,
-		// l'utilisateur gagne
-		if (t_case[3][dimension - 1] == 'R') {
-			return true;
-		}
-		return false;
-	}
-
-	/**
 	 * Cette méthode mettre à jour le tableau de caractère en fonction de la
 	 * position de la voiture
 	 * 
@@ -231,13 +215,6 @@ public class RushHour extends Jeu {
 		// TODO Auto-generated method stub
 		
 	}	
-	
-
-	@Override
-	public void enleverCoup(Coup c) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public double calculScore(Joueur joueur) {
@@ -246,5 +223,11 @@ public class RushHour extends Jeu {
 			return 1;
 		}
 		return -1;
+	}
+
+	@Override
+	public Joueur getJoueurQuiDoitGagnerMinMax() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

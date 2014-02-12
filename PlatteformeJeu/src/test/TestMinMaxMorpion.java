@@ -2,10 +2,10 @@ package test;
 
 import static org.junit.Assert.assertEquals;
 import gameMorpion.model.CoupMorpion;
-import gameMorpion.model.Joueur;
 import gameMorpion.model.Morpion;
 import generique.gameAbstract.Coup;
 import generique.gameAbstract.Jeu;
+import generique.gameAbstract.Joueur;
 import generique.gameAbstract.Partie;
 
 import org.junit.BeforeClass;
@@ -121,7 +121,7 @@ public class TestMinMaxMorpion {
 		partie.jouerUnCoup(c4);
 		((Morpion) jeu).setTourJoueur(j1);
 		partie.jouerUnCoup(c5);
-		int gagne = (int) minimax.minmax(jeu).getGagner();
+		int gagne = (int) minimax.lancerMinMax(jeu).getGagner();
 		assertEquals(1, gagne);
 	}
 	
@@ -146,7 +146,7 @@ public class TestMinMaxMorpion {
 		((Morpion) jeu).setTourJoueur(j1);
 		partie.jouerUnCoup(c3);
 
-		int gagne = (int) minimax.minmax(jeu).getGagner();
+		int gagne = (int) minimax.lancerMinMax(jeu).getGagner();
 		assertEquals(-1, gagne);
 	}
 
@@ -171,7 +171,7 @@ public class TestMinMaxMorpion {
 		((Morpion) jeu).setTourJoueur(j1);
 		partie.jouerUnCoup(c3);
 
-		int gagne = (int) minimax.minmax(jeu).getGagner();
+		int gagne = (int) minimax.lancerMinMax(jeu).getGagner();
 		assertEquals(-1, gagne);
 	}
 	
@@ -203,7 +203,7 @@ public class TestMinMaxMorpion {
 		partie.jouerUnCoup(c5);
 
 		
-		NoeudMinMax noeud = minimax.minmax(jeu);
+		NoeudMinMax noeud = minimax.lancerMinMax(jeu);
 
 		Coup coupEspere = new CoupMorpion(((Morpion) jeu).getJ2(), 1, 0);
 		assertEquals(coupEspere, noeud.getCoup());
@@ -231,7 +231,7 @@ public class TestMinMaxMorpion {
 		((Morpion) jeu).setTourJoueur(j1);
 		partie.jouerUnCoup(c3);
 
-		NoeudMinMax noeud = minimax.minmax(jeu);
+		NoeudMinMax noeud = minimax.lancerMinMax(jeu);
 
 		Coup coupEspere = new CoupMorpion(((Morpion) jeu).getJ2(), 1, 0);
 		assertEquals(coupEspere, noeud.getCoup());
@@ -253,7 +253,7 @@ public class TestMinMaxMorpion {
 		((Morpion) jeu).setTourJoueur(j1);
 		partie.jouerUnCoup(c1);
 
-		NoeudMinMax noeud = minimax.minmax(jeu);
+		NoeudMinMax noeud = minimax.lancerMinMax(jeu);
 
 		Coup coupEspere = new CoupMorpion(((Morpion) jeu).getJ2(), 1, 1);
 		assertEquals(coupEspere, noeud.getCoup());
@@ -275,7 +275,7 @@ public class TestMinMaxMorpion {
 		((Morpion) jeu).setTourJoueur(j1);
 		partie.jouerUnCoup(c1);
 
-		NoeudMinMax noeud = minimax.minmax(jeu);
+		NoeudMinMax noeud = minimax.lancerMinMax(jeu);
 
 		Coup coupEspere = new CoupMorpion(((Morpion) jeu).getJ2(), 1, 1);
 		assertEquals(coupEspere, noeud.getCoup());
@@ -309,7 +309,7 @@ public class TestMinMaxMorpion {
 		((Morpion) jeu).setTourJoueur(j1);
 		partie.jouerUnCoup(c5);
 
-		NoeudMinMax noeud = minimax.minmax(jeu);
+		NoeudMinMax noeud = minimax.lancerMinMax(jeu);
 
 		assertEquals(-1, (int)noeud.getGagner());
 	}

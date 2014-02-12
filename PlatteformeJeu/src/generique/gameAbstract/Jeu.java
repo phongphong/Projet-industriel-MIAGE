@@ -1,6 +1,5 @@
 package generique.gameAbstract;
 
-import gameMorpion.model.Joueur;
 
 import java.util.ArrayList;
 import java.util.Observable;
@@ -15,8 +14,6 @@ public abstract class Jeu extends Observable {
     
     public abstract ArrayList<Coup> listerTousCoupPossible();
     
-    public abstract boolean gagner(Coup c);
-    
     public abstract AbstractView getView(Partie partie);
     
     public abstract AbstractControler getControler(Partie partie);
@@ -25,9 +22,9 @@ public abstract class Jeu extends Observable {
     
     public abstract Joueur getJoueurEnCours();
     
-    public abstract void changerJoueur();
+    public abstract Joueur getJoueurQuiDoitGagnerMinMax();
     
-    public abstract void enleverCoup(Coup c);
+    public abstract void changerJoueur();
     
     public abstract double calculScore(Joueur joueur);
     

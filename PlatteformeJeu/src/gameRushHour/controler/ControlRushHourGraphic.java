@@ -51,7 +51,7 @@ public class ControlRushHourGraphic extends AbstractControler {
 
 	@Override
 	public void mouseReleased(MouseEvent me) {
-		if (partie.getJeu().gagner(null)) {
+		if (partie.getJeu().calculScore(null) == 1) {
 			JOptionPane.showMessageDialog(null, "Gagner");
 		}
 	}

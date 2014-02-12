@@ -4,20 +4,20 @@ import generique.gameAbstract.*;
 
 public class CoupMorpion implements Coup {
 
-	private Joueur j;
+	private Joueur joueur;
 	private int x;
 	private int y;
 	
 	public CoupMorpion(Joueur j, int x, int y){
 		super();
-		this.j = j;
+		this.joueur = j;
 		this.x = x;
 		this.y = y;
 	}
 	
 
-	public Joueur getJ() {
-		return j;
+	public Joueur getJoueur() {
+		return joueur;
 	}
 
 
@@ -30,28 +30,16 @@ public class CoupMorpion implements Coup {
 		return y;
 	}
 
-
-	public Voiture getV() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	public int getDeplacement() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	@Override
 	public String toString() {
-		return "[" + j + "," + x + "," + y + "]";
+		return "[" + joueur + "," + x + "," + y + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((j == null) ? 0 : j.hashCode());
+		result = prime * result + ((joueur == null) ? 0 : joueur.hashCode());
 		result = prime * result + x;
 		result = prime * result + y;
 		return result;
@@ -66,10 +54,10 @@ public class CoupMorpion implements Coup {
 		if (getClass() != obj.getClass())
 			return false;
 		CoupMorpion other = (CoupMorpion) obj;
-		if (j == null) {
-			if (other.j != null)
+		if (joueur == null) {
+			if (other.joueur != null)
 				return false;
-		} else if (!j.equals(other.j))
+		} else if (!joueur.equals(other.joueur))
 			return false;
 		if (x != other.x)
 			return false;

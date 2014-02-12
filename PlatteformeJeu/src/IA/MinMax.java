@@ -13,7 +13,12 @@ public class MinMax implements IA {
 	public MinMax() {
 
 	}
-
+	
+	
+	public NoeudMinMax lancerMinMax(Jeu jeu){
+		return minmax(jeu, jeu.getJoueurEnCours());
+	}
+ 
 	/**
 	 * Cette fonction permet de renvoyer le resultat optimal d'application de
 	 * l'algorithme MINMAX à un jeu morpion
@@ -21,7 +26,7 @@ public class MinMax implements IA {
 	 * @param jeu jeu en cours
 	 * @return résultat optimal
 	 */
-	public NoeudMinMax minmax(Jeu jeu) {
+	private NoeudMinMax minmax(Jeu jeu, Joueur joueurEnCours) {
 
 		int valeur_max = MAX_VAL;
 		int valeur_min = MIN_VAL;
@@ -43,15 +48,15 @@ public class MinMax implements IA {
 			jeuFils.jouerUnCoup(coupEnCours);
 			NoeudMinMax resultatDeNoeudFils;
 			
-			if (estTourJoueur2(jeu)) {
-				resultatDeNoeudFils = minmax(jeuFils);
+			if (jeu.getJoueurEnCours().equals(joueurEnCours)) {
+				resultatDeNoeudFils = minmax(jeuFils, joueurEnCours);
 				if (resultatDeNoeudFils.getGagner() > valeur_max) {
 					valeur_max = (int) resultatDeNoeudFils.getGagner();
 					meilleurNoeud = new NoeudMinMax(coupEnCours, valeur_max);
 				}
 			} else {
 				// maximiser le score quand c'est le tour O
-				resultatDeNoeudFils = minmax(jeuFils);
+				resultatDeNoeudFils = minmax(jeuFils, joueurEnCours);
 				if (resultatDeNoeudFils.getGagner() < valeur_min) {
 					valeur_min = (int) resultatDeNoeudFils.getGagner();
 					meilleurNoeud = new NoeudMinMax(coupEnCours, valeur_min);
@@ -60,9 +65,5 @@ public class MinMax implements IA {
 		}
 
 		return meilleurNoeud;
-	}
-
-	private boolean estTourJoueur2(Jeu jeu) {
-		return jeu.getJoueurEnCours().equals(((Morpion) jeu).getJ2());
 	}
 }

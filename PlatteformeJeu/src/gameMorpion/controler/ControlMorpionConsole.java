@@ -11,7 +11,6 @@ import java.util.*;
 
 public class ControlMorpionConsole {
 	
-	
 	public static void main(String[] args){
 		Morpion morpion = new Morpion();
 		ViewMorpionConsole view = new ViewMorpionConsole(morpion);
@@ -30,8 +29,8 @@ public class ControlMorpionConsole {
 			Coup c = listeCoup.get(choix);
 			morpion.jouerUnCoup(c);
 			morpion.changerJoueur();
-			if(morpion.gagner(c)){
-				System.out.println(((CoupMorpion) c).getJ().getNom() + " gagne !!!");
+			if(morpion.calculScore(morpion.getJoueurEnCours()) == 1){
+				System.out.println(((CoupMorpion) c).getJoueur().getNom() + " gagne !!!");
 				fini = true;
 			}
 		}
