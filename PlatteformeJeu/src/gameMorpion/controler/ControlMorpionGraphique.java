@@ -47,7 +47,7 @@ public class ControlMorpionGraphique extends AbstractControler {
 		Coup c = new CoupMorpion(joueurEnCours, x, y);
 		partie.jouerUnCoup(c);
 		if(morpion.getJoueurEnCours().equals(morpion.getJ2())){
-			Coup meilleurCoup = minimax.minmax(partie.getJeu().getCopyDeJeu(), c).getCoup();
+			Coup meilleurCoup = minimax.minmax(partie.getJeu().getCopyDeJeu()).getCoup();
 			System.out.println("Meilleur coup : "+meilleurCoup);
 		}
 		

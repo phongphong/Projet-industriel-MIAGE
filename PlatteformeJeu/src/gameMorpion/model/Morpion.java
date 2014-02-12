@@ -85,6 +85,7 @@ public class Morpion extends Jeu {
 			if (t_case[i][y] == j.getSigne()) {
 				ligne++;
 			}
+			
 			if (t_case[i][i] == j.getSigne()) {
 				diagonal++;
 			}
@@ -188,6 +189,48 @@ public class Morpion extends Jeu {
 	@Override
 	public double calculScore(Joueur joueur) {
 		// TODO Auto-generated method stub
+		char signeGagnant = '.';
+		
+		if(t_case[0][0] != '.' && (t_case[0][0] == t_case[0][1]) && (t_case[0][1] == t_case[0][2])){
+			signeGagnant = t_case[0][0];
+		}
+		
+		if(t_case[0][0] != '.' && (t_case[0][0] == t_case[1][1]) && (t_case[1][1] == t_case[2][2])){
+			signeGagnant = t_case[0][0];
+		}
+		
+		if(t_case[0][0] != '.' && (t_case[0][0] == t_case[1][0]) && (t_case[1][0] == t_case[2][0])){
+			signeGagnant = t_case[0][0];
+		}
+		
+		if(t_case[1][0] != '.' && (t_case[1][0] == t_case[1][1]) && (t_case[1][1] == t_case[1][2])){
+			signeGagnant = t_case[1][0];
+		}
+		
+		if(t_case[2][0] != '.' && (t_case[2][0] == t_case[2][1]) && (t_case[2][1] == t_case[2][2])){
+			signeGagnant = t_case[2][0];
+		}
+		
+		if(t_case[0][1] != '.' && (t_case[0][1] == t_case[1][1]) && (t_case[1][1] == t_case[2][1])){
+			signeGagnant = t_case[0][1];
+		}
+		
+		if(t_case[0][2] != '.' && (t_case[0][2] == t_case[1][2]) && (t_case[1][2] == t_case[2][2])){
+			signeGagnant = t_case[0][2];
+		}
+		
+		if(t_case[2][0] != '.' && (t_case[2][0] == t_case[1][1]) && (t_case[1][1] == t_case[0][2])){
+			signeGagnant = t_case[2][0];
+		}
+		
+		if(signeGagnant == joueur.getSigne()){
+			return 1;
+		}else{
+			if(signeGagnant != '.'){
+				return -1;
+			}
+		}
+		
 		return 0;
 	}
 	

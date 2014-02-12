@@ -26,6 +26,9 @@ public class ControleurVueArbre implements MouseListener {
 			p.getNoeudCourant().setColor(Color.white);
 			node.setColor(Color.green);
 			p.revenirAncienJeu(node);	
+			p.setNoeudACentrer(node);
+			view.translateToOrigin(node);
+			view.repaint();
 		}
 	}
 

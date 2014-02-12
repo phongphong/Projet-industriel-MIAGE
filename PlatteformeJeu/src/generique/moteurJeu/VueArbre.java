@@ -21,8 +21,9 @@ public class VueArbre extends SwingHTView implements Observer {
 		// TODO Auto-generated method stub
 		Partie p = (Partie) o;
 		NodeHypertree root = p.getRacineHypertree();
-		HTModel model = new HTModel(root);
+		HTModel model = new HTModel(root);	
 		this.refesh(model);
+		this.translateToOrigin(p.getNoeudACentrer());
 		this.repaint();
 	}
 }

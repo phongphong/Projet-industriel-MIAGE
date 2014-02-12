@@ -4,9 +4,9 @@ import generique.gameAbstract.Coup;
 
 public class NoeudMinMax {
 	private Coup coup;
-	private int gagner;
+	private double gagner;
 	
-	public NoeudMinMax(Coup coup, int gagner) {
+	public NoeudMinMax(Coup coup, double gagner) {
 		super();
 		this.coup = coup;
 		this.gagner = gagner;
@@ -20,11 +20,11 @@ public class NoeudMinMax {
 		this.coup = coup;
 	}
 
-	public int getGagner() {
+	public double getGagner() {
 		return gagner;
 	}
 
-	public void setGagner(int gagner) {
+	public void setGagner(double gagner) {
 		this.gagner = gagner;
 	}
 }

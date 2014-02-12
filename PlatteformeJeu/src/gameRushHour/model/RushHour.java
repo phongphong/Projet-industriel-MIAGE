@@ -240,8 +240,11 @@ public class RushHour extends Jeu {
 	}
 
 	@Override
-	public int calculScoreMinMax(Jeu jeu, Coup coup) {
+	public double calculScore(Joueur joueur) {
 		// TODO Auto-generated method stub
-		return 0;
+		if (t_case[3][dimension - 1] == 'R') {
+			return 1;
+		}
+		return -1;
 	}
 }

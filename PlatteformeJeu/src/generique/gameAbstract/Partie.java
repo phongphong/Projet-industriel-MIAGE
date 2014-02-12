@@ -7,11 +7,13 @@ public class Partie extends Observable {
 	private Jeu jeu;
 	private NodeHypertree racineHypertree;
 	private NodeHypertree noeudCourant;
+	private NodeHypertree noeudACentrer;
 
 	public Partie(Jeu jeu) {
 		this.jeu = jeu;
 		racineHypertree = new NodeHypertree(jeu.getCopyDeJeu());
 		noeudCourant = racineHypertree;
+		noeudACentrer = racineHypertree;
 	}
 
 	public void revenirAncienJeu(NodeHypertree node) {
@@ -64,5 +66,13 @@ public class Partie extends Observable {
 
 	public NodeHypertree getNoeudCourant() {
 		return noeudCourant;
+	}
+
+	public NodeHypertree getNoeudACentrer() {
+		return noeudACentrer;
+	}
+
+	public void setNoeudACentrer(NodeHypertree noeudACentrer) {
+		this.noeudACentrer = noeudACentrer;
 	}
 }
