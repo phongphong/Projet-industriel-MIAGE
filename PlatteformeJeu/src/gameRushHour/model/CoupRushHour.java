@@ -5,6 +5,8 @@
 package gameRushHour.model;
 
 import generique.gameAbstract.*;
+import generique.jeu.Coup;
+import generique.jeu.Joueur;
 
 import java.util.Objects;
 

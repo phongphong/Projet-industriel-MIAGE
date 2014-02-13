@@ -8,7 +8,7 @@ import gameRushHour.model.CoupRushHour;
 import gameRushHour.model.RushHour;
 import gameRushHour.model.Voiture;
 import generique.gameAbstract.AbstractControler;
-import generique.gameAbstract.Partie;
+import generique.jeu.Partie;
 
 import java.awt.event.*;
 import java.util.*;

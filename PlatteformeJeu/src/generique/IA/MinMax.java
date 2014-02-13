@@ -1,11 +1,14 @@
-package IA;
+package generique.IA;
 
 import java.util.ArrayList;
 
 import gameMorpion.model.Morpion;
 import generique.gameAbstract.*;
+import generique.jeu.Coup;
+import generique.jeu.Jeu;
+import generique.jeu.Joueur;
 
-public class MinMax implements IA {
+public class MinMax {
 
 	private static final int MIN_VAL = 1000;
 	private static final int MAX_VAL = -1000;

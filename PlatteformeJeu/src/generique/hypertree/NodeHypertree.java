@@ -1,5 +1,7 @@
-package generique.gameAbstract;
+package generique.hypertree;
 
+import generique.jeu.Coup;
+import generique.jeu.Jeu;
 import hypertree.AbstractHTNode;
 
 import java.awt.Color;
@@ -23,7 +25,7 @@ public class NodeHypertree extends AbstractHTNode {
 		children = new ArrayList<>();
 	}
 
-	protected void addChild(NodeHypertree child) {
+	public void addChild(NodeHypertree child) {
 		children.add(child);
 	}
 

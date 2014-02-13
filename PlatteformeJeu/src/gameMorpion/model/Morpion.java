@@ -4,10 +4,10 @@ import gameMorpion.controler.ControlMorpionGraphique;
 import gameMorpion.view.ViewMorpionGraphique;
 import generique.gameAbstract.AbstractControler;
 import generique.gameAbstract.AbstractView;
-import generique.gameAbstract.Coup;
-import generique.gameAbstract.Jeu;
-import generique.gameAbstract.Joueur;
-import generique.gameAbstract.Partie;
+import generique.jeu.Coup;
+import generique.jeu.Jeu;
+import generique.jeu.Joueur;
+import generique.jeu.Partie;
 
 import java.util.ArrayList;
 

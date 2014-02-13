@@ -2,14 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package generique.moteurJeu;
-
-import generique.gameAbstract.AbstractControler;
-import generique.gameAbstract.AbstractView;
-import generique.gameAbstract.Jeu;
-import generique.gameAbstract.NodeHypertree;
-import generique.gameAbstract.Partie;
-import hypertree.HTModel;
+package generique.factory;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -74,31 +67,16 @@ public class ViewGame extends JFrame {
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					// TODO Auto-generated method stub
-					Jeu jeu = factory.creerJeu(nomJeu);
-					//je creer la partie du jeu
-					Partie partie = new Partie(jeu);
-					
-					//Je recupere les vues et les controleurs selon le jeu et je lie la partie aux vues et controleurs
-					AbstractView view = jeu.getView(partie);
-					AbstractControler control = jeu.getControler(partie);
-					
-					
-					partie.addObserver(view);
-					view.addMouseListener(control);
-					view.addMouseMotionListener(control);
+					factory.creerJeu(nomJeu);
+				
 					panelJeu.removeAll();
-					panelJeu.add(view);
+					panelJeu.add(factory.getVueJeu());
 					
-					NodeHypertree root = partie.getRacineHypertree();
-					HTModel model = new HTModel(root);
-					VueArbre vueArbre = new VueArbre(model);
-					ControleurVueArbre controlArbre = new ControleurVueArbre(vueArbre, partie);
-					vueArbre.addMouseListener(controlArbre);
-					partie.addObserver(vueArbre);
+					
 					
 					panelArbre.removeAll();
 					panelArbre.setLayout(new BorderLayout());
-					panelArbre.add(vueArbre, BorderLayout.CENTER);
+					panelArbre.add(factory.getVueArbre(), BorderLayout.CENTER);
 					
 					panel.repaint();	
 				}
@@ -119,4 +97,6 @@ public class ViewGame extends JFrame {
 		this.pack();
 		this.setVisible(true);
 	}
+	
+	
 }

@@ -3,15 +3,15 @@ package gameMorpion.controler;
 
 import gameMorpion.model.CoupMorpion;
 import gameMorpion.model.Morpion;
+import generique.IA.MinMax;
+import generique.IA.NoeudMinMax;
 import generique.gameAbstract.AbstractControler;
-import generique.gameAbstract.Coup;
-import generique.gameAbstract.Joueur;
-import generique.gameAbstract.Partie;
+import generique.jeu.Coup;
+import generique.jeu.Joueur;
+import generique.jeu.Partie;
 
 import java.awt.event.MouseEvent;
 
-import IA.MinMax;
-import IA.NoeudMinMax;
 
 public class ControlMorpionGraphique extends AbstractControler {
 

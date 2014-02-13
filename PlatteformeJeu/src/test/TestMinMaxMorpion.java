@@ -3,16 +3,16 @@ package test;
 import static org.junit.Assert.assertEquals;
 import gameMorpion.model.CoupMorpion;
 import gameMorpion.model.Morpion;
-import generique.gameAbstract.Coup;
-import generique.gameAbstract.Jeu;
-import generique.gameAbstract.Joueur;
-import generique.gameAbstract.Partie;
+import generique.IA.MinMax;
+import generique.IA.NoeudMinMax;
+import generique.jeu.Coup;
+import generique.jeu.Jeu;
+import generique.jeu.Joueur;
+import generique.jeu.Partie;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import IA.MinMax;
-import IA.NoeudMinMax;
 
 public class TestMinMaxMorpion {
 	

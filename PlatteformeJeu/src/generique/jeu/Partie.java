@@ -1,4 +1,6 @@
-package generique.gameAbstract;
+package generique.jeu;
+
+import generique.hypertree.NodeHypertree;
 
 import java.awt.Color;
 import java.util.Observable;

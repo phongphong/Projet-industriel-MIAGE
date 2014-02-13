@@ -1,7 +1,6 @@
-package generique.moteurJeu;
+package generique.hypertree;
 
-import generique.gameAbstract.NodeHypertree;
-import generique.gameAbstract.Partie;
+import generique.jeu.Partie;
 import hypertree.HTModel;
 import hypertree.SwingHTView;
 

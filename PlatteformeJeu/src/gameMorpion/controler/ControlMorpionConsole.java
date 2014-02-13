@@ -3,7 +3,7 @@ package gameMorpion.controler;
 import gameMorpion.model.CoupMorpion;
 import gameMorpion.model.Morpion;
 import gameMorpion.view.ViewMorpionConsole;
-import generique.gameAbstract.Coup;
+import generique.jeu.Coup;
 
 import java.util.*;
 

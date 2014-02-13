@@ -1,6 +1,8 @@
 package gameMorpion.model;
 import gameRushHour.model.Voiture;
 import generique.gameAbstract.*;
+import generique.jeu.Coup;
+import generique.jeu.Joueur;
 
 public class CoupMorpion implements Coup {
 

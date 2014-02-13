@@ -1,4 +1,4 @@
-package generique.gameAbstract;
+package generique.jeu;
 
 public class Joueur {
 

@@ -7,6 +7,10 @@ package gameRushHour.model;
 import gameRushHour.controler.ControlRushHourGraphic;
 import gameRushHour.view.ViewRushHourGraphic;
 import generique.gameAbstract.*;
+import generique.jeu.Coup;
+import generique.jeu.Jeu;
+import generique.jeu.Joueur;
+import generique.jeu.Partie;
 
 import java.util.*;
 

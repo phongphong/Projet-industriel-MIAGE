@@ -1,5 +1,8 @@
-package generique.gameAbstract;
+package generique.jeu;
 
+
+import generique.gameAbstract.AbstractControler;
+import generique.gameAbstract.AbstractView;
 
 import java.util.ArrayList;
 import java.util.Observable;

@@ -8,6 +8,7 @@ package gameRushHour.controler;
 import gameRushHour.model.RushHour;
 import gameRushHour.view.ViewRushHourConsole;
 import generique.gameAbstract.*;
+import generique.jeu.Coup;
 
 import java.util.*;
 
