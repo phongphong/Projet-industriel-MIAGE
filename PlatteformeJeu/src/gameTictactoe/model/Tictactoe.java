@@ -1,38 +1,38 @@
 package gameTictactoe.model;
 
-import gameTictactoe.controller.TictactoeGraphicController;
-import gameTictactoe.view.ViewMorpionGraphique;
+import gameTictactoe.controller.ControllerTictactoeGraphic;
+import gameTictactoe.view.ViewTictactoeGraphic;
 import generic.abstractController.AbstractControler;
-import generic.abstractModel.Coup;
-import generic.abstractModel.Jeu;
-import generic.abstractModel.Joueur;
-import generic.abstractModel.Partie;
+import generic.abstractModel.GameAction;
+import generic.abstractModel.Game;
+import generic.abstractModel.Player;
+import generic.abstractModel.GamePart;
 import generic.abstractView.AbstractView;
 
 import java.util.ArrayList;
 
 
-public class Tictactoe extends Jeu {
+public class Tictactoe extends Game {
 
-	private Joueur t_case[][];
-	private Joueur joueurEnCours;
-	private Joueur j1;
-	private Joueur j2;
+	private Player t_case[][];
+	private Player joueurEnCours;
+	private Player j1;
+	private Player j2;
 
 	public Tictactoe() {
 
-		t_case = new Joueur[3][3];
+		t_case = new Player[3][3];
 
 		// creation des joueurs
-		j1 = new Joueur("J1");
-		j2 = new Joueur("J2");
+		j1 = new Player("J1");
+		j2 = new Player("J2");
 
 		joueurEnCours = j1;
 	}
 
 	@Override
-	public void jouerUnCoup(Coup c) {
-		Joueur joueurEnCours = ((TictactoeAction) c).getJoueur();
+	public void jouerUnCoup(GameAction c) {
+		Player joueurEnCours = ((TictactoeAction) c).getJoueur();
 		int x = ((TictactoeAction) c).getX();
 		int y = ((TictactoeAction) c).getY();
 		t_case[x][y] = joueurEnCours;
@@ -43,8 +43,8 @@ public class Tictactoe extends Jeu {
 	}
 
 	@Override
-	public ArrayList<Coup> listerTousCoupPossible() {
-		ArrayList<Coup> listeCoupPossible = new ArrayList<Coup>();
+	public ArrayList<GameAction> listerTousCoupPossible() {
+		ArrayList<GameAction> listeCoupPossible = new ArrayList<GameAction>();
 		if (this.calculScore(joueurEnCours) != 1) {
 			for (int i = 0; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
@@ -57,7 +57,7 @@ public class Tictactoe extends Jeu {
 		return listeCoupPossible;
 	}
 
-	public Joueur[][] getT_case() {
+	public Player[][] getT_case() {
 		return t_case;
 	}
 
@@ -70,33 +70,33 @@ public class Tictactoe extends Jeu {
 	}
 
 	@Override
-	public Joueur getJoueurEnCours() {
+	public Player getJoueurEnCours() {
 		return joueurEnCours;
 	}
 
-	public Joueur getJ1() {
+	public Player getJ1() {
 		return j1;
 	}
 
-	public Joueur getJ2() {
+	public Player getJ2() {
 		return j2;
 	}
 
-	public void setT_case(Joueur[][] t_case) {
+	public void setT_case(Player[][] t_case) {
 		this.t_case = t_case;
 		setChanged();
 		notifyObservers();
 	}
 
-	public void setTourJoueur(Joueur tourJoueur) {
+	public void setTourJoueur(Player tourJoueur) {
 		this.joueurEnCours = tourJoueur;
 	}
 
-	public void setJ1(Joueur j1) {
+	public void setJ1(Player j1) {
 		this.j1 = j1;
 	}
 
-	public void setJ2(Joueur j2) {
+	public void setJ2(Player j2) {
 		this.j2 = j2;
 	}
 
@@ -113,14 +113,14 @@ public class Tictactoe extends Jeu {
 	}
 
 	@Override
-	public Jeu getCopyDeJeu() {
+	public Game getCopyDeJeu() {
 		// TODO Auto-generated method stub
 		Tictactoe morpion = new Tictactoe();
 		morpion.setJ1(j1);
 		morpion.setJ2(j2);
 		morpion.setTourJoueur(joueurEnCours);
 
-		Joueur[][] t_case_bis = new Joueur[3][3];
+		Player[][] t_case_bis = new Player[3][3];
 		for (int i = 0; i < t_case_bis.length; i++) {
 			for (int j = 0; j < t_case_bis.length; j++) {
 				t_case_bis[i][j] = t_case[i][j];
@@ -131,10 +131,10 @@ public class Tictactoe extends Jeu {
 	}
 
 	@Override
-	public double calculScore(Joueur joueur) {
+	public double calculScore(Player joueur) {
 		// TODO Auto-generated method stub
 		int gagne = 0;
-		Joueur joueurGagnant = null;
+		Player joueurGagnant = null;
 
 		if (t_case[0][0] != null  && t_case[0][0].equals(t_case[0][1]) && t_case[0][1].equals(t_case[0][2])) {
 			joueurGagnant = t_case[0][0];

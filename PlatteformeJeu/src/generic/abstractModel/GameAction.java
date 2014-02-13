@@ -5,7 +5,7 @@ package generic.abstractModel;
  *
  * @author Phongphet
  */
-public interface Coup {
+public interface GameAction {
     
 	
 }

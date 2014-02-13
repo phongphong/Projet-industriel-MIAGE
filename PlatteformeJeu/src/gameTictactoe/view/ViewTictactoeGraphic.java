@@ -1,8 +1,8 @@
 package gameTictactoe.view;
 
 import gameTictactoe.model.Tictactoe;
-import generic.abstractModel.Joueur;
-import generic.abstractModel.Partie;
+import generic.abstractModel.Player;
+import generic.abstractModel.GamePart;
 import generic.abstractView.AbstractView;
 
 import java.awt.Graphics;
@@ -10,12 +10,12 @@ import java.util.Observable;
 
 
 @SuppressWarnings("serial")
-public class ViewMorpionGraphique extends AbstractView {
+public class ViewTictactoeGraphic extends AbstractView {
 
 	private static final int TAILLE_CASE = 50;
-	private Partie partie;
+	private GamePart partie;
 
-	public ViewMorpionGraphique(Partie partie) {
+	public ViewTictactoeGraphic(GamePart partie) {
 		super();
 		this.partie = partie;
 		this.setSize(200, 200);
@@ -26,7 +26,7 @@ public class ViewMorpionGraphique extends AbstractView {
 		super.paintComponent(g);
 		Tictactoe jeuEnCours = (Tictactoe) partie.getJeu();
 		
-		Joueur[][] t_case = jeuEnCours.getT_case();
+		Player[][] t_case = jeuEnCours.getT_case();
 		for (int i = 0; i < t_case.length; i++) {
 			for (int j = 0; j < t_case.length; j++) {
 				g.drawRect(i * TAILLE_CASE, j * TAILLE_CASE, TAILLE_CASE, TAILLE_CASE);
@@ -45,7 +45,7 @@ public class ViewMorpionGraphique extends AbstractView {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		this.partie = ((Partie) arg0);
+		this.partie = ((GamePart) arg0);
 		repaint();
 	}
 }

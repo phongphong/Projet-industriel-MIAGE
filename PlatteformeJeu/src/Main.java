@@ -3,7 +3,7 @@ import generic.gameMotor.*;
 public class Main {
 	public static void main(String[] args){
 		GameFactory factory = new GameFactory();
-        ViewGame viewGame = new ViewGame(factory);
+        GameView viewGame = new GameView(factory);
         viewGame.affiche();
 	}
 }

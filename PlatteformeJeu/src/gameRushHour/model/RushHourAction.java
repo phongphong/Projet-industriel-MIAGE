@@ -8,23 +8,23 @@ import java.util.Objects;
  *
  * @author Phongphet
  */
-public class CoupRushHour implements Coup {
+public class RushHourAction implements GameAction {
     
-    private Voiture v;
+    private Car v;
     private int deplacement;
 
-    public CoupRushHour(Voiture v, int deplacement) {
+    public RushHourAction(Car v, int deplacement) {
         super();
     	this.v = v;
         this.deplacement = deplacement;
     }
 
 
-    public Voiture getV() {
+    public Car getV() {
         return v;
     }
 
-    public void setV(Voiture v) {
+    public void setV(Car v) {
         this.v = v;
     }
 
@@ -56,7 +56,7 @@ public class CoupRushHour implements Coup {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final CoupRushHour other = (CoupRushHour) obj;
+        final RushHourAction other = (RushHourAction) obj;
         if (!Objects.equals(this.v, other.v)) {
             return false;
         }
@@ -66,7 +66,7 @@ public class CoupRushHour implements Coup {
         return true;
     }
 
-	public Joueur getJ() {
+	public Player getJ() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -4,11 +4,11 @@
  */
 package gameRushHour.controller;
 
-import gameRushHour.model.CoupRushHour;
+import gameRushHour.model.RushHourAction;
 import gameRushHour.model.RushHour;
-import gameRushHour.model.Voiture;
+import gameRushHour.model.Car;
 import generic.abstractController.AbstractControler;
-import generic.abstractModel.Partie;
+import generic.abstractModel.GamePart;
 
 import java.awt.event.*;
 import java.util.*;
@@ -20,13 +20,13 @@ import javax.swing.*;
  * 
  * @author Phongphet
  */
-public class ControlRushHourGraphic extends AbstractControler {
+public class ControllerRushHourGraphic extends AbstractControler {
 
-	private ArrayList<Voiture> lVoiture;
+	private ArrayList<Car> lVoiture;
 	private int indice;
-	private Partie partie;
+	private GamePart partie;
 
-	public ControlRushHourGraphic(Partie partie) {
+	public ControllerRushHourGraphic(GamePart partie) {
 		this.partie = partie;
 		indice = -1;
 	}
@@ -45,7 +45,7 @@ public class ControlRushHourGraphic extends AbstractControler {
 			char c = ((RushHour) partie.getJeu()).getT_case()[ligne][colonne];
 			// on récupère la voiture choisie
 			lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
-			indice = lVoiture.indexOf(new Voiture(c));
+			indice = lVoiture.indexOf(new Car(c));
 		}
 	}
 
@@ -77,7 +77,7 @@ public class ControlRushHourGraphic extends AbstractControler {
 			if (ligne < RushHour.getDimension()
 					&& colonne < RushHour.getDimension()) {
 				lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
-				Voiture v = lVoiture.get(indice);
+				Car v = lVoiture.get(indice);
 				int deplacement;
 				if (v.getDirection() == 'h') {
 					deplacement = colonne - v.getCol();
@@ -85,7 +85,7 @@ public class ControlRushHourGraphic extends AbstractControler {
 					deplacement = ligne - v.getLigne();
 				}
 				// On cree ce coup
-				CoupRushHour c = new CoupRushHour(v, deplacement);
+				RushHourAction c = new RushHourAction(v, deplacement);
 				partie.jouerUnCoup(c);
 			}
 		}

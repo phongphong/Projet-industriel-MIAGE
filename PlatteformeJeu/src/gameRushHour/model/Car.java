@@ -8,7 +8,7 @@ package gameRushHour.model;
  *
  * @author Phongphet
  */
-public class Voiture {
+public class Car {
     
     private char num;
     private int ligne;
@@ -17,7 +17,7 @@ public class Voiture {
     private char direction;
     private boolean voitureR;
 
-    public Voiture(char num, int ligne, int col, int longeur, char direction, boolean voitureR) {
+    public Car(char num, int ligne, int col, int longeur, char direction, boolean voitureR) {
         this.num = num;
         this.ligne = ligne;
         this.col = col;
@@ -26,7 +26,7 @@ public class Voiture {
         this.voitureR = voitureR;
     }
     
-    public Voiture(char num){
+    public Car(char num){
         this.num = num;
     }
 
@@ -80,7 +80,7 @@ public class Voiture {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Voiture other = (Voiture) obj;
+        final Car other = (Car) obj;
         if (this.num != other.num) {
             return false;
         }

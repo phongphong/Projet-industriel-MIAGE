@@ -1,10 +1,10 @@
 package generic.abstractModel;
 
-public class Joueur {
+public class Player {
 
 	private String nom;
 	
-	public Joueur(String nom) {
+	public Player(String nom) {
 		super();
 		this.nom = nom;
 	}
@@ -38,7 +38,7 @@ public class Joueur {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Joueur other = (Joueur) obj;
+		Player other = (Player) obj;
 		if (nom == null) {
 			if (other.nom != null)
 				return false;

@@ -1,21 +1,21 @@
 package generic.hypertree;
 
-import generic.abstractModel.Coup;
-import generic.abstractModel.Jeu;
+import generic.abstractModel.GameAction;
+import generic.abstractModel.Game;
 import hypertree.AbstractHTNode;
 
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class NodeHypertree extends AbstractHTNode {
+public class HypertreeNode extends AbstractHTNode {
 
-	private Jeu jeu;
-	private ArrayList<Coup> listeCoup;
-	private ArrayList<NodeHypertree> children;
+	private Game jeu;
+	private ArrayList<GameAction> listeCoup;
+	private ArrayList<HypertreeNode> children;
 	private Color c;
 
-	public NodeHypertree(Jeu jeu) {
+	public HypertreeNode(Game jeu) {
 		super();
 		this.jeu = jeu;
 		c = new Color(255,255,255);
@@ -23,7 +23,7 @@ public class NodeHypertree extends AbstractHTNode {
 		children = new ArrayList<>();
 	}
 
-	public void addChild(NodeHypertree child) {
+	public void addChild(HypertreeNode child) {
 		children.add(child);
 	}
 
@@ -48,7 +48,7 @@ public class NodeHypertree extends AbstractHTNode {
 	 */
 	public String getName() {
 		String nomCoup = "";
-		for(Coup c : listeCoup){
+		for(GameAction c : listeCoup){
 			nomCoup += c.toString();
 		}
 		return nomCoup;
@@ -62,19 +62,19 @@ public class NodeHypertree extends AbstractHTNode {
 		c=nc;
 	}
 
-	public Jeu getJeu() {
+	public Game getJeu() {
 		return jeu;
 	}
 
-	public void setJeu(Jeu jeu) {
+	public void setJeu(Game jeu) {
 		this.jeu = jeu;
 	}
 
-	public ArrayList<Coup> getListeCoup() {
+	public ArrayList<GameAction> getListeCoup() {
 		return listeCoup;
 	}
 
-	public ArrayList<NodeHypertree> getChildren() {
+	public ArrayList<HypertreeNode> getChildren() {
 		return children;
 	}
 }

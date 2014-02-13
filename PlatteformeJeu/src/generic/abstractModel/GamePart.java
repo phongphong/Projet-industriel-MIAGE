@@ -1,24 +1,24 @@
 package generic.abstractModel;
 
-import generic.hypertree.NodeHypertree;
+import generic.hypertree.HypertreeNode;
 
 import java.awt.Color;
 import java.util.Observable;
-public class Partie extends Observable {
+public class GamePart extends Observable {
 
-	private Jeu jeu;
-	private NodeHypertree racineHypertree;
-	private NodeHypertree noeudCourant;
-	private NodeHypertree noeudACentrer;
+	private Game jeu;
+	private HypertreeNode racineHypertree;
+	private HypertreeNode noeudCourant;
+	private HypertreeNode noeudACentrer;
 
-	public Partie(Jeu jeu) {
+	public GamePart(Game jeu) {
 		this.jeu = jeu;
-		racineHypertree = new NodeHypertree(jeu.getCopyDeJeu());
+		racineHypertree = new HypertreeNode(jeu.getCopyDeJeu());
 		noeudCourant = racineHypertree;
 		noeudACentrer = racineHypertree;
 	}
 
-	public void revenirAncienJeu(NodeHypertree node) {
+	public void revenirAncienJeu(HypertreeNode node) {
 		
 		jeu = node.getJeu().getCopyDeJeu();
 		this.noeudCourant = node;
@@ -26,7 +26,7 @@ public class Partie extends Observable {
 		notifyObservers();
 	}
 
-	public void jouerUnCoup(Coup c) {
+	public void jouerUnCoup(GameAction c) {
 		if(jeu.listerTousCoupPossible().contains(c)){
 			noeudCourant.setColor(Color.white);
 			// je fais evoluer le jeu
@@ -36,7 +36,7 @@ public class Partie extends Observable {
 			
 			//TODO attention si le coup existe deja
 			boolean existeDeja = false;
-			for(NodeHypertree fils : noeudCourant.getChildren()){
+			for(HypertreeNode fils : noeudCourant.getChildren()){
 				if(fils.getListeCoup().contains(c)){
 					existeDeja = true;
 					noeudCourant = fils;
@@ -44,7 +44,7 @@ public class Partie extends Observable {
 				}
 			}
 			if(!existeDeja){
-				NodeHypertree n_fils = new NodeHypertree(jeu.getCopyDeJeu());
+				HypertreeNode n_fils = new HypertreeNode(jeu.getCopyDeJeu());
 				n_fils.getListeCoup().add(c);
 				noeudCourant.addChild(n_fils);
 				
@@ -58,23 +58,23 @@ public class Partie extends Observable {
 		}
 	}
 
-	public Jeu getJeu() {
+	public Game getJeu() {
 		return jeu;
 	}
 
-	public NodeHypertree getRacineHypertree() {
+	public HypertreeNode getRacineHypertree() {
 		return racineHypertree;
 	}
 
-	public NodeHypertree getNoeudCourant() {
+	public HypertreeNode getNoeudCourant() {
 		return noeudCourant;
 	}
 
-	public NodeHypertree getNoeudACentrer() {
+	public HypertreeNode getNoeudACentrer() {
 		return noeudACentrer;
 	}
 
-	public void setNoeudACentrer(NodeHypertree noeudACentrer) {
+	public void setNoeudACentrer(HypertreeNode noeudACentrer) {
 		this.noeudACentrer = noeudACentrer;
 	}
 }

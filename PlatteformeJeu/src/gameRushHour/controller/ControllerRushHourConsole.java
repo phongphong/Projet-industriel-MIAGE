@@ -2,17 +2,17 @@ package gameRushHour.controller;
 
 import gameRushHour.model.RushHour;
 import gameRushHour.view.ViewRushHourConsole;
-import generic.abstractModel.Coup;
+import generic.abstractModel.GameAction;
 
 import java.util.*;
 
-public class ControlRushHourConsole {
+public class ControllerRushHourConsole {
         public static void main(String[] args) {
         RushHour rh = new RushHour();
         ViewRushHourConsole vue = new ViewRushHourConsole(rh);
         rh.addObserver(vue);
         vue.affiche();
-        ArrayList<Coup> listeCoup;
+        ArrayList<GameAction> listeCoup;
         Scanner sc = new Scanner(System.in);
         int choixCoup;
         boolean fini = false;

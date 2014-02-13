@@ -1,22 +1,22 @@
 package generic.AI;
 
-import generic.abstractModel.Coup;
+import generic.abstractModel.GameAction;
 
-public class NoeudMinMax {
-	private Coup coup;
+public class MinMaxNode {
+	private GameAction coup;
 	private double gagner;
 	
-	public NoeudMinMax(Coup coup, double gagner) {
+	public MinMaxNode(GameAction coup, double gagner) {
 		super();
 		this.coup = coup;
 		this.gagner = gagner;
 	}
 
-	public Coup getCoup() {
+	public GameAction getCoup() {
 		return coup;
 	}
 
-	public void setCoup(Coup coup) {
+	public void setCoup(GameAction coup) {
 		this.coup = coup;
 	}
 

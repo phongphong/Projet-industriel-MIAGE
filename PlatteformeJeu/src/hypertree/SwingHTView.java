@@ -26,8 +26,8 @@
 
 package hypertree;
 
-import generic.abstractModel.Partie;
-import generic.hypertree.NodeHypertree;
+import generic.abstractModel.GamePart;
+import generic.hypertree.HypertreeNode;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;

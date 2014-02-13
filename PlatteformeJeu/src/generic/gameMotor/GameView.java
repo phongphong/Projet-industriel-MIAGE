@@ -25,12 +25,12 @@ import javax.swing.JPanel;
  * @author Phongphet
  */
 @SuppressWarnings("serial")
-public class ViewGame extends JFrame {
+public class GameView extends JFrame {
 
 	private GameFactory factory;
 	private Dimension d;
 
-	public ViewGame(GameFactory factory) {
+	public GameView(GameFactory factory) {
 		this.factory = factory;
 		d = Toolkit.getDefaultToolkit().getScreenSize();
 	}

@@ -16,7 +16,7 @@ public class MinMax implements AI {
 	}
 	
 	
-	public NoeudMinMax lancerMinMax(Jeu jeu){
+	public MinMaxNode lancerMinMax(Game jeu){
 		return minmax(jeu, jeu.getJoueurEnCours());
 	}
  
@@ -27,40 +27,40 @@ public class MinMax implements AI {
 	 * @param jeu jeu en cours
 	 * @return résultat optimal
 	 */
-	private NoeudMinMax minmax(Jeu jeu, Joueur joueurEnCours) {
+	private MinMaxNode minmax(Game jeu, Player joueurEnCours) {
 
 		int valeur_max = MAX_VAL;
 		int valeur_min = MIN_VAL;
-		NoeudMinMax meilleurNoeud = null;
+		MinMaxNode meilleurNoeud = null;
 
 		double gagne = jeu.calculScore(((Tictactoe) jeu).getJ2());
 		if(gagne != 0){
-			return new NoeudMinMax(null, gagne);
+			return new MinMaxNode(null, gagne);
 		}
 		
-		ArrayList<Coup> listeCoupPossible = jeu.listerTousCoupPossible();
+		ArrayList<GameAction> listeCoupPossible = jeu.listerTousCoupPossible();
 		if (listeCoupPossible.isEmpty()) {
-			return new NoeudMinMax(null, 0);
+			return new MinMaxNode(null, 0);
 		}
 
-		for (Coup coupEnCours : listeCoupPossible) {
+		for (GameAction coupEnCours : listeCoupPossible) {
 			
-			Jeu jeuFils = jeu.getCopyDeJeu();
+			Game jeuFils = jeu.getCopyDeJeu();
 			jeuFils.jouerUnCoup(coupEnCours);
-			NoeudMinMax resultatDeNoeudFils;
+			MinMaxNode resultatDeNoeudFils;
 			
 			if (jeu.getJoueurEnCours().equals(joueurEnCours)) {
 				resultatDeNoeudFils = minmax(jeuFils, joueurEnCours);
 				if (resultatDeNoeudFils.getGagner() > valeur_max) {
 					valeur_max = (int) resultatDeNoeudFils.getGagner();
-					meilleurNoeud = new NoeudMinMax(coupEnCours, valeur_max);
+					meilleurNoeud = new MinMaxNode(coupEnCours, valeur_max);
 				}
 			} else {
 				// maximiser le score quand c'est le tour O
 				resultatDeNoeudFils = minmax(jeuFils, joueurEnCours);
 				if (resultatDeNoeudFils.getGagner() < valeur_min) {
 					valeur_min = (int) resultatDeNoeudFils.getGagner();
-					meilleurNoeud = new NoeudMinMax(coupEnCours, valeur_min);
+					meilleurNoeud = new MinMaxNode(coupEnCours, valeur_min);
 				}
 			}
 		}

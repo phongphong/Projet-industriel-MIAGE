@@ -1,13 +1,13 @@
 package gameTictactoe.model;
 import generic.abstractModel.*;
 
-public class TictactoeAction implements Coup {
+public class TictactoeAction implements GameAction {
 
-	private Joueur joueur;
+	private Player joueur;
 	private int x;
 	private int y;
 	
-	public TictactoeAction(Joueur j, int x, int y){
+	public TictactoeAction(Player j, int x, int y){
 		super();
 		this.joueur = j;
 		this.x = x;
@@ -15,7 +15,7 @@ public class TictactoeAction implements Coup {
 	}
 	
 
-	public Joueur getJoueur() {
+	public Player getJoueur() {
 		return joueur;
 	}
 

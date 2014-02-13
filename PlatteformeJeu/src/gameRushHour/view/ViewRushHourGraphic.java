@@ -5,7 +5,7 @@
 package gameRushHour.view;
 
 import gameRushHour.model.RushHour;
-import generic.abstractModel.Partie;
+import generic.abstractModel.GamePart;
 import generic.abstractView.AbstractView;
 
 import java.awt.*;
@@ -17,9 +17,9 @@ import java.util.*;
 @SuppressWarnings("serial")
 public class ViewRushHourGraphic extends AbstractView{
 
-    private Partie partie;
+    private GamePart partie;
     
-    public ViewRushHourGraphic(Partie partie){
+    public ViewRushHourGraphic(GamePart partie){
         super();
         this.partie =  partie;
         this.setSize(600, 600);
@@ -57,7 +57,7 @@ public class ViewRushHourGraphic extends AbstractView{
     
     @Override
     public void update(Observable o, Object o1) {
-        partie = ((Partie) o);
+        partie = ((GamePart) o);
         repaint();
     }
 }

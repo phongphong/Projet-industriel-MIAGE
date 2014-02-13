@@ -4,22 +4,22 @@ package gameTictactoe.controller;
 import gameTictactoe.model.Tictactoe;
 import gameTictactoe.model.TictactoeAction;
 import generic.AI.MinMax;
-import generic.AI.NoeudMinMax;
+import generic.AI.MinMaxNode;
 import generic.abstractController.AbstractControler;
-import generic.abstractModel.Coup;
-import generic.abstractModel.Joueur;
-import generic.abstractModel.Partie;
+import generic.abstractModel.GameAction;
+import generic.abstractModel.Player;
+import generic.abstractModel.GamePart;
 
 import java.awt.event.MouseEvent;
 
 
 
-public class TictactoeGraphicController extends AbstractControler {
+public class ControllerTictactoeGraphic extends AbstractControler {
 
-	private Partie partie;
+	private GamePart partie;
 	private MinMax minimax;
 	
-	public TictactoeGraphicController(Partie partie) {
+	public ControllerTictactoeGraphic(GamePart partie) {
 		this.partie = partie;
 		minimax = new MinMax();
 	}
@@ -44,12 +44,12 @@ public class TictactoeGraphicController extends AbstractControler {
 		int y = e.getY() / 50;
 		
 		Tictactoe morpion = (Tictactoe) partie.getJeu(); 
-		Joueur joueurEnCours = morpion.getJoueurEnCours();
-		Coup coupJoueur = new TictactoeAction(joueurEnCours, x, y);
+		Player joueurEnCours = morpion.getJoueurEnCours();
+		GameAction coupJoueur = new TictactoeAction(joueurEnCours, x, y);
 		partie.jouerUnCoup(coupJoueur);
 		if(morpion.getJoueurEnCours().equals(morpion.getJ2())){
-			NoeudMinMax noeudMinMax = minimax.lancerMinMax(partie.getJeu().getCopyDeJeu());
-			Coup meilleurCoup = noeudMinMax.getCoup();
+			MinMaxNode noeudMinMax = minimax.lancerMinMax(partie.getJeu().getCopyDeJeu());
+			GameAction meilleurCoup = noeudMinMax.getCoup();
 			System.out.println("Meilleur coup : "+meilleurCoup);
 		}
 		
