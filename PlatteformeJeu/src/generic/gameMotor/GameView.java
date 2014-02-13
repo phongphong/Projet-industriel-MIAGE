@@ -66,13 +66,10 @@ public class GameView extends JFrame {
 			sousMenu.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					// TODO Auto-generated method stub
 					factory.creerJeu(nomJeu);
 				
 					panelJeu.removeAll();
 					panelJeu.add(factory.getVueJeu());
-					
-					
 					
 					panelArbre.removeAll();
 					panelArbre.setLayout(new BorderLayout());
