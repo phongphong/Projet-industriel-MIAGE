@@ -1,6 +1,6 @@
 package gameRushHour.model;
 
-import generique.abstractModel.*;
+import generic.abstractModel.*;
 
 import java.util.Objects;
 

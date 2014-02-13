@@ -7,8 +7,8 @@ package gameRushHour.controller;
 import gameRushHour.model.CoupRushHour;
 import gameRushHour.model.RushHour;
 import gameRushHour.model.Voiture;
-import generique.abstractController.AbstractControler;
-import generique.abstractModel.Partie;
+import generic.abstractController.AbstractControler;
+import generic.abstractModel.Partie;
 
 import java.awt.event.*;
 import java.util.*;

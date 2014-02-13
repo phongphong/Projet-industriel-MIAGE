@@ -1,23 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gameRushHour.controller;
-
 
 import gameRushHour.model.RushHour;
 import gameRushHour.view.ViewRushHourConsole;
-import generique.abstractController.*;
-import generique.abstractModel.Coup;
+import generic.abstractModel.Coup;
 
 import java.util.*;
 
-
-
-/**
- *
- * @author Phongphet
- */
 public class ControlRushHourConsole {
         public static void main(String[] args) {
         RushHour rh = new RushHour();
