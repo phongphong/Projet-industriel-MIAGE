@@ -2,13 +2,13 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package gameRushHour.controler;
+package gameRushHour.controller;
 
 
 import gameRushHour.model.RushHour;
 import gameRushHour.view.ViewRushHourConsole;
-import generique.gameAbstract.*;
-import generique.jeu.Coup;
+import generique.abstractController.*;
+import generique.abstractModel.Coup;
 
 import java.util.*;
 

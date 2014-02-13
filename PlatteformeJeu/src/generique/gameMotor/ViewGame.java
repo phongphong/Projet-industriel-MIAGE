@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package generique.factory;
+package generique.gameMotor;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

@@ -1,4 +1,4 @@
-import generique.factory.*;
+import generique.gameMotor.*;
 
 public class Main {
 	public static void main(String[] args){

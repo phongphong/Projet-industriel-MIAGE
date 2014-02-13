@@ -1,17 +1,18 @@
-package generique.factory;
+package generique.gameMotor;
 
-import gameMorpion.controler.ControlMorpionGraphique;
+import gameMorpion.controller.ControlMorpionGraphique;
 import gameMorpion.model.Morpion;
 import gameMorpion.view.ViewMorpionGraphique;
-import gameRushHour.controler.ControlRushHourGraphic;
+import gameRushHour.controller.ControlRushHourGraphic;
 import gameRushHour.model.RushHour;
 import gameRushHour.view.ViewRushHourGraphic;
-import generique.gameAbstract.*;
+import generique.abstractController.*;
+import generique.abstractModel.Jeu;
+import generique.abstractModel.Partie;
+import generique.abstractView.AbstractView;
 import generique.hypertree.ControleurVueArbre;
 import generique.hypertree.NodeHypertree;
 import generique.hypertree.VueArbre;
-import generique.jeu.Jeu;
-import generique.jeu.Partie;
 import hypertree.HTModel;
 
 import java.util.ArrayList;

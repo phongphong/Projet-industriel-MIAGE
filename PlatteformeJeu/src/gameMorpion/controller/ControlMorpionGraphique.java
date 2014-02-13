@@ -1,14 +1,14 @@
-package gameMorpion.controler;
+package gameMorpion.controller;
 
 
 import gameMorpion.model.CoupMorpion;
 import gameMorpion.model.Morpion;
 import generique.IA.MinMax;
 import generique.IA.NoeudMinMax;
-import generique.gameAbstract.AbstractControler;
-import generique.jeu.Coup;
-import generique.jeu.Joueur;
-import generique.jeu.Partie;
+import generique.abstractController.AbstractControler;
+import generique.abstractModel.Coup;
+import generique.abstractModel.Joueur;
+import generique.abstractModel.Partie;
 
 import java.awt.event.MouseEvent;
 

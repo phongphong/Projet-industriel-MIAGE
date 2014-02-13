@@ -4,13 +4,7 @@
  */
 package gameRushHour.model;
 
-import gameRushHour.controler.ControlRushHourGraphic;
-import gameRushHour.view.ViewRushHourGraphic;
-import generique.gameAbstract.*;
-import generique.jeu.Coup;
-import generique.jeu.Jeu;
-import generique.jeu.Joueur;
-import generique.jeu.Partie;
+import generique.abstractModel.*;
 
 import java.util.*;
 
@@ -166,16 +160,6 @@ public class RushHour extends Jeu {
 	}
 
 	@Override
-	public AbstractView getView(Partie partie) {
-		return (AbstractView) new ViewRushHourGraphic(partie);
-	}
-
-	@Override
-	public AbstractControler getControler(Partie partie) {
-		return new ControlRushHourGraphic(partie);
-	}
-
-	@Override
 	public Jeu getCopyDeJeu() {
 		RushHour rh = new RushHour();
 		for(int i = 0 ; i < t_case.length ; i++){
@@ -215,23 +199,11 @@ public class RushHour extends Jeu {
 	}
 
 	@Override
-	public void changerJoueur() {
-		// TODO Auto-generated method stub
-		
-	}	
-
-	@Override
 	public double calculScore(Joueur joueur) {
 		// TODO Auto-generated method stub
 		if (t_case[3][dimension - 1] == 'R') {
 			return 1;
 		}
 		return -1;
-	}
-
-	@Override
-	public Joueur getJoueurQuiDoitGagnerMinMax() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }

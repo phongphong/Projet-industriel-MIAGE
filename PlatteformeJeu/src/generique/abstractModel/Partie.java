@@ -1,4 +1,4 @@
-package generique.jeu;
+package generique.abstractModel;
 
 import generique.hypertree.NodeHypertree;
 

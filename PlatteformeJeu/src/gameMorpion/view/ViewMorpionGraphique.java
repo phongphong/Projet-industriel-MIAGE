@@ -1,9 +1,9 @@
 package gameMorpion.view;
 
 import gameMorpion.model.Morpion;
-import generique.gameAbstract.AbstractView;
-import generique.jeu.Joueur;
-import generique.jeu.Partie;
+import generique.abstractModel.Joueur;
+import generique.abstractModel.Partie;
+import generique.abstractView.AbstractView;
 
 import java.awt.Graphics;
 import java.util.Observable;

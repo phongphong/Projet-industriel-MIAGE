@@ -1,6 +1,6 @@
 package generique.IA;
 
-import generique.jeu.Coup;
+import generique.abstractModel.Coup;
 
 public class NoeudMinMax {
 	private Coup coup;

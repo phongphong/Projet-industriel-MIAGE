@@ -1,7 +1,7 @@
 package generique.hypertree;
 
-import generique.jeu.Coup;
-import generique.jeu.Jeu;
+import generique.abstractModel.Coup;
+import generique.abstractModel.Jeu;
 import hypertree.AbstractHTNode;
 
 import java.awt.Color;

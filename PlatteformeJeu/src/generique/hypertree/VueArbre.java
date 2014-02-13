@@ -1,6 +1,6 @@
 package generique.hypertree;
 
-import generique.jeu.Partie;
+import generique.abstractModel.Partie;
 import hypertree.HTModel;
 import hypertree.SwingHTView;
 

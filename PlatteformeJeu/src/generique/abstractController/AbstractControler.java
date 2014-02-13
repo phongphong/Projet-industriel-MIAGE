@@ -1,4 +1,4 @@
-package generique.gameAbstract;
+package generique.abstractController;
 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;

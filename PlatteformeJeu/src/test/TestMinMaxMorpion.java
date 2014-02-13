@@ -5,10 +5,10 @@ import gameMorpion.model.CoupMorpion;
 import gameMorpion.model.Morpion;
 import generique.IA.MinMax;
 import generique.IA.NoeudMinMax;
-import generique.jeu.Coup;
-import generique.jeu.Jeu;
-import generique.jeu.Joueur;
-import generique.jeu.Partie;
+import generique.abstractModel.Coup;
+import generique.abstractModel.Jeu;
+import generique.abstractModel.Joueur;
+import generique.abstractModel.Partie;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

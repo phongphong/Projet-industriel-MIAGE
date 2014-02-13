@@ -5,8 +5,8 @@
 package gameRushHour.view;
 
 import gameRushHour.model.RushHour;
-import generique.gameAbstract.AbstractView;
-import generique.jeu.Partie;
+import generique.abstractModel.Partie;
+import generique.abstractView.AbstractView;
 
 import java.awt.*;
 import java.util.*;

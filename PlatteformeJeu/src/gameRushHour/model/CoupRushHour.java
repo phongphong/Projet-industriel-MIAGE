@@ -1,16 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gameRushHour.model;
 
-import generique.gameAbstract.*;
-import generique.jeu.Coup;
-import generique.jeu.Joueur;
+import generique.abstractModel.*;
 
 import java.util.Objects;
-
-
 
 /**
  *

@@ -1,4 +1,4 @@
-package generique.gameAbstract;
+package generique.abstractView;
 
 import java.util.Observer;
 

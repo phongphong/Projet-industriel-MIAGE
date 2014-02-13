@@ -1,13 +1,13 @@
 package gameMorpion.model;
 
-import gameMorpion.controler.ControlMorpionGraphique;
+import gameMorpion.controller.ControlMorpionGraphique;
 import gameMorpion.view.ViewMorpionGraphique;
-import generique.gameAbstract.AbstractControler;
-import generique.gameAbstract.AbstractView;
-import generique.jeu.Coup;
-import generique.jeu.Jeu;
-import generique.jeu.Joueur;
-import generique.jeu.Partie;
+import generique.abstractController.AbstractControler;
+import generique.abstractModel.Coup;
+import generique.abstractModel.Jeu;
+import generique.abstractModel.Joueur;
+import generique.abstractModel.Partie;
+import generique.abstractView.AbstractView;
 
 import java.util.ArrayList;
 
@@ -17,8 +17,6 @@ public class Morpion extends Jeu {
 	private Joueur joueurEnCours;
 	private Joueur j1;
 	private Joueur j2;
-	private char caractereJ1;
-	private char caractereJ2;
 
 	public Morpion() {
 
@@ -27,16 +25,8 @@ public class Morpion extends Jeu {
 		// creation des joueurs
 		j1 = new Joueur("J1");
 		j2 = new Joueur("J2");
-		caractereJ1 = 'O';
-		caractereJ2 = 'X';
 
 		joueurEnCours = j1;
-
-		/*for (int i = 0; i < t_case.length; i++) {
-			for (int j = 0; j < t_case.length; j++) {
-				t_case[j][i] = '.';
-			}
-		}*/
 	}
 
 	@Override
@@ -70,7 +60,6 @@ public class Morpion extends Jeu {
 		return t_case;
 	}
 
-	@Override
 	public void changerJoueur() {
 		if (joueurEnCours.equals(j1)) {
 			joueurEnCours = j2;
@@ -82,22 +71,6 @@ public class Morpion extends Jeu {
 	@Override
 	public Joueur getJoueurEnCours() {
 		return joueurEnCours;
-	}
-
-	@Override
-	public Joueur getJoueurQuiDoitGagnerMinMax() {
-		// TODO Auto-generated method stub
-		return j2;
-	}
-
-	@Override
-	public AbstractView getView(Partie partie) {
-		return new ViewMorpionGraphique(partie);
-	}
-
-	@Override
-	public AbstractControler getControler(Partie partie) {
-		return new ControlMorpionGraphique(partie);
 	}
 
 	public Joueur getJ1() {
