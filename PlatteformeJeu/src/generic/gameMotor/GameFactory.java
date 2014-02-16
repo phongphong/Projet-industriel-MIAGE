@@ -20,76 +20,98 @@ import java.util.ArrayList;
 
 
 /**
- * Cette classe représente le contrôleur du plateforme de jeu qui gère tous les jeux
+ * This class represents the factory that create every game in this application
  * @author Phongphet
  */
 public class GameFactory {
 	
-	private ArrayList<String> listeJeu;
-	private AbstractView vueJeu;
-	private HypertreeView vueArbre;
+	private ArrayList<String> listGame;
+	private AbstractView viewGame;
+	private HypertreeView treeView;
     
+	/**
+	 * Constructor of factory
+	 */
     public GameFactory(){
-    	listeJeu = new ArrayList<>();
-    	listeJeu.add("morpion");
-    	listeJeu.add("rushhour");
+    	listGame = new ArrayList<>();
+    	listGame.add("morpion");
+    	listGame.add("rushhour");
     }
     
     /**
-     * Cette méthode lancer le jeu choisi par l'utilisateur
-     * @param jeu jeu choisi par l'utilisateur
+     * This method create a game that a player select
+     * @param name of the game selected by a player
      */
-    public void creerJeu(String nomJeu){
-    	Game jeu = null;
-    	GamePart partie = null;
+    public void createGame(String gameName){
+    	Game game = null;
+    	GamePart partOfGame = null;
     	AbstractControler control = null;
     	
-        switch(nomJeu){
+        switch(gameName){
             case "morpion":
-            	jeu = new Tictactoe();
-            	partie = new GamePart(jeu);
-            	vueJeu = new ViewTictactoeGraphic(partie);
-            	control = new ControllerTictactoeGraphic(partie);
+            	game = new Tictactoe();
+            	partOfGame = new GamePart(game);
+            	viewGame = new ViewTictactoeGraphic(partOfGame);
+            	control = new ControllerTictactoeGraphic(partOfGame);
                 break;
                 
             case "rushhour":
-                jeu = new RushHour();
-                partie = new GamePart(jeu);
-                vueJeu = new ViewRushHourGraphic(partie);
-                control = new ControllerRushHourGraphic(partie);
+                game = new RushHour();
+                partOfGame = new GamePart(game);
+                viewGame = new ViewRushHourGraphic(partOfGame);
+                control = new ControllerRushHourGraphic(partOfGame);
                 break;
         }
 		
-		creerJeu(partie, control);
-		creerArbre(partie);
+		createCurrentGame(partOfGame, control);
+		createTree(partOfGame);
     }
 
-	private void creerJeu(GamePart partie, AbstractControler control) {
-		partie.addObserver(vueJeu);
-		vueJeu.addMouseListener(control);
-		vueJeu.addMouseMotionListener(control);
+    /**
+     * This methods create necessary elements for lunching the select game
+     * @param part part of game
+     * @param control game controller
+     */
+	private void createCurrentGame(GamePart part, AbstractControler control) {
+		part.addObserver(viewGame);
+		viewGame.addMouseListener(control);
+		viewGame.addMouseMotionListener(control);
 	}
 
-	private void creerArbre(GamePart partie) {
-		HypertreeNode root = partie.getRacineHypertree();
+	/**
+	 * This method create a hypertree that relates to the game
+	 * @param part part of game
+	 */
+	private void createTree(GamePart part) {
+		HypertreeNode root = part.getRootHypertree();
 		HTModel model = new HTModel(root);
-		vueArbre = new HypertreeView(model);
-		HypertreeNodeController controlArbre = new HypertreeNodeController(vueArbre, partie);
-		vueArbre.addMouseListener(controlArbre);
-		partie.addObserver(vueArbre);
+		treeView = new HypertreeView(model);
+		HypertreeNodeController HypertreeControl = new HypertreeNodeController(treeView, part);
+		treeView.addMouseListener(HypertreeControl);
+		part.addObserver(treeView);
 	}
     
-    
-    
-    public ArrayList<String> getListeJeu(){
-    	return listeJeu;
+    /**
+     * Getter of game list
+     * @return game list
+     */
+    public ArrayList<String> getListGame(){
+    	return listGame;
     }
 
-	public AbstractView getVueJeu() {
-		return vueJeu;
+    /**
+     * Getter of game view
+     * @return game view
+     */
+	public AbstractView getViewGame() {
+		return viewGame;
 	}
 
-	public HypertreeView getVueArbre() {
-		return vueArbre;
+	/**
+	 * Getter of tree view
+	 * @return tree view
+	 */
+	public HypertreeView getViewTree() {
+		return treeView;
 	}
 }

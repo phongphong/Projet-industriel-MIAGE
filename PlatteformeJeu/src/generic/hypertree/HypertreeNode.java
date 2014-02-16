@@ -1,32 +1,46 @@
 package generic.hypertree;
 
-import generic.abstractModel.GameAction;
-import generic.abstractModel.Game;
+import generic.abstractModel.*;
 import hypertree.AbstractHTNode;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.*;
 
+/**
+ * This class represents the hypertree node that save each state of game
+ * @author Phongphet
+ *
+ */
 public class HypertreeNode extends AbstractHTNode {
 
-	private Game jeu;
-	private ArrayList<GameAction> listeCoup;
+	private Game game;
+	private ArrayList<GameAction> listAction;
 	private ArrayList<HypertreeNode> children;
-	private Color c;
+	private Color color;
 
-	public HypertreeNode(Game jeu) {
+	/**
+	 * Constructor of HypertreeNode
+	 * @param game current game
+	 */
+	public HypertreeNode(Game game) {
 		super();
-		this.jeu = jeu;
-		c = new Color(255,255,255);
-		listeCoup = new ArrayList<>();
+		this.game = game;
+		color = new Color(255,255,255);
+		listAction = new ArrayList<>();
 		children = new ArrayList<>();
 	}
 
+	/**
+	 * this method put child node into the current tree
+	 * @param child 
+	 */
 	public void addChild(HypertreeNode child) {
 		children.add(child);
 	}
 
+	/**
+	 * this method return an iterator object of the hashmup
+	 */
 	public Iterator<?> children() {
 		return this.children.iterator();
 	}
@@ -47,33 +61,56 @@ public class HypertreeNode extends AbstractHTNode {
 	 * @return the name of the file
 	 */
 	public String getName() {
-		String nomCoup = "";
-		for(GameAction c : listeCoup){
-			nomCoup += c.toString();
+		String nameAction = "";
+		for(GameAction action : listAction){
+			nameAction += action.toString();
 		}
-		return nomCoup;
+		return nameAction;
 	}
 
+	/**
+	 * Getter of color
+	 */
 	public Color getColor() {
-		return c;
+		return color;
 	}
 	
-	public void setColor(Color nc) {
-		c=nc;
+	/**
+	 * Setter of color 
+	 * @param newColor new color
+	 */
+	public void setColor(Color newColor) {
+		color=newColor;
 	}
 
-	public Game getJeu() {
-		return jeu;
+	/**
+	 * Getter of game
+	 * @return current game
+	 */
+	public Game getGame() {
+		return game;
 	}
 
-	public void setJeu(Game jeu) {
-		this.jeu = jeu;
+	/**
+	 * Setter of game
+	 * @param game
+	 */
+	public void setGame(Game game) {
+		this.game = game;
 	}
 
-	public ArrayList<GameAction> getListeCoup() {
-		return listeCoup;
+	/**
+	 * Getter of action list of action 
+	 * @return
+	 */
+	public ArrayList<GameAction> getListeAction() {
+		return listAction;
 	}
 
+	/**
+	 * Getter of child node
+	 * @return list of child node
+	 */
 	public ArrayList<HypertreeNode> getChildren() {
 		return children;
 	}

@@ -1,37 +1,42 @@
 package gameTictactoe.controller;
 
-import gameTictactoe.model.Tictactoe;
-import gameTictactoe.model.TictactoeAction;
+import gameTictactoe.model.*;
 import gameTictactoe.view.ViewTictactoeConsole;
 import generic.abstractModel.GameAction;
-
 import java.util.*;
 
-
-
+/**
+ * This class represents the controller of Tic Tac Toe game in console mode
+ * @author Phongphet
+ *
+ */
 public class ControllerTictactoeConsole {
 	
+	/**
+	 * Main class that launch the game in console mode
+	 * @param args
+	 */
 	public static void main(String[] args){
-		Tictactoe morpion = new Tictactoe();
-		ViewTictactoeConsole view = new ViewTictactoeConsole(morpion);
-		morpion.addObserver(view);
-		boolean fini = false;
+		Tictactoe tictactoe = new Tictactoe();
+		ViewTictactoeConsole view = new ViewTictactoeConsole(tictactoe);
+		tictactoe.addObserver(view);
+		boolean finishGame = false;
 		Scanner sc = new Scanner(System.in);
-		int choix;
-		while(!fini){
-			System.out.println("Ce tour est � " + morpion.getJoueurEnCours().getNom());
-			ArrayList<GameAction> listeCoup = morpion.listerTousCoupPossible();
+		int choice;
+		while(!finishGame){
+			System.out.println("Ce tour est de " + tictactoe.getCurrentPlayer().getName());
+			ArrayList<GameAction> listAction = tictactoe.listAllPossibleAction();
 			System.out.println("Veuillez choisir le coup : ");
-			for(int i=0 ; i<listeCoup.size() ; i++){
-				System.out.println(i+". " + listeCoup.get(i));
+			for(int i=0 ; i<listAction.size() ; i++){
+				System.out.println(i+". " + listAction.get(i));
 			}
-			choix = sc.nextInt();
-			GameAction c = listeCoup.get(choix);
-			morpion.jouerUnCoup(c);
-			morpion.changerJoueur();
-			if(morpion.calculScore(morpion.getJoueurEnCours()) == 1){
-				System.out.println(((TictactoeAction) c).getJoueur().getNom() + " gagne !!!");
-				fini = true;
+			choice = sc.nextInt();
+			GameAction action = listAction.get(choice);
+			tictactoe.doAction(action);
+			tictactoe.switchPlayer();
+			if(tictactoe.caculateScore(tictactoe.getCurrentPlayer()) == 1){
+				System.out.println(((TictactoeAction) action).getPlayer().getName() + " gagne !!!");
+				finishGame = true;
 			}
 		}
 	}

@@ -1,12 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gameRushHour.controller;
 
-import gameRushHour.model.RushHourAction;
-import gameRushHour.model.RushHour;
-import gameRushHour.model.Car;
+import gameRushHour.model.*;
 import generic.abstractController.AbstractControler;
 import generic.abstractModel.GamePart;
 
@@ -16,19 +10,22 @@ import java.util.*;
 import javax.swing.*;
 
 /**
- * Cette classe représente le contrôleur en mode GRAPHIQUE du jeu rushHour
- * 
+ * This class represents the controller of Rushhour game in graphical mode
  * @author Phongphet
  */
 public class ControllerRushHourGraphic extends AbstractControler {
 
-	private ArrayList<Car> lVoiture;
-	private int indice;
-	private GamePart partie;
+	private ArrayList<Car> listeOfCars;
+	private int indexSelected;
+	private GamePart part;
 
-	public ControllerRushHourGraphic(GamePart partie) {
-		this.partie = partie;
-		indice = -1;
+	/**
+	 * Controller constructor
+	 * @param part part of a game
+	 */
+	public ControllerRushHourGraphic(GamePart part) {
+		this.part = part;
+		indexSelected = -1;
 	}
 
 	@Override
@@ -38,21 +35,20 @@ public class ControllerRushHourGraphic extends AbstractControler {
 
 	@Override
 	public void mousePressed(MouseEvent me) {
-		int colonne = me.getX() / 50;
-		int ligne = me.getY() / 50;
-		if (ligne < RushHour.getDimension()
-				&& colonne < RushHour.getDimension()) {
-			char c = ((RushHour) partie.getJeu()).getT_case()[ligne][colonne];
+		int column = me.getX() / 50;
+		int row = me.getY() / 50;
+		if (row < RushHour.getDimension() && column < RushHour.getDimension()) {
+			char carNumber = ((RushHour) part.getGame()).getGrid()[row][column];
 			// on récupère la voiture choisie
-			lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
-			indice = lVoiture.indexOf(new Car(c));
+			listeOfCars = ((RushHour) part.getGame()).getlistCar();
+			indexSelected = listeOfCars.indexOf(new Car(carNumber));
 		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent me) {
-		if (partie.getJeu().calculScore(null) == 1) {
-			JOptionPane.showMessageDialog(null, "Gagner");
+		if (part.getGame().caculateScore(null) == 1) {
+			JOptionPane.showMessageDialog(null, "You win !");
 		}
 	}
 
@@ -68,25 +64,22 @@ public class ControllerRushHourGraphic extends AbstractControler {
 
 	@Override
 	public void mouseDragged(MouseEvent me) {
-		// si la voiture choisi n'est pas nulle
-		if (indice != -1) {
-			// on regenere le nouveau coup(voiture, deplacement) en fonction du
-			// deplacement de la souris et la direction
-			int colonne = me.getX() / 50;
-			int ligne = me.getY() / 50;
-			if (ligne < RushHour.getDimension()
-					&& colonne < RushHour.getDimension()) {
-				lVoiture = ((RushHour) partie.getJeu()).getlVoiture();
-				Car v = lVoiture.get(indice);
-				int deplacement;
-				if (v.getDirection() == 'h') {
-					deplacement = colonne - v.getCol();
+		if (indexSelected != -1) {
+			
+			int column = me.getX() / 50;
+			int row = me.getY() / 50;
+			if (row < RushHour.getDimension() && column < RushHour.getDimension()) {
+				listeOfCars = ((RushHour) part.getGame()).getlistCar();
+				Car selectedCar = listeOfCars.get(indexSelected);
+				int moves;
+				if (selectedCar.getDirection() == 'h') {
+					moves = column - selectedCar.getColumn();
 				} else {
-					deplacement = ligne - v.getLigne();
+					moves = row - selectedCar.getRow();
 				}
 				// On cree ce coup
-				RushHourAction c = new RushHourAction(v, deplacement);
-				partie.jouerUnCoup(c);
+				RushHourAction c = new RushHourAction(selectedCar, moves);
+				part.doAction(c);
 			}
 		}
 	}

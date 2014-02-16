@@ -6,24 +6,34 @@ import generic.abstractModel.GameAction;
 
 import java.util.*;
 
+/**
+ * This class repersents the controller of rushhour game in console mode
+ * @author Phongphet
+ */
 public class ControllerRushHourConsole {
-        public static void main(String[] args) {
-        RushHour rh = new RushHour();
-        ViewRushHourConsole vue = new ViewRushHourConsole(rh);
-        rh.addObserver(vue);
-        vue.affiche();
-        ArrayList<GameAction> listeCoup;
-        Scanner sc = new Scanner(System.in);
-        int choixCoup;
-        boolean fini = false;
-        while (!fini) {
-            System.out.println("Qu'est ce que vous voulez faire");
-            listeCoup = rh.listerTousCoupPossible();
-            for(int j = 0 ; j < listeCoup.size() ; j++){
-                System.out.println(j + ". " + listeCoup.get(j).toString());
-            }
-            choixCoup = sc.nextInt();
-            rh.jouerUnCoup(listeCoup.get(choixCoup));
-        }
-    }
+
+	/**
+	 * This is a main method that launch the rushhour game in console mode
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		
+		RushHour rushhour = new RushHour();
+		ViewRushHourConsole view = new ViewRushHourConsole(rushhour);
+		rushhour.addObserver(view);
+		view.display();
+		ArrayList<GameAction> listAction;
+		Scanner sc = new Scanner(System.in);
+		int choice;
+		boolean finishGame = false;
+		while (!finishGame) {
+			System.out.println("Which action do you want to do?");
+			listAction = rushhour.listAllPossibleAction();
+			for (int j = 0; j < listAction.size(); j++) {
+				System.out.println(j + ". " + listAction.get(j).toString());
+			}
+			choice = sc.nextInt();
+			rushhour.doAction(listAction.get(choice));
+		}
+	}
 }

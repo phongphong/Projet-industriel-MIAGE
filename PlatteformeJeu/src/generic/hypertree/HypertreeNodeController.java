@@ -7,14 +7,24 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * This class represents the controller of hypertree
+ * @author Phongphet
+ *
+ */
 public class HypertreeNodeController implements MouseListener {
 
 	private SwingHTView view;
-	private GamePart p;
+	private GamePart gamePart;
 
-	public HypertreeNodeController(SwingHTView view, GamePart p) {
+	/**
+	 * Constructor that create HypetreeController
+	 * @param view current view of the tree
+	 * @param gamePart part of the game
+	 */
+	public HypertreeNodeController(SwingHTView view, GamePart gamePart) {
 		this.view = view;
-		this.p = p;
+		this.gamePart = gamePart;
 	}
 
 	@Override
@@ -22,10 +32,10 @@ public class HypertreeNodeController implements MouseListener {
 		// TODO Auto-generated method stub
 		HypertreeNode node = (HypertreeNode) view.getNodeUnderTheMouse(e);
 		if (node != null) {
-			p.getNoeudCourant().setColor(Color.white);
+			gamePart.getCurrentNode().setColor(Color.white);
 			node.setColor(Color.green);
-			p.revenirAncienJeu(node);	
-			p.setNoeudACentrer(node);
+			gamePart.returnToPreviousStateOfGame(node);	
+			gamePart.setNodeToCenter(node);
 			view.translateToOrigin(node);
 			view.repaint();
 		}

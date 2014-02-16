@@ -6,25 +6,31 @@ package gameRushHour.view;
 
 import gameRushHour.model.RushHour;
 
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
 
 /**
- *
+ * This class represents the view of rushhour game in console mode
  * @author Phongphet
  */
 public class ViewRushHourConsole implements Observer{
     
-    private RushHour rh;
+    private RushHour rushhour;
     
+    /**
+     * Contructor of the view
+     * @param rh rushhour model
+     */
     public ViewRushHourConsole(RushHour rh){
-        this.rh = rh;
+        this.rushhour = rh;
     }
             
-    public void affiche(){
+    /**
+     * This method display the game grid
+     */
+    public void display(){
     	System.out.println("_ _ _");
-        char[][] t_case = rh.getT_case();
+        char[][] t_case = rushhour.getGrid();
         for(int i = 0 ; i < t_case.length ; i++){
             for(int j = 0 ; j < t_case.length ; j++){
                 System.out.print(t_case[i][j]+" ");
@@ -36,7 +42,7 @@ public class ViewRushHourConsole implements Observer{
 
     @Override
     public void update(Observable o, Object o1) {
-        rh = (RushHour) o;
-        this.affiche();
+        rushhour = (RushHour) o;
+        this.display();
     }
 }

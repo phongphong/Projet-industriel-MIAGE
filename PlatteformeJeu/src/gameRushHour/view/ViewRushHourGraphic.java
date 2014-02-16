@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gameRushHour.view;
 
 import gameRushHour.model.RushHour;
@@ -11,33 +7,37 @@ import generic.abstractView.AbstractView;
 import java.awt.*;
 import java.util.*;
 /**
- * Cette méthode représente la vue Graphique du jeu RushHour
+ * This method represents the graphical view of rushhour game
  * @author Phongphet
  */
 @SuppressWarnings("serial")
 public class ViewRushHourGraphic extends AbstractView{
 
-    private GamePart partie;
-    
-    public ViewRushHourGraphic(GamePart partie){
-        super();
-        this.partie =  partie;
-        this.setSize(600, 600);
-    }
+    private static final int CELL_SIZE = 50;
+	private static final int GAME_HEIGHT = 600;
+	private static final int GAME_WIDTH = 600;
+	private GamePart part;
     
     /**
-     *
-     * @param g
+     * Constructor of ViewRushHourGraphic
+     * @param part a part of game Rushhour
      */
+    public ViewRushHourGraphic(GamePart part){
+        super();
+        this.part =  part;
+        this.setSize(GAME_WIDTH, GAME_HEIGHT);
+    }
+    
+    
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        char[][] t_case = ((RushHour) partie.getJeu()).getT_case();
+        char[][] t_case = ((RushHour) part.getGame()).getGrid();
         for(int i = 0 ; i < t_case.length ; i++){
             for(int j = 0 ; j < t_case.length ; j++){
                 if(t_case[j][i] == '.'){
                     g.setColor(Color.black);
-                    g.drawRect(i * 50, j * 50, 50, 50);
+                    g.drawRect(i * CELL_SIZE, j * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                 }else{
                     //dessine la voiture rouge
                     if(t_case[j][i] == 'R'){
@@ -46,9 +46,9 @@ public class ViewRushHourGraphic extends AbstractView{
                     //dessine les autres voitures
                         g.setColor(Color.yellow);
                     }
-                    g.fillRect(i * 50, j * 50, 50, 50);
+                    g.fillRect(i * CELL_SIZE, j * CELL_SIZE, CELL_SIZE, CELL_SIZE);
                     g.setColor(Color.black);
-                    g.drawString(String.valueOf(t_case[j][i]), i * 50 + 25, j * 50 + 25);
+                    g.drawString(String.valueOf(t_case[j][i]), i * CELL_SIZE + (CELL_SIZE / 2), j * CELL_SIZE + (CELL_SIZE / 2));
                     
                 }
             }
@@ -57,7 +57,7 @@ public class ViewRushHourGraphic extends AbstractView{
     
     @Override
     public void update(Observable o, Object o1) {
-        partie = ((GamePart) o);
+        part = ((GamePart) o);
         repaint();
     }
 }

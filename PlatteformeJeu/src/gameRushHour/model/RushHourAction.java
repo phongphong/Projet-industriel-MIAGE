@@ -1,45 +1,63 @@
 package gameRushHour.model;
 
 import generic.abstractModel.*;
-
 import java.util.Objects;
 
 /**
- *
+ * This car represents the action that a player can make in Rushhour game
  * @author Phongphet
  */
 public class RushHourAction implements GameAction {
     
-    private Car v;
-    private int deplacement;
+    private Car car;
+    private int move;
 
-    public RushHourAction(Car v, int deplacement) {
+    /**
+     * Constructor of RushHourAction class
+     * @param car
+     * @param moves
+     */
+    public RushHourAction(Car car, int moves) {
         super();
-    	this.v = v;
-        this.deplacement = deplacement;
+    	this.car = car;
+        this.move = moves;
     }
 
-
-    public Car getV() {
-        return v;
+    /**
+     * getter of car
+     * @return car
+     */
+    public Car getCar() {
+        return car;
     }
 
-    public void setV(Car v) {
-        this.v = v;
+    /**
+     * setter of car
+     * @param car
+     */
+    public void setCar(Car car) {
+        this.car = car;
     }
 
-
-    public int getDeplacement() {
-        return deplacement;
+    /**
+     * getter of move
+     * @return
+     */
+    public int getMove() {
+        return move;
     }
 
-    public void setDeplacement(int deplacement) {
-        this.deplacement = deplacement;
+    /**
+     * setter of move
+     * @param move
+     */
+    public void setMove(int move) {
+        this.move = move;
     }
 
     @Override
     public String toString() {
-        return "[" + v.getNum() + ", " + deplacement + ']';
+        return "[" + car.getNumber() + ", " + move + ']';
     }
 
     @Override
@@ -57,28 +75,12 @@ public class RushHourAction implements GameAction {
             return false;
         }
         final RushHourAction other = (RushHourAction) obj;
-        if (!Objects.equals(this.v, other.v)) {
+        if (!Objects.equals(this.car, other.car)) {
             return false;
         }
-        if (this.deplacement != other.deplacement) {
+        if (this.move != other.move) {
             return false;
         }
         return true;
     }
-
-	public Player getJ() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int getX() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	public int getY() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

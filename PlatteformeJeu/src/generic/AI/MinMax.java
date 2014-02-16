@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import gameTictactoe.model.Tictactoe;
 import generic.abstractModel.*;
 
+/**
+ * This class represents the implementation of MinMax algorithm
+ * @author Phongphet
+ *
+ */
 public class MinMax implements AI {
 
 	private static final int MIN_VAL = 1000;
@@ -15,56 +20,58 @@ public class MinMax implements AI {
 
 	}
 	
-	
-	public MinMaxNode lancerMinMax(Game jeu){
-		return minmax(jeu, jeu.getJoueurEnCours());
+	/**
+	 * This method launch the minmax algorithm to the game given in the parameter
+	 * @param game game that we're launching min max algorithm on
+	 * @return MinMax Node which is the best node in min max tree, it contains the best move and best score
+	 */
+	public MinMaxNode launchMinMax(Game game){
+		return minmax(game, game.getCurrentPlayer());
 	}
  
 	/**
-	 * Cette fonction permet de renvoyer le resultat optimal d'application de
-	 * l'algorithme MINMAX à un jeu morpion
-	 * 
-	 * @param jeu jeu en cours
-	 * @return résultat optimal
+	 * This function implements minmax tree and find the best node in the tree
+	 * @param game current game
+	 * @return best move
 	 */
-	private MinMaxNode minmax(Game jeu, Player joueurEnCours) {
+	private MinMaxNode minmax(Game game, Player currentPlayer) {
 
-		int valeur_max = MAX_VAL;
-		int valeur_min = MIN_VAL;
-		MinMaxNode meilleurNoeud = null;
+		int max_value = MAX_VAL;
+		int min_value = MIN_VAL;
+		MinMaxNode bestMove = null;
 
-		double gagne = jeu.calculScore(((Tictactoe) jeu).getJ2());
-		if(gagne != 0){
-			return new MinMaxNode(null, gagne);
+		double win = game.caculateScore(currentPlayer);
+		if(win != 0){
+			return new MinMaxNode(null, win);
 		}
 		
-		ArrayList<GameAction> listeCoupPossible = jeu.listerTousCoupPossible();
-		if (listeCoupPossible.isEmpty()) {
+		ArrayList<GameAction> listAllPossibleAction = game.listAllPossibleAction();
+		if (listAllPossibleAction.isEmpty()) {
 			return new MinMaxNode(null, 0);
 		}
 
-		for (GameAction coupEnCours : listeCoupPossible) {
+		for (GameAction currentMove : listAllPossibleAction) {
 			
-			Game jeuFils = jeu.getCopyDeJeu();
-			jeuFils.jouerUnCoup(coupEnCours);
-			MinMaxNode resultatDeNoeudFils;
+			Game copyOfGame = game.getCopyOfGame();
+			copyOfGame.doAction(currentMove);
+			MinMaxNode childNode;
 			
-			if (jeu.getJoueurEnCours().equals(joueurEnCours)) {
-				resultatDeNoeudFils = minmax(jeuFils, joueurEnCours);
-				if (resultatDeNoeudFils.getGagner() > valeur_max) {
-					valeur_max = (int) resultatDeNoeudFils.getGagner();
-					meilleurNoeud = new MinMaxNode(coupEnCours, valeur_max);
+			if (game.getCurrentPlayer().equals(currentPlayer)) {
+				childNode = minmax(copyOfGame, currentPlayer);
+				if (childNode.getWin() > max_value) {
+					max_value = (int) childNode.getWin();
+					bestMove = new MinMaxNode(currentMove, max_value);
 				}
 			} else {
-				// maximiser le score quand c'est le tour O
-				resultatDeNoeudFils = minmax(jeuFils, joueurEnCours);
-				if (resultatDeNoeudFils.getGagner() < valeur_min) {
-					valeur_min = (int) resultatDeNoeudFils.getGagner();
-					meilleurNoeud = new MinMaxNode(coupEnCours, valeur_min);
+				
+				childNode = minmax(copyOfGame, currentPlayer);
+				if (childNode.getWin() < min_value) {
+					min_value = (int) childNode.getWin();
+					bestMove = new MinMaxNode(currentMove, min_value);
 				}
 			}
 		}
 
-		return meilleurNoeud;
+		return bestMove;
 	}
 }

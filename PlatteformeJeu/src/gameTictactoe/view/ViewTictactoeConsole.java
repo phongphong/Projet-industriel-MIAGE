@@ -3,26 +3,35 @@ package gameTictactoe.view;
 import gameTictactoe.model.Tictactoe;
 import generic.abstractModel.Player;
 
-import java.util.Observable;
-import java.util.Observer;
+import java.util.*;
 
-
-
+/**
+ * This class represents the view of Tictactoe game in console mode
+ * @author Phongphet
+ *
+ */
 public class ViewTictactoeConsole implements Observer{
 
-	private Tictactoe morpion;
+	private Tictactoe tictactoe;
 	
-	public ViewTictactoeConsole(Tictactoe morpion){
-		this.morpion = morpion;
+	/**
+	 * Constructor of ViewTictactoe class
+	 * @param tictactoe
+	 */
+	public ViewTictactoeConsole(Tictactoe tictactoe){
+		this.tictactoe = tictactoe;
 	}
 	
-	public void affiche(){
-		Player[][] t_case = morpion.getT_case();
-		for(int i=0 ; i<t_case.length ; i++){
-			for(int j=0 ; j<t_case.length ; j++){
-				if(t_case[j][i].equals(morpion.getJ1())){
+	/**
+	 * This method display the grid of tic tac toe game in console mode
+	 */
+	public void display(){
+		Player[][] grid = tictactoe.getGrid();
+		for(int i=0 ; i<grid.length ; i++){
+			for(int j=0 ; j<grid.length ; j++){
+				if(grid[j][i].equals(tictactoe.getFirstPlayer())){
 					System.out.print("O" + "	");
-				}else if(t_case[j][i].equals(morpion.getJ2())){
+				}else if(grid[j][i].equals(tictactoe.getSecondPlayer())){
 					System.out.print("X" + "	");
 				}else{
 					System.out.print("." + "	");
@@ -34,7 +43,7 @@ public class ViewTictactoeConsole implements Observer{
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		this.morpion = (Tictactoe)o;
-		this.affiche();
+		this.tictactoe = (Tictactoe)o;
+		this.display();
 	}
 }

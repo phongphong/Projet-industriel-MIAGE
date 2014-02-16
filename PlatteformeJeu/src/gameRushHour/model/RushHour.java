@@ -5,26 +5,28 @@
 package gameRushHour.model;
 
 import generic.abstractModel.*;
-
 import java.util.*;
 
 /**
- * Cette classe représente le modèle du Jeu RushHour
+ * This class represent the Rushhour game model 
  * 
  * @author Phongphet
  */
 public class RushHour extends Game {
 
 	private static final int dimension = 6;
-	char[][] t_case;
-	ArrayList<Car> lVoiture;
+	char[][] grid;
+	ArrayList<Car> listCar;
 
+	/**
+	 * Constructor of Rushhour model
+	 */
 	public RushHour() {
 		// initialisation du tableau de boolean
-		t_case = new char[dimension][dimension];
+		grid = new char[dimension][dimension];
 		for (int i = 0; i < dimension; i++) {
 			for (int j = 0; j < dimension; j++) {
-				t_case[i][j] = '.';
+				grid[i][j] = '.';
 			}
 		}
 
@@ -37,171 +39,183 @@ public class RushHour extends Game {
 		Car v5 = new Car('3', 5, 4, 2, 'h', false);
 
 		// ajout de la voiture dans la liste des voitures
-		lVoiture = new ArrayList<>();
-		lVoiture.add(v1);
-		lVoiture.add(v2);
-		lVoiture.add(v3);
-		lVoiture.add(v4);
-		lVoiture.add(v5);
+		listCar = new ArrayList<>();
+		listCar.add(v1);
+		listCar.add(v2);
+		listCar.add(v3);
+		listCar.add(v4);
+		listCar.add(v5);
 
 		// les cases qui sont occupes sont devenus occupe et contient le numero
 		// du voiture
-		this.setCaseOccupe(v1, v1.getNum());
-		this.setCaseOccupe(v2, v2.getNum());
-		this.setCaseOccupe(v3, v3.getNum());
-		this.setCaseOccupe(v4, v4.getNum());
-		this.setCaseOccupe(v5, v5.getNum());
+		this.setGridCellAvailable(v1, v1.getNumber());
+		this.setGridCellAvailable(v2, v2.getNumber());
+		this.setGridCellAvailable(v3, v3.getNumber());
+		this.setGridCellAvailable(v4, v4.getNumber());
+		this.setGridCellAvailable(v5, v5.getNumber());
 	}
 
 	/**
-	 * Cette méthode applique un coup choisi par l'utilisateur au jeu
-	 * 
-	 * @param c
+	 * This methode applies an given action to the current state of game
+	 * @param action new action
 	 */
 	@Override
-	public void jouerUnCoup(GameAction c) {
+	public void doAction(GameAction action) {
 		// on recupere la voiture en fonction du coup
-		Car v = ((RushHourAction) c).getV();
+		Car v = ((RushHourAction) action).getCar();
 		// les anciens cases qui ont ete occupes par cette voitures sont devenus
 		// disponibles
 		// on recupere la direction de la voiture et mettre a jour les cases de
 		// la voiture
-		this.setCaseOccupe(v, '.');
+		this.setGridCellAvailable(v, '.');
 		if (v.getDirection() == 'h') {
-			v.setCol(v.getCol() + ((RushHourAction) c).getDeplacement());
+			v.setColumn(v.getColumn() + ((RushHourAction) action).getMove());
 		} else {
-			v.setLigne(v.getLigne() + ((RushHourAction) c).getDeplacement());
+			v.setRow(v.getRow() + ((RushHourAction) action).getMove());
 		}
-		this.setCaseOccupe(v, (char) v.getNum());
+		this.setGridCellAvailable(v, (char) v.getNumber());
 	}
 	
 	
 
 	/**
-	 * Cette méthode analyse une situation actuelle du jeu et liste tous les
-	 * coups possibles
-	 * 
-	 * @return
+	 * This method list all actions that a player can make from the current state of game
+	 * @return list of possible actions
 	 */
 	@Override
-	public ArrayList<GameAction> listerTousCoupPossible() {
-		ArrayList<GameAction> listeCoup = new ArrayList<>();
+	public ArrayList<GameAction> listAllPossibleAction() {
+		ArrayList<GameAction> listAction = new ArrayList<>();
 		// pour chaque voiture, on recupere les cases qu'elle peut deplacer en
 		// fonction de sa direction
-		for (int i = 0; i < lVoiture.size(); i++) {
-			Car v = lVoiture.get(i);
-			if (v.getDirection() == 'h') {
+		for (int i = 0; i < listCar.size(); i++) {
+			Car car = listCar.get(i);
+			if (car.getDirection() == 'h') {
 				// on recupere les cases qui sont devant la voiture (les cases
 				// qu'elle peut y aller)
-				for (int j = 0; j < v.getCol(); j++) {
-					if (t_case[v.getLigne()][j] == '.'){
-						listeCoup.add(new RushHourAction(v, j - v.getCol()));
+				for (int j = 0; j < car.getColumn(); j++) {
+					if (grid[car.getRow()][j] == '.'){
+						listAction.add(new RushHourAction(car, j - car.getColumn()));
 					} 
 				}
 				// on recupere les cases qui sont derrieres la voiture (les
 				// cases qu'elle peut y aller)
-				for (int k = v.getCol() + v.getLongeur(); k < dimension; k++) {
-					if (t_case[v.getLigne()][k] == '.'
-							|| t_case[v.getLigne()][k] == v.getNum())
-						listeCoup.add(new RushHourAction(v, k - v.getCol()
-								- v.getLongeur() + 1));
+				for (int k = car.getColumn() + car.getLength(); k < dimension; k++) {
+					if (grid[car.getRow()][k] == '.' || grid[car.getRow()][k] == car.getNumber())
+						listAction.add(new RushHourAction(car, k - car.getColumn() - car.getLength() + 1));
 					else
 						break;
 				}
 			} else {
-				for (int l = 0; l < v.getLigne(); l++) {
-					if (t_case[l][v.getCol()] == '.')
-						listeCoup.add(new RushHourAction(v, l - v.getLigne()));
+				for (int l = 0; l < car.getRow(); l++) {
+					if (grid[l][car.getColumn()] == '.')
+						listAction.add(new RushHourAction(car, l - car.getRow()));
 					else
 						break;
 				}
-				for (int m = v.getLigne() + v.getLongeur(); m < dimension; m++) {
-					if (t_case[m][v.getCol()] == '.'
-							|| t_case[m][v.getCol()] == v.getNum())
-						listeCoup.add(new RushHourAction(v, m - v.getLigne()
-								- v.getLongeur() + 1));
+				for (int m = car.getRow() + car.getLength(); m < dimension; m++) {
+					if (grid[m][car.getColumn()] == '.' || grid[m][car.getColumn()] == car.getNumber())
+						listAction.add(new RushHourAction(car, m - car.getRow() - car.getLength() + 1));
 					else
 						break;
 				}
 			}
 		}
-		return listeCoup;
+		return listAction;
 	}
 
 	/**
-	 * Cette méthode mettre à jour le tableau de caractère en fonction de la
-	 * position de la voiture
+	 * This car update the grid, it set the cell that was occupied by the car available
 	 * 
-	 * @param v
-	 * @param c
+	 * @param car
+	 * @param availableSign Sign '.' which shows that the cell become available
 	 */
-	private void setCaseOccupe(Car v, char c) {
-		if (v.getDirection() == 'v') {
-			for (int i = v.getLigne(); i < v.getLigne() + v.getLongeur(); i++) {
-				t_case[i][v.getCol()] = c;
+	private void setGridCellAvailable(Car car, char availableSign) {
+		if (car.getDirection() == 'v') {
+			for (int i = car.getRow(); i < car.getRow() + car.getLength(); i++) {
+				grid[i][car.getColumn()] = availableSign;
 			}
 		} else {
-			for (int i = v.getCol(); i < v.getCol() + v.getLongeur(); i++) {
-				t_case[v.getLigne()][i] = c;
+			for (int i = car.getColumn(); i < car.getColumn() + car.getLength(); i++) {
+				grid[car.getRow()][i] = availableSign;
 			}
 		}
 	}
 
-	public char[][] getT_case() {
-		return t_case;
+	/**
+	 * Getter of grid
+	 * @return grid
+	 */
+	public char[][] getGrid() {
+		return grid;
 	}
 
+	/**
+	 * Getter of 
+	 * @return
+	 */
 	public static int getDimension() {
 		return dimension;
 	}
 
-	public ArrayList<Car> getlVoiture() {
-		return lVoiture;
+	/**
+	 * Getter of list of car
+	 * @return list of car
+	 */
+	public ArrayList<Car> getlistCar() {
+		return listCar;
+	}
+	
+	/**
+	 * Setter of grid
+	 * @param grid
+	 */
+	public void setGrid(char[][] grid) {
+		this.grid = grid;
+		setChanged();
+		notifyObservers();
+	}
+
+	/**
+	 * Setter of car list
+	 * @param listCar
+	 */
+	public void setListCar(ArrayList<Car> listCar) {
+		this.listCar = listCar;
+		setChanged();
+		notifyObservers();
 	}
 
 	@Override
-	public Game getCopyDeJeu() {
+	public Game getCopyOfGame() {
 		RushHour rh = new RushHour();
-		for(int i = 0 ; i < t_case.length ; i++){
-            for(int j = 0 ; j < t_case.length ; j++){
-            	rh.getT_case()[i][j] = t_case[i][j];
+		for(int i = 0 ; i < grid.length ; i++){
+            for(int j = 0 ; j < grid.length ; j++){
+            	rh.getGrid()[i][j] = grid[i][j];
             }
         }
 		
-		rh.getlVoiture().clear();
-		for(Car v : lVoiture){
-			Car v_temp = new Car(v.getNum(), v.getLigne(), v.getCol(), v.getLongeur(), v.getDirection(), v.isVoitureR());
-			rh.getlVoiture().add(v_temp);
-			rh.setCaseOccupe(v_temp, v_temp.getNum());
+		rh.getlistCar().clear();
+		for(Car car : listCar){
+			Car car_copied = new Car(car.getNumber(), car.getRow(), car.getColumn(), car.getLength(), car.getDirection(), car.isRedcar());
+			rh.getlistCar().add(car_copied);
+			rh.setGridCellAvailable(car_copied, car_copied.getNumber());
 		}
 		
 		
 		return rh;
 	}
 
-	public void setT_case(char[][] t_case) {
-		this.t_case = t_case;
-		setChanged();
-		notifyObservers();
-	}
-
-	public void setlVoiture(ArrayList<Car> lVoiture) {
-		this.lVoiture = lVoiture;
-		setChanged();
-		notifyObservers();
-	}
-
 	/*Il y a qu'un seul joueur dans ce jeu*/
 	@Override
-	public Player getJoueurEnCours() {
+	public Player getCurrentPlayer() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public double calculScore(Player joueur) {
+	public double caculateScore(Player joueur) {
 		// TODO Auto-generated method stub
-		if (t_case[3][dimension - 1] == 'R') {
+		if (grid[3][dimension - 1] == 'R') {
 			return 1;
 		}
 		return -1;

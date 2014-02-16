@@ -2,31 +2,43 @@ package generic.abstractModel;
 
 public class Player {
 
-	private String nom;
+	private String name;
 	
-	public Player(String nom) {
+	/**
+	 * Constructor
+	 * @param name name of player
+	 */
+	public Player(String name) {
 		super();
-		this.nom = nom;
+		this.name = name;
 	}
 
-	public String getNom() {
-		return nom;
+	/**
+	 * Getter of name of player
+	 * @return name
+	 */
+	public String getName() {
+		return name;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	/**
+	 * Setter of name of player
+	 * @return name
+	 */
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	@Override
 	public String toString() {
-		return nom;
+		return name;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -39,10 +51,10 @@ public class Player {
 		if (getClass() != obj.getClass())
 			return false;
 		Player other = (Player) obj;
-		if (nom == null) {
-			if (other.nom != null)
+		if (name == null) {
+			if (other.name != null)
 				return false;
-		} else if (!nom.equals(other.nom))
+		} else if (!name.equals(other.name))
 			return false;
 		return true;
 	}

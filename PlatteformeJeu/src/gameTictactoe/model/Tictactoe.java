@@ -1,182 +1,229 @@
 package gameTictactoe.model;
 
-import gameTictactoe.controller.ControllerTictactoeGraphic;
-import gameTictactoe.view.ViewTictactoeGraphic;
-import generic.abstractController.AbstractControler;
-import generic.abstractModel.GameAction;
-import generic.abstractModel.Game;
-import generic.abstractModel.Player;
-import generic.abstractModel.GamePart;
-import generic.abstractView.AbstractView;
+import generic.abstractModel.*;
 
 import java.util.ArrayList;
 
-
+/**
+ * This class represents the Tic tac toe game model
+ * @author Phongphet
+ *
+ */
 public class Tictactoe extends Game {
 
-	private Player t_case[][];
-	private Player joueurEnCours;
-	private Player j1;
-	private Player j2;
+	private Player grid[][];
+	private Player currentPlayer;
+	private Player firstPlayer;
+	private Player secondPlayer;
 
+	/**
+	 * Constructor of tic tac toe game
+	 */
 	public Tictactoe() {
 
-		t_case = new Player[3][3];
+		grid = new Player[3][3];
 
 		// creation des joueurs
-		j1 = new Player("J1");
-		j2 = new Player("J2");
+		firstPlayer = new Player("J1");
+		secondPlayer = new Player("J2");
 
-		joueurEnCours = j1;
+		currentPlayer = firstPlayer;
 	}
 
+	/**
+	 * This method applies the action given in the method parameter to the current state of the game
+	 */
 	@Override
-	public void jouerUnCoup(GameAction c) {
-		Player joueurEnCours = ((TictactoeAction) c).getJoueur();
-		int x = ((TictactoeAction) c).getX();
-		int y = ((TictactoeAction) c).getY();
-		t_case[x][y] = joueurEnCours;
+	public void doAction(GameAction action) {
+		Player currentPlayer = ((TictactoeAction) action).getPlayer();
+		int column = ((TictactoeAction) action).getColumn();
+		int row = ((TictactoeAction) action).getRow();
+		grid[column][row] = currentPlayer;
 		
-		if (this.calculScore(joueurEnCours) != 1) {
-			this.changerJoueur();
+		if (this.caculateScore(currentPlayer) != 1) {
+			this.switchPlayer();
 		}
 	}
 
+	/**
+	 * This method list all possible action that a player can do
+	 */
 	@Override
-	public ArrayList<GameAction> listerTousCoupPossible() {
-		ArrayList<GameAction> listeCoupPossible = new ArrayList<GameAction>();
-		if (this.calculScore(joueurEnCours) != 1) {
+	public ArrayList<GameAction> listAllPossibleAction() {
+		ArrayList<GameAction> listAllPossibleAction = new ArrayList<GameAction>();
+		if (this.caculateScore(currentPlayer) != 1) {
 			for (int i = 0; i < 3; i++) {
 				for (int j = 0; j < 3; j++) {
-					if (t_case[j][i] == null) {
-						listeCoupPossible.add(new TictactoeAction(joueurEnCours, j, i));
+					if (grid[j][i] == null) {
+						listAllPossibleAction.add(new TictactoeAction(currentPlayer, j, i));
 					}
 				}
 			}
 		}
-		return listeCoupPossible;
+		return listAllPossibleAction;
+	}
+	
+	/**
+	 * Getter of current player
+	 */
+	@Override
+	public Player getCurrentPlayer() {
+		return currentPlayer;
+	}
+	
+	/**
+	 * This method make a copy of the game
+	 */
+	@Override
+	public Game getCopyOfGame() {
+		// TODO Auto-generated method stub
+		Tictactoe copyOfTictactoe = new Tictactoe();
+		copyOfTictactoe.setFirstPlayer(firstPlayer);
+		copyOfTictactoe.setSecondPlayer(secondPlayer);
+		copyOfTictactoe.setTurnPlayer(currentPlayer);
+
+		Player[][] copyOfGrid = new Player[3][3];
+		for (int i = 0; i < copyOfGrid.length; i++) {
+			for (int j = 0; j < copyOfGrid.length; j++) {
+				copyOfGrid[i][j] = grid[i][j];
+			}
+		}
+		copyOfTictactoe.setGrid(copyOfGrid);
+		return copyOfTictactoe;
 	}
 
-	public Player[][] getT_case() {
-		return t_case;
+	/**
+	 * This method tells if the player given in the parameter wins the game or not
+	 * it returns 1 if he wins, -1 if others win and 0 if no one wins
+	 */
+	@Override
+	public double caculateScore(Player player) {
+		// TODO Auto-generated method stub
+		int win = 0;
+		Player winner = null;
+
+		if (grid[0][0] != null  && grid[0][0].equals(grid[0][1]) && grid[0][1].equals(grid[0][2])) {
+			winner = grid[0][0];
+		}
+
+		if (grid[0][0] != null && grid[0][0].equals(grid[1][1]) && grid[1][1].equals(grid[2][2])) {
+			winner = grid[0][0];
+		}
+
+		if (grid[0][0] != null  && grid[0][0].equals(grid[1][0]) && grid[1][0].equals(grid[2][0])) {
+			winner = grid[0][0];
+		}
+
+		if (grid[1][0] != null && grid[1][0].equals(grid[1][1]) && grid[1][1].equals(grid[1][2])) {
+			winner = grid[1][0];
+		}
+		
+		if (grid[2][0] != null  && grid[2][0].equals(grid[2][1]) && grid[2][1].equals(grid[2][2])) {
+			winner = grid[2][0];
+		}
+
+		if (grid[0][1] != null && grid[0][1].equals(grid[1][1]) && grid[1][1].equals(grid[2][1])) {
+			winner = grid[0][1];
+		}
+		
+		if (grid[0][2] != null  && grid[0][2].equals(grid[1][2]) && grid[1][2].equals(grid[2][2])) {
+			winner = grid[0][2];
+		}
+
+		if (grid[2][0] != null && grid[2][0].equals(grid[1][1]) && grid[1][1].equals(grid[0][2])) {
+			winner = grid[2][0];
+		}
+		
+		if(winner != null){
+			if(winner.equals(player)){
+				win = 1;
+			}else{
+				win = -1;
+			}
+		}
+		
+		return win;
+
 	}
 
-	public void changerJoueur() {
-		if (joueurEnCours.equals(j1)) {
-			joueurEnCours = j2;
+	/**
+	 * Getter of grid
+	 * @return grid of tictactoe game
+	 */
+	public Player[][] getGrid() {
+		return grid;
+	}
+
+	/**
+	 * This method switches player
+	 */
+	public void switchPlayer() {
+		if (currentPlayer.equals(firstPlayer)) {
+			currentPlayer = secondPlayer;
 		} else {
-			joueurEnCours = j1;
+			currentPlayer = firstPlayer;
 		}
 	}
 
-	@Override
-	public Player getJoueurEnCours() {
-		return joueurEnCours;
+	/**
+	 * Getter of first player
+	 * @return first player of the game
+	 */
+	public Player getFirstPlayer() {
+		return firstPlayer;
 	}
-
-	public Player getJ1() {
-		return j1;
-	}
-
-	public Player getJ2() {
-		return j2;
-	}
-
-	public void setT_case(Player[][] t_case) {
-		this.t_case = t_case;
+	
+	/**
+	 * Setter of grid
+	 * @param grid
+	 */
+	public void setGrid(Player[][] grid) {
+		this.grid = grid;
 		setChanged();
 		notifyObservers();
 	}
 
-	public void setTourJoueur(Player tourJoueur) {
-		this.joueurEnCours = tourJoueur;
+	/**
+	 * Getter of second player
+	 * @return second player
+ 	 */
+	public Player getSecondPlayer() {
+		return secondPlayer;
 	}
 
-	public void setJ1(Player j1) {
-		this.j1 = j1;
+	/**
+	 * Setter of first player
+	 * @param firstPlayer first player
+	 */
+	public void setFirstPlayer(Player firstPlayer) {
+		this.firstPlayer = firstPlayer;
 	}
 
-	public void setJ2(Player j2) {
-		this.j2 = j2;
+	/**
+	 * Setter of second player
+	 * @param secondPlayer second player
+	 */
+	public void setSecondPlayer(Player secondPlayer) {
+		this.secondPlayer = secondPlayer;
+	}
+	
+	/**
+	 * This methode set the turn of the player
+	 * @param player
+	 */
+	public void setTurnPlayer(Player player) {
+		this.currentPlayer = player;
 	}
 
 	@Override
 	public String toString() {
-		String affiche = "";
-		for (int i = 0; i < t_case.length; i++) {
-			for (int j = 0; j < t_case.length; j++) {
-				affiche += t_case[j][i] + "	";
+		String display = "";
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid.length; j++) {
+				display += grid[j][i] + "	";
 			}
-			affiche += "\n";
+			display += "\n";
 		}
-		return affiche;
-	}
-
-	@Override
-	public Game getCopyDeJeu() {
-		// TODO Auto-generated method stub
-		Tictactoe morpion = new Tictactoe();
-		morpion.setJ1(j1);
-		morpion.setJ2(j2);
-		morpion.setTourJoueur(joueurEnCours);
-
-		Player[][] t_case_bis = new Player[3][3];
-		for (int i = 0; i < t_case_bis.length; i++) {
-			for (int j = 0; j < t_case_bis.length; j++) {
-				t_case_bis[i][j] = t_case[i][j];
-			}
-		}
-		morpion.setT_case(t_case_bis);
-		return morpion;
-	}
-
-	@Override
-	public double calculScore(Player joueur) {
-		// TODO Auto-generated method stub
-		int gagne = 0;
-		Player joueurGagnant = null;
-
-		if (t_case[0][0] != null  && t_case[0][0].equals(t_case[0][1]) && t_case[0][1].equals(t_case[0][2])) {
-			joueurGagnant = t_case[0][0];
-		}
-
-		if (t_case[0][0] != null && t_case[0][0].equals(t_case[1][1]) && t_case[1][1].equals(t_case[2][2])) {
-			joueurGagnant = t_case[0][0];
-		}
-
-		if (t_case[0][0] != null  && t_case[0][0].equals(t_case[1][0]) && t_case[1][0].equals(t_case[2][0])) {
-			joueurGagnant = t_case[0][0];
-		}
-
-		if (t_case[1][0] != null && t_case[1][0].equals(t_case[1][1]) && t_case[1][1].equals(t_case[1][2])) {
-			joueurGagnant = t_case[1][0];
-		}
-		
-		if (t_case[2][0] != null  && t_case[2][0].equals(t_case[2][1]) && t_case[2][1].equals(t_case[2][2])) {
-			joueurGagnant = t_case[2][0];
-		}
-
-		if (t_case[0][1] != null && t_case[0][1].equals(t_case[1][1]) && t_case[1][1].equals(t_case[2][1])) {
-			joueurGagnant = t_case[0][1];
-		}
-		
-		if (t_case[0][2] != null  && t_case[0][2].equals(t_case[1][2]) && t_case[1][2].equals(t_case[2][2])) {
-			joueurGagnant = t_case[0][2];
-		}
-
-		if (t_case[2][0] != null && t_case[2][0].equals(t_case[1][1]) && t_case[1][1].equals(t_case[0][2])) {
-			joueurGagnant = t_case[2][0];
-		}
-		
-		if(joueurGagnant != null){
-			if(joueurGagnant.equals(joueur)){
-				gagne = 1;
-			}else{
-				gagne = -1;
-			}
-		}
-		
-		return gagne;
-
+		return display;
 	}
 }

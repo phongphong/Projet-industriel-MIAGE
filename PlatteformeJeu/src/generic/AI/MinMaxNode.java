@@ -2,29 +2,53 @@ package generic.AI;
 
 import generic.abstractModel.GameAction;
 
+/**
+ * This class represents the node in min max tree implementation
+ */
 public class MinMaxNode {
-	private GameAction coup;
-	private double gagner;
+	private GameAction move;
+	private double win;
 	
-	public MinMaxNode(GameAction coup, double gagner) {
+	/**
+	 * Constructor
+	 * @param move the move of the game
+	 * @param win the score of the move application to the current state of game
+	 */
+	public MinMaxNode(GameAction move, double win) {
 		super();
-		this.coup = coup;
-		this.gagner = gagner;
+		this.move = move;
+		this.win = win;
 	}
 
-	public GameAction getCoup() {
-		return coup;
+	/**
+	 * Getter of move
+	 * @return move
+	 */
+	public GameAction getMove() {
+		return move;
 	}
 
-	public void setCoup(GameAction coup) {
-		this.coup = coup;
+	/**
+	 * Setter of move
+	 * @param move
+	 */
+	public void setCoup(GameAction move) {
+		this.move = move;
 	}
 
-	public double getGagner() {
-		return gagner;
+	/**
+	 * Getter of win
+	 * @return 1 for winning, -1 for loosing and 0 if no one win
+	 */
+	public double getWin() {
+		return win;
 	}
-
-	public void setGagner(double gagner) {
-		this.gagner = gagner;
+	
+	/**
+	 * Setter of win
+	 * @param win
+	 */
+	public void setWin(double win) {
+		this.win = win;
 	}
 }

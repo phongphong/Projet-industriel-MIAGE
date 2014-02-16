@@ -8,8 +8,18 @@ import java.awt.Dimension;
 import java.util.Observable;
 import java.util.Observer;
 
+/**
+ * This class represents the view of hypertree
+ * @author Phongphet
+ *
+ */
+@SuppressWarnings("serial")
 public class HypertreeView extends SwingHTView implements Observer {
 	
+	/**
+	 * Constructor that create hypertree
+	 * @param model Hypertree model
+	 */
 	public HypertreeView(HTModel model){
 		super(model);
 		this.setSize(new Dimension(600, 600));
@@ -19,10 +29,10 @@ public class HypertreeView extends SwingHTView implements Observer {
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		GamePart p = (GamePart) o;
-		HypertreeNode root = p.getRacineHypertree();
+		HypertreeNode root = p.getRootHypertree();
 		HTModel model = new HTModel(root);	
 		this.refesh(model);
-		this.translateToOrigin(p.getNoeudACentrer());
+		this.translateToOrigin(p.getNodeToCenter());
 		this.repaint();
 	}
 }

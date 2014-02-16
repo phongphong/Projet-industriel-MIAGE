@@ -1,77 +1,120 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package gameRushHour.model;
 
 /**
- *
+ * This class represents a car in Rushhour game
  * @author Phongphet
  */
 public class Car {
     
-    private char num;
-    private int ligne;
-    private int col;
-    private int longeur;
+    private char number;
+    private int row;
+    private int column;
+    private int length;
     private char direction;
-    private boolean voitureR;
+    private boolean redCar;
 
-    public Car(char num, int ligne, int col, int longeur, char direction, boolean voitureR) {
-        this.num = num;
-        this.ligne = ligne;
-        this.col = col;
-        this.longeur = longeur;
+    /**
+     * Car constructor
+     * @param number car's number
+     * @param rows position of a car in the game(row)
+     * @param column position of a car in the game(column)
+     * @param lenght lenght of car
+     * @param direction direction of car
+     * @param redCar tell if this is a car that a player should move ot exist
+     */
+    public Car(char number, int rows, int column, int lenght, char direction, boolean redCar) {
+        this.number = number;
+        this.row = rows;
+        this.column = column;
+        this.length = lenght;
         this.direction = direction;
-        this.voitureR = voitureR;
+        this.redCar = redCar;
     }
     
+    /**
+     * Car constructor (Use of equals methode)
+     * @param num
+     */
     public Car(char num){
-        this.num = num;
+        this.number = num;
     }
 
-    public char getNum() {
-        return num;
+    /**
+     * get the car number
+     * @return number of car
+     */
+    public char getNumber() {
+        return number;
+    }
+    
+    /**
+     * get the position (column) of the car
+     * @return column
+     */
+    public int getColumn() {
+        return column;
+    }
+    
+    /**
+     * set the position (column) of the car
+     * @param new column
+     */
+    public void setColumn(int column) {
+        this.column = column;
     }
 
-    public void setNum(char num) {
-        this.num = num;
+    /**
+     * get the position (row) of the car
+     * @return row
+     */
+    public int getRow() {
+        return row;
     }
 
-    public int getCol() {
-        return col;
+    /**
+     * set the position (row) of the car
+     * @param number new row
+     */
+    public void setRow(int number) {
+        this.row = number;
     }
 
-    public void setCol(int col) {
-        this.col = col;
+    /**
+     * get the car lenght
+     * @return lenght
+     */
+    public int getLength() {
+        return length;
     }
 
-    public int getLigne() {
-        return ligne;
-    }
-
-    public void setLigne(int ligne) {
-        this.ligne = ligne;
-    }
-
-    public int getLongeur() {
-        return longeur;
-    }
-
+    /**
+     * get the direction of the car
+     * @return direction
+     */
     public char getDirection() {
         return direction;
     }
 
-    public boolean isVoitureR() {
-        return voitureR;
+    /**
+     * This method tells if this car should be existed
+     * @return true or false
+     */
+    public boolean isRedcar() {
+        return redCar;
     }
 
+    /**
+     * Hashcode method
+     */
     @Override
     public int hashCode() {
         int hash = 7;
         return hash;
     }
 
+    /**
+     * Equals method
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -81,14 +124,17 @@ public class Car {
             return false;
         }
         final Car other = (Car) obj;
-        if (this.num != other.num) {
+        if (this.number != other.number) {
             return false;
         }
         return true;
     }
 
+    /**
+     * ToString method
+     */
     @Override
     public String toString() {
-        return "Voiture{" + "num=" + num + ", ligne=" + ligne + ", col=" + col + ", longeur=" + longeur + ", direction=" + direction + ", voitureR=" + voitureR + '}';
+        return "Voiture{" + "num=" + number + ", ligne=" + row + ", col=" + column + ", longeur=" + length + ", direction=" + direction + ", voitureR=" + redCar + '}';
     }
 }

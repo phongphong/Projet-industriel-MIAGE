@@ -1,46 +1,66 @@
 package gameTictactoe.model;
 import generic.abstractModel.*;
 
+/**
+ * This class represents the tictactoe action, this action contains a player and his sign placement in the grid
+ * @author Phongphet
+ *
+ */
 public class TictactoeAction implements GameAction {
 
-	private Player joueur;
-	private int x;
-	private int y;
+	private Player player;
+	private int column;
+	private int row;
 	
-	public TictactoeAction(Player j, int x, int y){
+	/**
+	 * Constructor of TictactoeAction  class
+	 * @param player current player
+	 * @param column the column in the grid where he places his sign
+	 * @param row the row in the grid where he places his sign
+	 */
+	public TictactoeAction(Player player, int column, int row){
 		super();
-		this.joueur = j;
-		this.x = x;
-		this.y = y;
+		this.player = player;
+		this.column = column;
+		this.row = row;
 	}
 	
-
-	public Player getJoueur() {
-		return joueur;
+	/**
+	 * Getter of player
+	 * @return
+	 */
+	public Player getPlayer() {
+		return player;
 	}
 
-
-	public int getX() {
-		return x;
+	/**
+	 * Getter of column
+	 * @return column
+	 */
+	public int getColumn() {
+		return column;
 	}
 
-
-	public int getY() {
-		return y;
+	/**
+	 * Getter of row
+	 * @return row
+	 */
+	public int getRow() {
+		return row;
 	}
 
 	@Override
 	public String toString() {
-		return "[" + joueur + "," + x + "," + y + "]";
+		return "[" + player + "," + column + "," + row + "]";
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((joueur == null) ? 0 : joueur.hashCode());
-		result = prime * result + x;
-		result = prime * result + y;
+		result = prime * result + ((player == null) ? 0 : player.hashCode());
+		result = prime * result + column;
+		result = prime * result + row;
 		return result;
 	}
 
@@ -53,17 +73,15 @@ public class TictactoeAction implements GameAction {
 		if (getClass() != obj.getClass())
 			return false;
 		TictactoeAction other = (TictactoeAction) obj;
-		if (joueur == null) {
-			if (other.joueur != null)
+		if (player == null) {
+			if (other.player != null)
 				return false;
-		} else if (!joueur.equals(other.joueur))
+		} else if (!player.equals(other.player))
 			return false;
-		if (x != other.x)
+		if (column != other.column)
 			return false;
-		if (y != other.y)
+		if (row != other.row)
 			return false;
 		return true;
 	}
-	
-	
 }

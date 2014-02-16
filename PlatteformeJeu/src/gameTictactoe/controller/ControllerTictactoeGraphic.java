@@ -1,26 +1,30 @@
 package gameTictactoe.controller;
 
 
-import gameTictactoe.model.Tictactoe;
-import gameTictactoe.model.TictactoeAction;
-import generic.AI.MinMax;
-import generic.AI.MinMaxNode;
+import gameTictactoe.model.*;
+import gameTictactoe.view.ViewTictactoeGraphic;
+import generic.AI.*;
 import generic.abstractController.AbstractControler;
-import generic.abstractModel.GameAction;
-import generic.abstractModel.Player;
-import generic.abstractModel.GamePart;
+import generic.abstractModel.*;
 
 import java.awt.event.MouseEvent;
 
-
-
+/**
+ * This class represents the controller of tictactoe game in graphical mode
+ * @author Phongphet
+ *
+ */
 public class ControllerTictactoeGraphic extends AbstractControler {
 
-	private GamePart partie;
+	private GamePart gamePart;
 	private MinMax minimax;
 	
-	public ControllerTictactoeGraphic(GamePart partie) {
-		this.partie = partie;
+	/**
+	 * Constructor of the controller of tic tac toe game
+	 * @param gamePart part of a tic tac toe game
+	 */
+	public ControllerTictactoeGraphic(GamePart gamePart) {
+		this.gamePart = gamePart;
 		minimax = new MinMax();
 	}
 
@@ -43,14 +47,15 @@ public class ControllerTictactoeGraphic extends AbstractControler {
 		int x = e.getX() / 50;
 		int y = e.getY() / 50;
 		
-		Tictactoe morpion = (Tictactoe) partie.getJeu(); 
-		Player joueurEnCours = morpion.getJoueurEnCours();
-		GameAction coupJoueur = new TictactoeAction(joueurEnCours, x, y);
-		partie.jouerUnCoup(coupJoueur);
-		if(morpion.getJoueurEnCours().equals(morpion.getJ2())){
-			MinMaxNode noeudMinMax = minimax.lancerMinMax(partie.getJeu().getCopyDeJeu());
-			GameAction meilleurCoup = noeudMinMax.getCoup();
-			System.out.println("Meilleur coup : "+meilleurCoup);
+		Tictactoe tictactoe = (Tictactoe) gamePart.getGame(); 
+		Player currentPlayer = tictactoe.getCurrentPlayer();
+		GameAction action = new TictactoeAction(currentPlayer, x, y);
+		gamePart.doAction(action);
+		if(tictactoe.getCurrentPlayer().equals(tictactoe.getSecondPlayer())){
+			MinMaxNode minmaxNode = minimax.launchMinMax(gamePart.getGame().getCopyOfGame());
+			GameAction bestMove = minmaxNode.getMove();
+			System.out.println("Best move : "+bestMove);
+			//gamePart.doAction(bestMove);
 		}
 		
 	}

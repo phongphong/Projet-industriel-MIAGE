@@ -29,8 +29,8 @@ public class TestMinMaxMorpion {
 		jeu = new Tictactoe();
 		partie = new GamePart(jeu);
 		minimax = new MinMax();
-		j1 = ((Tictactoe) jeu).getJ1();
-		j2 = ((Tictactoe) jeu).getJ2();
+		j1 = ((Tictactoe) jeu).getFirstPlayer();
+		j2 = ((Tictactoe) jeu).getSecondPlayer();
 	}
 	
 	/*
@@ -49,17 +49,17 @@ public class TestMinMaxMorpion {
 		GameAction c4 = new TictactoeAction(j2, 1, 1);
 		GameAction c5 = new TictactoeAction(j1, 0, 2);
 		
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c1);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c2);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c3);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c4);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c5);
-		int gagne = (int) jeu.calculScore(((Tictactoe) jeu).getJ2());
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c1);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c2);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c3);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c4);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c5);
+		int gagne = (int) jeu.caculateScore(((Tictactoe) jeu).getSecondPlayer());
 		assertEquals(-1, gagne);
 	}
 	
@@ -80,19 +80,19 @@ public class TestMinMaxMorpion {
 		GameAction c5 = new TictactoeAction(j1, 0, 2);
 		GameAction c6 = new TictactoeAction(j2, 1, 2);
 		
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c1);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c2);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c3);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c4);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c5);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c6);
-		int gagne = (int) jeu.calculScore(((Tictactoe) jeu).getJ2());
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c1);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c2);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c3);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c4);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c5);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c6);
+		int gagne = (int) jeu.caculateScore(((Tictactoe) jeu).getSecondPlayer());
 		assertEquals(1, gagne);
 	}
 	
@@ -112,17 +112,17 @@ public class TestMinMaxMorpion {
 		GameAction c4 = new TictactoeAction(j2, 1, 1);
 		GameAction c5 = new TictactoeAction(j1, 2, 2);
 		
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c1);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c2);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c3);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c4);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c5);
-		int gagne = (int) minimax.lancerMinMax(jeu).getGagner();
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c1);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c2);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c3);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c4);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c5);
+		int gagne = (int) minimax.launchMinMax(jeu).getWin();
 		assertEquals(1, gagne);
 	}
 	
@@ -140,14 +140,14 @@ public class TestMinMaxMorpion {
 		GameAction c2 = new TictactoeAction(j2, 1, 0);
 		GameAction c3 = new TictactoeAction(j1, 0, 1);
 		
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c1);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c2);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c3);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c1);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c2);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c3);
 
-		int gagne = (int) minimax.lancerMinMax(jeu).getGagner();
+		int gagne = (int) minimax.launchMinMax(jeu).getWin();
 		assertEquals(-1, gagne);
 	}
 
@@ -165,14 +165,14 @@ public class TestMinMaxMorpion {
 		GameAction c2 = new TictactoeAction(j2, 0, 1);
 		GameAction c3 = new TictactoeAction(j1, 1, 0);
 		
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c1);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c2);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c3);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c1);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c2);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c3);
 
-		int gagne = (int) minimax.lancerMinMax(jeu).getGagner();
+		int gagne = (int) minimax.launchMinMax(jeu).getWin();
 		assertEquals(-1, gagne);
 	}
 	
@@ -192,23 +192,23 @@ public class TestMinMaxMorpion {
 		GameAction c4 = new TictactoeAction(j2, 2, 1);
 		GameAction c5 = new TictactoeAction(j1, 2, 0);
 		
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c1);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c2);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c3);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c4);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c5);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c1);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c2);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c3);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c4);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c5);
 
 		
-		MinMaxNode noeud = minimax.lancerMinMax(jeu);
+		MinMaxNode noeud = minimax.launchMinMax(jeu);
 
-		GameAction coupEspere = new TictactoeAction(((Tictactoe) jeu).getJ2(), 1, 0);
-		assertEquals(coupEspere, noeud.getCoup());
-		assertEquals(1, (int)noeud.getGagner());
+		GameAction coupEspere = new TictactoeAction(((Tictactoe) jeu).getSecondPlayer(), 1, 0);
+		assertEquals(coupEspere, noeud.getMove());
+		assertEquals(1, (int)noeud.getWin());
 	}
 	
 	/*
@@ -225,18 +225,18 @@ public class TestMinMaxMorpion {
 		GameAction c2 = new TictactoeAction(j2, 1, 1);
 		GameAction c3 = new TictactoeAction(j1, 2, 2);
 		
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c1);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c2);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c3);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c1);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c2);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c3);
 
-		MinMaxNode noeud = minimax.lancerMinMax(jeu);
+		MinMaxNode noeud = minimax.launchMinMax(jeu);
 
-		GameAction coupEspere = new TictactoeAction(((Tictactoe) jeu).getJ2(), 1, 0);
-		assertEquals(coupEspere, noeud.getCoup());
-		assertEquals(0, (int) noeud.getGagner());
+		GameAction coupEspere = new TictactoeAction(((Tictactoe) jeu).getSecondPlayer(), 1, 0);
+		assertEquals(coupEspere, noeud.getMove());
+		assertEquals(0, (int) noeud.getWin());
 	}
 	
 	/*
@@ -251,14 +251,14 @@ public class TestMinMaxMorpion {
 		
 		GameAction c1 = new TictactoeAction(j1, 0, 0);
 		
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c1);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c1);
 
-		MinMaxNode noeud = minimax.lancerMinMax(jeu);
+		MinMaxNode noeud = minimax.launchMinMax(jeu);
 
-		GameAction coupEspere = new TictactoeAction(((Tictactoe) jeu).getJ2(), 1, 1);
-		assertEquals(coupEspere, noeud.getCoup());
-		assertEquals(0, (int)noeud.getGagner());
+		GameAction coupEspere = new TictactoeAction(((Tictactoe) jeu).getSecondPlayer(), 1, 1);
+		assertEquals(coupEspere, noeud.getMove());
+		assertEquals(0, (int)noeud.getWin());
 	}
 	
 	/*
@@ -273,14 +273,14 @@ public class TestMinMaxMorpion {
 		
 		GameAction c1 = new TictactoeAction(j1, 0, 0);
 		
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c1);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c1);
 
-		MinMaxNode noeud = minimax.lancerMinMax(jeu);
+		MinMaxNode noeud = minimax.launchMinMax(jeu);
 
-		GameAction coupEspere = new TictactoeAction(((Tictactoe) jeu).getJ2(), 1, 1);
-		assertEquals(coupEspere, noeud.getCoup());
-		assertEquals(0, (int)noeud.getGagner());
+		GameAction coupEspere = new TictactoeAction(((Tictactoe) jeu).getSecondPlayer(), 1, 1);
+		assertEquals(coupEspere, noeud.getMove());
+		assertEquals(0, (int)noeud.getWin());
 	}
 	
 	/*
@@ -299,19 +299,19 @@ public class TestMinMaxMorpion {
 		GameAction c4 = new TictactoeAction(j2, 0, 1);
 		GameAction c5 = new TictactoeAction(j1, 1, 1);
 		
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c1);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c2);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c3);
-		((Tictactoe) jeu).setTourJoueur(j2);
-		partie.jouerUnCoup(c4);
-		((Tictactoe) jeu).setTourJoueur(j1);
-		partie.jouerUnCoup(c5);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c1);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c2);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c3);
+		((Tictactoe) jeu).setTurnPlayer(j2);
+		partie.doAction(c4);
+		((Tictactoe) jeu).setTurnPlayer(j1);
+		partie.doAction(c5);
 
-		MinMaxNode noeud = minimax.lancerMinMax(jeu);
+		MinMaxNode noeud = minimax.launchMinMax(jeu);
 
-		assertEquals(-1, (int)noeud.getGagner());
+		assertEquals(-1, (int)noeud.getWin());
 	}
 }
