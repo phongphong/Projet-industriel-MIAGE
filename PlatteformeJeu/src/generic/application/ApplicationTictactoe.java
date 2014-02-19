@@ -4,12 +4,9 @@ import gameTictactoe.controller.ControllerTictactoeGraphic;
 import gameTictactoe.model.Tictactoe;
 import gameTictactoe.view.ViewTictactoeGraphic;
 import generic.abstractController.AbstractControler;
-import generic.abstractModel.Game;
-import generic.abstractModel.GameSession;
+import generic.abstractModel.*;
 import generic.abstractView.AbstractView;
-import generic.hypertree.HypertreeNode;
-import generic.hypertree.HypertreeNodeController;
-import generic.hypertree.HypertreeView;
+import generic.hypertree.*;
 import hypertree.HTModel;
 
 public class ApplicationTictactoe extends Application{
