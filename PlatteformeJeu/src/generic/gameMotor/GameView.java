@@ -1,9 +1,10 @@
 package generic.gameMotor;
 
+import generic.application.Application;
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Label;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,14 +64,14 @@ public class GameView extends JFrame {
 			gameSubMenu.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
-					factory.createGame(gameName);
+					Application applicationGame = factory.createGame(gameName);
 				
 					gamePanel.removeAll();
-					gamePanel.add(factory.getViewGame());
+					gamePanel.add(applicationGame.getViewGame());
 					
 					treePanel.removeAll();
 					treePanel.setLayout(new BorderLayout());
-					treePanel.add(factory.getViewTree(), BorderLayout.CENTER);
+					treePanel.add(applicationGame.getViewHypertree(), BorderLayout.CENTER);
 					
 					panel.repaint();	
 				}

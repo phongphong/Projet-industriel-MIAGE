@@ -1,6 +1,6 @@
 package generic.hypertree;
 
-import generic.abstractModel.GamePart;
+import generic.abstractModel.GameSession;
 import hypertree.SwingHTView;
 
 import java.awt.Color;
@@ -15,14 +15,14 @@ import java.awt.event.MouseListener;
 public class HypertreeNodeController implements MouseListener {
 
 	private SwingHTView view;
-	private GamePart gamePart;
+	private GameSession gamePart;
 
 	/**
 	 * Constructor that create HypetreeController
 	 * @param view current view of the tree
 	 * @param gamePart part of the game
 	 */
-	public HypertreeNodeController(SwingHTView view, GamePart gamePart) {
+	public HypertreeNodeController(SwingHTView view, GameSession gamePart) {
 		this.view = view;
 		this.gamePart = gamePart;
 	}

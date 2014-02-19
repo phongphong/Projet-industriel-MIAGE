@@ -9,7 +9,7 @@ import java.util.Observable;
  * @author Phongphet
  *
  */
-public class GamePart extends Observable {
+public class GameSession extends Observable {
 
 	private Game game;
 	private HypertreeNode rootHypertree;
@@ -20,7 +20,7 @@ public class GamePart extends Observable {
 	 * Constructor
 	 * @param game selected game
 	 */
-	public GamePart(Game game) {
+	public GameSession(Game game) {
 		this.game = game;
 		rootHypertree = new HypertreeNode(game.getCopyOfGame());
 		currentNode = rootHypertree;

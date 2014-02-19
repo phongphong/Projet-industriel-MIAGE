@@ -14,13 +14,13 @@ public class ViewTictactoeGraphic extends AbstractView {
 	private static final int GAME_HEIGHT = 200;
 	private static final int GAME_WIDTH = 200;
 	private static final int CELL_SIZE = 50;
-	private GamePart part;
+	private GameSession part;
 
 	/**
 	 * Constructor of ViewTictactoeGraphic class
 	 * @param part part of tic tac toe game
 	 */
-	public ViewTictactoeGraphic(GamePart part) {
+	public ViewTictactoeGraphic(GameSession part) {
 		super();
 		this.part = part;
 		this.setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -50,7 +50,7 @@ public class ViewTictactoeGraphic extends AbstractView {
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		this.part = ((GamePart) arg0);
+		this.part = ((GameSession) arg0);
 		repaint();
 	}
 }

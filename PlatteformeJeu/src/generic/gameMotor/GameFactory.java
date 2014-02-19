@@ -6,12 +6,15 @@ import gameRushHour.view.ViewRushHourGraphic;
 import gameTictactoe.controller.ControllerTictactoeGraphic;
 import gameTictactoe.model.Tictactoe;
 import gameTictactoe.view.ViewTictactoeGraphic;
-import generic.abstractController.*;
+import generic.abstractController.AbstractControler;
 import generic.abstractModel.Game;
-import generic.abstractModel.GamePart;
+import generic.abstractModel.GameSession;
 import generic.abstractView.AbstractView;
-import generic.hypertree.HypertreeNodeController;
+import generic.application.Application;
+import generic.application.ApplicationRushhour;
+import generic.application.ApplicationTictactoe;
 import generic.hypertree.HypertreeNode;
+import generic.hypertree.HypertreeNodeController;
 import generic.hypertree.HypertreeView;
 import hypertree.HTModel;
 
@@ -42,29 +45,19 @@ public class GameFactory {
      * This method create a game that a player select
      * @param name of the game selected by a player
      */
-    public void createGame(String gameName){
-    	Game game = null;
-    	GamePart partOfGame = null;
-    	AbstractControler control = null;
+    public Application createGame(String gameName){
+    	Application applicationGame = null;
     	
         switch(gameName){
             case "morpion":
-            	game = new Tictactoe();
-            	partOfGame = new GamePart(game);
-            	viewGame = new ViewTictactoeGraphic(partOfGame);
-            	control = new ControllerTictactoeGraphic(partOfGame);
+            	applicationGame = new ApplicationTictactoe();
                 break;
                 
             case "rushhour":
-                game = new RushHour();
-                partOfGame = new GamePart(game);
-                viewGame = new ViewRushHourGraphic(partOfGame);
-                control = new ControllerRushHourGraphic(partOfGame);
+            	applicationGame = new ApplicationRushhour();
                 break;
         }
-		
-		createCurrentGame(partOfGame, control);
-		createTree(partOfGame);
+        return applicationGame;
     }
 
     /**
@@ -72,7 +65,7 @@ public class GameFactory {
      * @param part part of game
      * @param control game controller
      */
-	private void createCurrentGame(GamePart part, AbstractControler control) {
+	private void createCurrentGame(GameSession part, AbstractControler control) {
 		part.addObserver(viewGame);
 		viewGame.addMouseListener(control);
 		viewGame.addMouseMotionListener(control);
@@ -82,7 +75,7 @@ public class GameFactory {
 	 * This method create a hypertree that relates to the game
 	 * @param part part of game
 	 */
-	private void createTree(GamePart part) {
+	private void createTree(GameSession part) {
 		HypertreeNode root = part.getRootHypertree();
 		HTModel model = new HTModel(root);
 		treeView = new HypertreeView(model);

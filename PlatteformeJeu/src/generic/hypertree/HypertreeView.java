@@ -1,6 +1,6 @@
 package generic.hypertree;
 
-import generic.abstractModel.GamePart;
+import generic.abstractModel.GameSession;
 import hypertree.HTModel;
 import hypertree.SwingHTView;
 
@@ -28,7 +28,7 @@ public class HypertreeView extends SwingHTView implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		GamePart p = (GamePart) o;
+		GameSession p = (GameSession) o;
 		HypertreeNode root = p.getRootHypertree();
 		HTModel model = new HTModel(root);	
 		this.refesh(model);

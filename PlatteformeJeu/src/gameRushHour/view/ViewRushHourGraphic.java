@@ -1,7 +1,7 @@
 package gameRushHour.view;
 
 import gameRushHour.model.RushHour;
-import generic.abstractModel.GamePart;
+import generic.abstractModel.GameSession;
 import generic.abstractView.AbstractView;
 
 import java.awt.*;
@@ -16,13 +16,13 @@ public class ViewRushHourGraphic extends AbstractView{
     private static final int CELL_SIZE = 50;
 	private static final int GAME_HEIGHT = 600;
 	private static final int GAME_WIDTH = 600;
-	private GamePart part;
+	private GameSession part;
     
     /**
      * Constructor of ViewRushHourGraphic
      * @param part a part of game Rushhour
      */
-    public ViewRushHourGraphic(GamePart part){
+    public ViewRushHourGraphic(GameSession part){
         super();
         this.part =  part;
         this.setSize(GAME_WIDTH, GAME_HEIGHT);
@@ -57,7 +57,7 @@ public class ViewRushHourGraphic extends AbstractView{
     
     @Override
     public void update(Observable o, Object o1) {
-        part = ((GamePart) o);
+        part = ((GameSession) o);
         repaint();
     }
 }

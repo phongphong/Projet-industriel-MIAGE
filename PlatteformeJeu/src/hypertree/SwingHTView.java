@@ -26,7 +26,7 @@
 
 package hypertree;
 
-import generic.abstractModel.GamePart;
+import generic.abstractModel.GameSession;
 import generic.hypertree.HypertreeNode;
 
 import java.awt.*;

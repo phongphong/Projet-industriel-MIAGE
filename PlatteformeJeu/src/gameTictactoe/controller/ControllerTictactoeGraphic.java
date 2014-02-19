@@ -16,15 +16,15 @@ import java.awt.event.MouseEvent;
  */
 public class ControllerTictactoeGraphic extends AbstractControler {
 
-	private GamePart gamePart;
+	private GameSession gameSession;
 	private MinMax minimax;
 	
 	/**
 	 * Constructor of the controller of tic tac toe game
-	 * @param gamePart part of a tic tac toe game
+	 * @param gameSession part of a tic tac toe game
 	 */
-	public ControllerTictactoeGraphic(GamePart gamePart) {
-		this.gamePart = gamePart;
+	public ControllerTictactoeGraphic(GameSession gameSession) {
+		this.gameSession = gameSession;
 		minimax = new MinMax();
 	}
 
@@ -47,15 +47,15 @@ public class ControllerTictactoeGraphic extends AbstractControler {
 		int x = e.getX() / 50;
 		int y = e.getY() / 50;
 		
-		Tictactoe tictactoe = (Tictactoe) gamePart.getGame(); 
+		Tictactoe tictactoe = (Tictactoe) gameSession.getGame(); 
 		Player currentPlayer = tictactoe.getCurrentPlayer();
 		GameAction action = new TictactoeAction(currentPlayer, x, y);
-		gamePart.doAction(action);
+		gameSession.doAction(action);
 		if(tictactoe.getCurrentPlayer().equals(tictactoe.getSecondPlayer())){
-			MinMaxNode minmaxNode = minimax.launchMinMax(gamePart.getGame().getCopyOfGame());
+			MinMaxNode minmaxNode = minimax.launchMinMax(gameSession.getGame().getCopyOfGame());
 			GameAction bestMove = minmaxNode.getMove();
 			System.out.println("Best move : "+bestMove);
-			gamePart.doAction(bestMove);
+			gameSession.doAction(bestMove);
 		}
 		
 	}

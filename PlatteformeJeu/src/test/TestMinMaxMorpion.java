@@ -8,7 +8,7 @@ import generic.AI.MinMaxNode;
 import generic.abstractModel.GameAction;
 import generic.abstractModel.Game;
 import generic.abstractModel.Player;
-import generic.abstractModel.GamePart;
+import generic.abstractModel.GameSession;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -18,7 +18,7 @@ import org.junit.Test;
 public class TestMinMaxMorpion {
 	
 
-	private static GamePart partie;
+	private static GameSession partie;
 	private static Game jeu;
 	private static MinMax minimax;
 	private static Player j1;
@@ -27,7 +27,7 @@ public class TestMinMaxMorpion {
 	@BeforeClass
 	public static void setUp(){
 		jeu = new Tictactoe();
-		partie = new GamePart(jeu);
+		partie = new GameSession(jeu);
 		minimax = new MinMax();
 		j1 = ((Tictactoe) jeu).getFirstPlayer();
 		j2 = ((Tictactoe) jeu).getSecondPlayer();
