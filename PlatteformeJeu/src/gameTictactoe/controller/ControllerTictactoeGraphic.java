@@ -55,7 +55,7 @@ public class ControllerTictactoeGraphic extends AbstractControler {
 			MinMaxNode minmaxNode = minimax.launchMinMax(gamePart.getGame().getCopyOfGame());
 			GameAction bestMove = minmaxNode.getMove();
 			System.out.println("Best move : "+bestMove);
-			//gamePart.doAction(bestMove);
+			gamePart.doAction(bestMove);
 		}
 		
 	}

@@ -78,7 +78,7 @@ public class ControllerRushHourGraphic extends AbstractControler {
 					moves = row - selectedCar.getRow();
 				}
 				// On cree ce coup
-				RushHourAction c = new RushHourAction(selectedCar, moves);
+				RushHourAction c = new RushHourAction(selectedCar.getNumber(), moves);
 				part.doAction(c);
 			}
 		}

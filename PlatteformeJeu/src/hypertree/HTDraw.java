@@ -176,7 +176,7 @@ public class HTDraw {
      * @param node    the given HTDrawNode
      */
     void translateToOrigin(HTDrawNode node) {
-        view.stopMouseListening();
+        //view.stopMouseListening();
         AnimThread t = new AnimThread(node);
         t.start();
     }
@@ -341,7 +341,7 @@ public class HTDraw {
                 translate(zStart, zEnd);
                 endTranslation();
 			    view.repaint();
-			    view.startMouseListening();
+			    //view.startMouseListening();
             }        
         }
 

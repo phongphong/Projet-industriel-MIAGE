@@ -15,7 +15,7 @@ import java.util.Observer;
  */
 @SuppressWarnings("serial")
 public class HypertreeView extends SwingHTView implements Observer {
-	
+	private static int nb;
 	/**
 	 * Constructor that create hypertree
 	 * @param model Hypertree model

@@ -1,10 +1,12 @@
 package gameRushHour.model;
 
+import java.io.Serializable;
+
 /**
  * This class represents a car in Rushhour game
  * @author Phongphet
  */
-public class Car {
+public class Car implements Serializable {
     
     private char number;
     private int row;
@@ -103,34 +105,29 @@ public class Car {
         return redCar;
     }
 
-    /**
-     * Hashcode method
-     */
     @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
-    }
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + number;
+		return result;
+	}
 
-    /**
-     * Equals method
-     */
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Car other = (Car) obj;
-        if (this.number != other.number) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Car other = (Car) obj;
+		if (number != other.number)
+			return false;
+		return true;
+	}
 
-    /**
+	/**
      * ToString method
      */
     @Override

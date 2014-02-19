@@ -49,6 +49,7 @@ public class SwingHTView
 
     extends JPanel implements HTView {
 
+	static int nb=0;
 
     private HTModel    model  = null; // the tree model represented
     private HTDraw     draw   = null; // the drawing model
@@ -168,7 +169,8 @@ public class SwingHTView
      * Starts the listening of mouse events.
      */
     public void startMouseListening() {
-        this.addMouseListener(action);
+       System.out.println("IN : " + (nb++));
+    	this.addMouseListener(action);
         this.addMouseMotionListener(action);
     }
 
@@ -186,7 +188,8 @@ public class SwingHTView
     
     /*method add by Phongphet*/
     public void refesh(HTModel model){
-        this.model = model; 
+    	stopMouseListening();
+    	this.model = model; 
         draw = new HTDraw(model, this);
         action = new HTAction(draw);
         startMouseListening();

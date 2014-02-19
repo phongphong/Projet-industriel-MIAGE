@@ -5,82 +5,89 @@ import java.util.Objects;
 
 /**
  * This car represents the action that a player can make in Rushhour game
+ * 
  * @author Phongphet
  */
 public class RushHourAction implements GameAction {
-    
-    private Car car;
-    private int move;
 
-    /**
-     * Constructor of RushHourAction class
-     * @param car
-     * @param moves
-     */
-    public RushHourAction(Car car, int moves) {
-        super();
-    	this.car = car;
-        this.move = moves;
-    }
+	private char carNumber;
+	private int move;
 
-    /**
-     * getter of car
-     * @return car
-     */
-    public Car getCar() {
-        return car;
-    }
+	/**
+	 * Constructor of RushHourAction class
+	 * 
+	 * @param car
+	 * @param moves
+	 */
+	public RushHourAction(char carNumber, int moves) {
+		super();
+		this.carNumber = carNumber;
+		this.move = moves;
+	}
 
-    /**
-     * setter of car
-     * @param car
-     */
-    public void setCar(Car car) {
-        this.car = car;
-    }
+	/**
+	 * getter of car
+	 * 
+	 * @return car
+	 */
+	public char getCarNumber() {
+		return carNumber;
+	}
 
-    /**
-     * getter of move
-     * @return
-     */
-    public int getMove() {
-        return move;
-    }
+	/**
+	 * setter of car
+	 * 
+	 * @param car
+	 */
+	public void setCar(char carNumber) {
+		this.carNumber = carNumber;
+	}
 
-    /**
-     * setter of move
-     * @param move
-     */
-    public void setMove(int move) {
-        this.move = move;
-    }
+	/**
+	 * getter of move
+	 * 
+	 * @return
+	 */
+	public int getMove() {
+		return move;
+	}
 
-    @Override
-    public String toString() {
-        return "[" + car.getNumber() + ", " + move + ']';
-    }
+	/**
+	 * setter of move
+	 * 
+	 * @param move
+	 */
+	public void setMove(int move) {
+		this.move = move;
+	}
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
-    }
+	@Override
+	public String toString() {
+		return "[" + carNumber + ", " + move + ']';
+	}
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final RushHourAction other = (RushHourAction) obj;
-        if (!Objects.equals(this.car, other.car)) {
-            return false;
-        }
-        if (this.move != other.move) {
-            return false;
-        }
-        return true;
-    }
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + carNumber;
+		result = prime * result + move;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RushHourAction other = (RushHourAction) obj;
+		if (carNumber != other.carNumber)
+			return false;
+		if (move != other.move)
+			return false;
+		return true;
+	}
 }
