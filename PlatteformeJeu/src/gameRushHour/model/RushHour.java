@@ -7,8 +7,6 @@ package gameRushHour.model;
 import generic.abstractModel.*;
 import java.util.*;
 
-import org.apache.commons.lang.SerializationUtils;
-
 /**
  * This class represent the Rushhour game model
  * 

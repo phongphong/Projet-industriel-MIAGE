@@ -22,6 +22,7 @@ public class ApplicationRushhour extends Application {
     	
     	gameSession.addObserver(viewGame);
 		viewGame.addMouseListener(control);
+		viewGame.addMouseMotionListener(control);
 		
 		HypertreeNode root = gameSession.getRootHypertree();
 		HTModel model = new HTModel(root);
